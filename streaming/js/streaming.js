@@ -1,5 +1,5 @@
-var streaming_even = document.getElementById("streaming_even");
-var streaming_odd = document.getElementById("streaming_odd");
+var player1 = document.getElementById("player1");
+var player2 = document.getElementById("player2");
 var video = 1;
 var opcion = 0;
 
@@ -26,24 +26,24 @@ function runPoll() {
 };
 
 function checkPlay(response) {
-  if(streaming_even.style.display != "none") {
+  if(player1.style.display != "none") {
     if(response.value == "true") {
-      if(streaming_even.paused) {
-        streaming_even.play();
+      if(player1.paused) {
+        player1.play();
       }
     } else if(response.value == "false"){
-      if(!streaming_even.paused) {
-        streaming_even.pause();
+      if(!player1.paused) {
+        player1.pause();
       }
     }
-  } else if(streaming_odd.style.display != "none") {
+  } else if(player2.style.display != "none") {
     if(response.value == "true") {
-      if(streaming_odd.paused) {
-        streaming_odd.play();
+      if(player2.paused) {
+        player2.play();
       }
     } else if(response.value == "false"){
-      if(!streaming_odd.paused) {
-        streaming_odd.pause();
+      if(!player2.paused) {
+        player2.pause();
       }
     }
   }
@@ -54,30 +54,30 @@ function changeVideo(response) {
   opcion = response[3].value;
   if(video % 2 == 0) {
     if(opcion % 2 == 0) {
-      streaming_even.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
+      player1.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
       setTimeout(function() {
-        streaming_odd.style.display = "none";
-        streaming_even.style.display = "block";
+        player2.style.display = "none";
+        player1.style.display = "block";
       }, 500);
     } else {
-      streaming_odd.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
+      player2.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
       setTimeout(function() {
-        streaming_even.style.display = "none";
-        streaming_odd.style.display = "block";
+        player1.style.display = "none";
+        player2.style.display = "block";
       }, 500);
     }
   } else {
-    if(opcion % 2 != 0) {
-      streaming_odd.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
+    if(opcion % 2 == 0) {
+      player2.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
       setTimeout(function() {
-        streaming_even.style.display = "none";
-        streaming_odd.style.display = "block";
+        player1.style.display = "none";
+        player2.style.display = "block";
       }, 500);
     } else {
-      streaming_even.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
+      player1.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
       setTimeout(function() {
-        streaming_odd.style.display = "none";
-        streaming_even.style.display = "block";
+        player2.style.display = "none";
+        player1.style.display = "block";
       }, 500);
     }
   }
