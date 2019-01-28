@@ -1,6 +1,7 @@
 var streaming_even = document.getElementById("streaming_even");
 var streaming_odd = document.getElementById("streaming_odd");
 var video = 1;
+var opcion = 0;
 
 $(document).ready(function () {
   runPoll();
@@ -12,7 +13,7 @@ function runPoll() {
       url: 'http://olistreaming.ddns.net:8888/server/server.php',
       success: function (response) {
         checkPlay(response[0]);
-        if(video != response[1].value) {
+        if(video != response[1].value || opcion != response[3].value) {
           changeVideo(response);
         }
       },
