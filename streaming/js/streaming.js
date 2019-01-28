@@ -9,7 +9,7 @@ $(document).ready(function () {
 function runPoll() {
   setTimeout(function () {
     $.ajax({
-      url: 'http://localhost:8888/server/server.php',
+      url: 'http://olistreaming.ddns.net:8888/server/server.php',
       success: function (response) {
         checkPlay(response[0]);
         if(state != response[1].value) {
