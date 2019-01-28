@@ -1,6 +1,6 @@
 var streaming_even = document.getElementById("streaming_even");
 var streaming_odd = document.getElementById("streaming_odd");
-var state = 1;
+var video = 1;
 
 $(document).ready(function () {
   runPoll();
@@ -12,8 +12,8 @@ function runPoll() {
       url: 'http://olistreaming.ddns.net:8888/server/server.php',
       success: function (response) {
         checkPlay(response[0]);
-        if(state != response[1].value) {
-          changeState(response);
+        if(video != response[1].value) {
+          changeVideo(response);
         }
       },
       dataType: "json",
@@ -48,7 +48,7 @@ function checkPlay(response) {
   }
 }
 
-function changeState(response) {
+function changeVideo(response) {
   video = response[1].value;
   opcion = response[3].value;
   if(opcion % 2 == 0 && video % 2 != 0) {
