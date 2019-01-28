@@ -10,7 +10,7 @@
 
 .video-container video {
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
   position: absolute;
   top: 50%;
   left: 50%;

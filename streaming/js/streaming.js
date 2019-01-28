@@ -52,13 +52,13 @@ function changeVideo(response) {
   video = response[1].value;
   opcion = response[3].value;
   if(opcion % 2 == 0 && video % 2 != 0) {
-    streaming_even.src = "/media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
+    streaming_even.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
     setTimeout(function() {
       streaming_odd.style.display = "none";
       streaming_even.style.display = "block";
     }, 500);
   } else {
-    streaming_odd.src = "/media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
+    streaming_odd.src = "media/video" + response[1].value + "/opcion" + response[3].value + ".mp4";
     setTimeout(function() {
       streaming_even.style.display = "none";
       streaming_odd.style.display = "block";
