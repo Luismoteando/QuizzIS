@@ -6,10 +6,11 @@ while [ ! -f "$file" ]; do
 done
 
 while IFS=" " read -r role team; do
-done
-
-if [ $role == "streaming" ] ; then
-  /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/streaming.html"
-elif [ $role == "videomarker" ] ; then
-  /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/videomarker.html?team=$team"
-fi
+  if [ $team !=  "" ] ; then
+    if [ $role == "streaming" ] ; then
+      /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/streaming.html"
+    elif [ $role == "videomarker" ] ; then
+      /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/videomarker.html?team=$team"
+    fi
+  fi
+done < "$file"
