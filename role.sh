@@ -6,7 +6,7 @@ while [ ! -f "$file" ]; do
 done
 
 while IFS=" " read -r role team; do
-done < "$file"
+done
 
 if [ $role == "streaming" ] ; then
   /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/streaming.html"
