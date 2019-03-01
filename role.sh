@@ -9,7 +9,7 @@ while IFS=" " read -r role category team alias; do
   if [[ $role == "streaming" ]]; then
     if [[ $category ==  "bach" ]]; then
       /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/bachStreaming.html"
-    elif [[ $category == "cycl"]]; then
+    elif [[ $category == "cycl" ]]; then
       /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/cyclStreaming.html"
     fi
   elif [[ $role == "videomarker" ]]; then
