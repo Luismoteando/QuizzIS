@@ -11,7 +11,7 @@
   <div class="container-fluid full-height">
     <div class="row row-md-4">
       <div class="col-md-12">
-        <h1 id="team" class="v-center h-center">
+        <h1 id="alias" class="v-center h-center">
           Equipo
         </h1>
       </div>
@@ -29,20 +29,28 @@
   <script>
   var score = document.getElementById("score");
   var videomarker = 0;
-  var team;
+  var team = "";
+  var alias = "";
 
   $(document).ready(function () {
+    setTeam();
+    setAlias();
     runPoll();
-    team = getParameterByName("team");
-    document.getElementById("team").innerHTML = team;
   });
 
   function runPoll() {
     setTimeout(function () {
       $.ajax({
-        url: 'http://olistreaming.ddns.net:8888/server/server.php',
+        url: 'http://olistreaming.ddns.net:8888/server/bachServer.php',
         success: function (response) {
-          score.innerHTML = response[2].value;
+          if(team == "teamA") {
+            score.innerHTML = response[3].value;
+          } else if(team == "teamB") {
+            score.innerHTML = response[4].value;
+          } else if(team == "teamC") {
+            score.innerHTML = response[5].value;
+
+          }
         },
         dataType: "json",
         complete: function () {
@@ -66,6 +74,15 @@
         return decodeURIComponent(results[1].replace(/\+/g, " "));
       }
     }
+  }
+
+  function setTeam() {
+    team = getParameterByName("team");
+  }
+
+  function setAlias() {
+    alias = getParameterByName("alias");
+    document.getElementById("alias").innerHTML = alias;
   }
 </script>
 </body>

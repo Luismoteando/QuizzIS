@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de control</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row" style="padding: 10px;">
+      <div class="col-md-12">
+        <div class="page-header text-center">
+          <h1>
+            Panel de control
+          </h1>
+          <h3>
+            Ciclos formativos
+          </h3>
+        </div>
+        <div class="row text-center" style="padding: 10px;">
+          <div class="col-md-12 col-sm-12">
+            <div class="jumbotron m-1">
+              <h3>
+                Vídeo
+              </h3>
+              <div class="row" style="padding: 10px; width: 40%; margin: 0 auto;">
+                <button id="previous" type="button" class="btn">
+                  <i class="fas fa-backward"></i> Anterior
+                </button>
+
+                <button id="play" type="button" class="btn">
+                  <i class="fas fa-pause"></i> Pausar
+                </button>
+
+                <button id="next" type="button" class="btn">
+                  <i class="fas fa-forward"></i> Siguiente
+                </button>
+              </div>
+
+              <div class="row options" style="padding: 10px; width: 40%; margin: 0 auto;">
+                <button id="option1" type="button" class="btn">
+                  Opción 1
+                </button>
+
+                <button id="option2" type="button" class="btn">
+                  Opción 2
+                </button>
+              </div>
+
+              <div class="row options" style="padding: 10px; width: 40%; margin: 0 auto;">
+                <button id="option3" type="button" class="btn">
+                  Opción 3
+                </button>
+
+                <button id="option4" type="button" class="btn">
+                  Opción 4
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="jumbotron m-1">
+              <h3>
+                Marcador A
+              </h3>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="addA" type="button" class="btn">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="substractA" type="button" class="btn">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="jumbotron m-1">
+              <h3>
+                Marcador B
+              </h3>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="addB" type="button" class="btn">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="substractB" type="button" class="btn">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="jumbotron m-1">
+              <h3>
+                Marcador C
+              </h3>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="addC" type="button" class="btn">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="substractC" type="button" class="btn">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+var previous = document.getElementById('previous');
+var play = document.getElementById('play');
+var next = document.getElementById('next');
+var addA = document.getElementById('addA');
+var substractA = document.getElementById('substractA');
+var addB = document.getElementById('addB');
+var substractB = document.getElementById('substractB');
+var addC = document.getElementById('addC');
+var substractC = document.getElementById('substractC');
+var option1 = document.getElementById('option1');
+var option2 = document.getElementById('option2');
+var option3 = document.getElementById('option3');
+var option4 = document.getElementById('option4');
+
+play.onclick = function() {
+  if(play.innerHTML == '<i class="fas fa-play"></i> Reproducir') {
+    $.post("cyclcyclServer.php", { play: "true" });
+    play.innerHTML = '<i class="fas fa-pause"></i> Pausar';
+  } else {
+    $.post("cyclServer.php", { play: "false" });
+    play.innerHTML = '<i class="fas fa-play"></i> Reproducir';
+  }
+};
+
+previous.onclick = function() {
+  $.post("cyclServer.php", { previous: true, play: true});
+  play.innerHTML = '<i class="fas fa-pause"></i> Pausar';
+};
+
+next.onclick = function() {
+  $.post("cyclServer.php", { next: true, play: true });
+  play.innerHTML = '<i class="fas fa-pause"></i> Pausar';
+};
+
+addA.onclick = function() {
+  $.post("cyclServer.php", { addA: true });
+};
+
+substractA.onclick = function() {
+  $.post("cyclServer.php", { substractA: true });
+};
+
+addB.onclick = function() {
+  $.post("cyclServer.php", { addB: true });
+};
+
+substractB.onclick = function() {
+  $.post("cyclServer.php", { substractB: true });
+};
+
+addC.onclick = function() {
+  $.post("cyclServer.php", { addC: true });
+};
+
+substractC.onclick = function() {
+  $.post("cyclServer.php", { substractC: true });
+};
+
+option1.onclick = function() {
+  $.post("cyclServer.php", { option1: true });
+};
+
+option2.onclick = function() {
+  $.post("cyclServer.php", { option2: true });
+};
+
+option3.onclick = function() {
+  $.post("cyclServer.php", { option3: true });
+};
+
+option4.onclick = function() {
+  $.post("cyclServer.php", { option4: true });
+};
+</script>
+</body>
+</html>
