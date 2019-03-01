@@ -22,7 +22,7 @@ while IFS=" " read -r role category team alias; do
     elif [[ $category == "cycl" ]]; then
       if [[ $team == "teamA" || $team == "teamB" || $team == "teamC" ]]; then
         if [[ $alias !=  "" ]]; then
-          /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/cyclVideomarker.html?alias=$alias"
+          /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/cyclVideomarker.html?team=$team&alias=$alias"
         fi
       fi
     fi
