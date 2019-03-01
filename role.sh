@@ -14,13 +14,13 @@ while IFS=" " read -r role category team alias; do
     fi
   elif [[ $role == "videomarker" ]]; then
     if [[ $category == "bach" ]]; then
-      if [[ $team == "teamA" ] || [ $team == "teamB" ] || [ $team == "teamC" ]]; then
+      if [[ $team == "teamA" || $team == "teamB" || $team == "teamC" ]]; then
         if [[ $alias !=  "" ]]; then
           /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/bachVideomarker.html?team=$team&alias=$alias"
         fi
       fi
     elif [[ $category == "cycl" ]]; then
-      if [[ $team == "teamA" ] || [ $team == "teamB" ] || [ $team == "teamC" ]]; then
+      if [[ $team == "teamA" || $team == "teamB" || $team == "teamC" ]]; then
         if [[ $alias !=  "" ]]; then
           /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/cyclVideomarker.html?alias=$alias"
         fi
