@@ -7,96 +7,80 @@
 </head>
 <body>
   <div class="fullscreen-bg">
-    <video id="player1" src="media/video1/opcion0.mp4" autoplay loop muted></video>
-    <video id="player2" src="media/video1/opcion0.mp4" autoplay loop muted></video>
+    <video id="player1" src="media/video1.mp4" autoplay loop muted></video>
+    <video id="player2" src="media/video1.mp4" autoplay loop muted></video>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>
-  var player1 = document.getElementById("player1");
-  var player2 = document.getElementById("player2");
-  var video = 1;
-  var option = 0;
+    var player1 = document.getElementById("player1");
+    var player2 = document.getElementById("player2");
+    var video = 1;
+    var option = 0;
 
-  $(document).ready(function () {
-    runPoll();
-  });
+    $(document).ready(function () {
+      runPoll();
+    });
 
-  function runPoll() {
-    setTimeout(function () {
-      $.ajax({
-        url: 'http://olistreaming.ddns.net:8888/server/cyclServer.php',
-        success: function (response) {
-          checkPlay(response[0]);
-          if(video != response[1].value || option != response[2].value) {
-            changeVideo(response);
+    function runPoll() {
+      setTimeout(function () {
+        $.ajax({
+          url: 'http://olistreaming.ddns.net:8888/server/cyclServer.php',
+          success: function (response) {
+            checkPlay(response[0]);
+            if(video != response[1].value || option != response[2].value) {
+              changeVideo(response);
+            }
+          },
+          dataType: "json",
+          complete: function () {
+            runPoll();
           }
-        },
-        dataType: "json",
-        complete: function () {
-          runPoll();
-        }
-      })
-    }, 100);
-  };
+        })
+      }, 100);
+    };
 
-  function checkPlay(response) {
-    if(player1.style.display != "none") {
-      if(response.value == "true") {
-        if(player1.paused) {
-          player1.play();
+    function checkPlay(response) {
+      if(player1.style.display != "none") {
+        if(response.value == "true") {
+          if(player1.paused) {
+            player1.play();
+          }
+        } else if(response.value == "false"){
+          if(!player1.paused) {
+            player1.pause();
+          }
         }
-      } else if(response.value == "false"){
-        if(!player1.paused) {
-          player1.pause();
-        }
-      }
-    } else if(player2.style.display != "none") {
-      if(response.value == "true") {
-        if(player2.paused) {
-          player2.play();
-        }
-      } else if(response.value == "false"){
-        if(!player2.paused) {
-          player2.pause();
+      } else if(player2.style.display != "none") {
+        if(response.value == "true") {
+          if(player2.paused) {
+            player2.play();
+          }
+        } else if(response.value == "false"){
+          if(!player2.paused) {
+            player2.pause();
+          }
         }
       }
     }
-  }
 
-  function changeVideo(response) {
-    video = response[1].value;
-    option = response[2].value;
-    if(video % 2 == 0) {
-      if(option % 2 == 0) {
-        player1.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
+    function changeVideo(response) {
+      video = response[1].value;
+      option = response[2].value;
+      if(video % 2 == 0) {
+        player1.src = "media/video" + response[1].value + ".mp4";
         setTimeout(function() {
           player2.style.display = "none";
           player1.style.display = "block";
         }, 500);
       } else {
-        player2.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
+        player2.src = "media/video" + response[1].value + ".mp4";
         setTimeout(function() {
           player1.style.display = "none";
           player2.style.display = "block";
-        }, 500);
-      }
-    } else {
-      if(option % 2 == 0) {
-        player2.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-        setTimeout(function() {
-          player1.style.display = "none";
-          player2.style.display = "block";
-        }, 500);
-      } else {
-        player1.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-        setTimeout(function() {
-          player2.style.display = "none";
-          player1.style.display = "block";
         }, 500);
       }
     }
-  }
-</script>
+  </script>
 </body>
 </html>
