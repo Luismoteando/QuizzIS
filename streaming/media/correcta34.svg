@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1353" height="238" viewBox="0 0 1353 238">
+<svg xmlns="http://www.w3.org/2000/svg" width="1353" height="205" viewBox="0 0 1353 205">
   <metadata><?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
 <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c138 79.159824, 2016/09/14-01:09:01        ">
    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -30,11 +30,11 @@
 <defs>
     <style>
       .cls-1 {
-        fill: lime;
+        fill: #e6b135;
         fill-rule: evenodd;
         opacity: 0.5;
       }
     </style>
   </defs>
-  <path id="Forma_1" data-name="Forma 1" class="cls-1" d="M56,1534s13.766-38,48-38H1353s43.66,7.14,54,61V1394s-7.12-75-57-75H105.7S54,1318.59,54,1389.95Z" transform="translate(-54 -1319)"/>
+  <path id="Forma_2" data-name="Forma 2" class="cls-1" d="M51,1710V1591s-2.281-86,54.695-86H1352.46s51.54,8.42,51.54,86.24V1710H51Z" transform="translate(-51 -1505)"/>
 </svg>
