@@ -20,7 +20,7 @@
     var correct1 = document.getElementById("correct1");
     var correct2 = document.getElementById("correct2");
     var correct3 = document.getElementById("correct3");
-    var correct4 = document.getElementById("correct3");
+    var correct4 = document.getElementById("correct4");
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2");
     var video = 1;
@@ -101,12 +101,24 @@
         correct4.style.display = "none";
       } else if(option == 1) {
         correct1.style.display = "block";
+        correct2.style.display = "none";
+        correct3.style.display = "none";
+        correct4.style.display = "none";
       } else if(option == 2) {
+        correct1.style.display = "none";
         correct2.style.display = "block";
+        correct3.style.display = "none";
+        correct4.style.display = "none";
       } else if(option == 3) {
-        correct2.style.display = "block";
+        correct1.style.display = "none";
+        correct2.style.display = "none";
+        correct3.style.display = "block";
+        correct4.style.display = "none";
       } else if(option == 4) {
-        correct2.style.display = "block";
+        correct1.style.display = "none";
+        correct2.style.display = "none";
+        correct3.style.display = "none";
+        correct4.style.display = "block";
       }
     }
   </script>
