@@ -68,11 +68,11 @@
         }
       }
     } else if(player2.style.display != "none") {
-      if(response.value == "true") {
+      if(play == "true") {
         if(player2.paused) {
           player2.play();
         }
-      } else if(response.value == "false"){
+      } else if(play == "false"){
         if(!player2.paused) {
           player2.pause();
         }

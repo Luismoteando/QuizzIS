@@ -1,8 +1,77 @@
-.row button {
+.controls {
+  padding: 10px;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.controls button {
   margin: 0 auto;
   display: block;
 }
 
+.options {
+  padding: 10px;
+  width: 40%;
+  margin: 0 auto;
+}
+
 .options button {
-    width: 37.5%;
+  margin: 0 auto;
+  display: block;
+  width: 43.5%;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .controls {
+    width: 100%;
+  }
+
+  .controls button {
+    width: 17.5%;
+  }
+
+  .controls button span {
+    display: none;
+  }
+
+  .options {
+    width: 100%;
+  }
+
+  .options button {
+    width: 35%;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .controls {
+    width: 75%;
+  }
+
+  .options {
+    width: 75%;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .controls {
+    width: 55%;
+  }
+
+  .options {
+    width: 55%;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }

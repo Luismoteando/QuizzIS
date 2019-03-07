@@ -25,21 +25,21 @@
               <h3>
                 Vídeo
               </h3>
-              <div class="row" style="padding: 10px; width: 40%; margin: 0 auto;">
+              <div class="row controls">
                 <button id="previous" type="button" class="btn">
-                  <i class="fas fa-backward"></i> Anterior
+                  <i class="fas fa-backward"></i><span> Anterior</span>
                 </button>
 
                 <button id="play" type="button" class="btn">
-                  <i class="fas fa-pause"></i> Pausar
+                  <i class="fas fa-pause"></i><span> Pausar</span>
                 </button>
 
                 <button id="next" type="button" class="btn">
-                  <i class="fas fa-forward"></i> Siguiente
+                  <i class="fas fa-forward"></i><span> Siguiente</span>
                 </button>
               </div>
 
-              <div class="row options" style="padding: 10px; width: 40%; margin: 0 auto;">
+              <div class="row options">
                 <button id="option1" type="button" class="btn">
                   Opción 1
                 </button>
@@ -49,7 +49,7 @@
                 </button>
               </div>
 
-              <div class="row options" style="padding: 10px; width: 40%; margin: 0 auto;">
+              <div class="row options">
                 <button id="option3" type="button" class="btn">
                   Opción 3
                 </button>
@@ -152,23 +152,45 @@ var option3 = document.getElementById('option3');
 var option4 = document.getElementById('option4');
 
 play.onclick = function() {
-  if(play.innerHTML == '<i class="fas fa-play"></i> Reproducir') {
-    $.post("cyclServer.php", { play: "true" });
-    play.innerHTML = '<i class="fas fa-pause"></i> Pausar';
+  var width = $(window).width();
+
+  if(width < 575.98) {
+    if(play.innerHTML == '<i class="fas fa-play"></i>') {
+      $.post("cyclServer.php", { play: "true" });
+      play.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+      $.post("cyclServer.php", { play: "false" });
+      play.innerHTML = '<i class="fas fa-play"></i>';
+    }
   } else {
-    $.post("cyclServer.php", { play: "false" });
-    play.innerHTML = '<i class="fas fa-play"></i> Reproducir';
+    if(play.innerHTML == '<i class="fas fa-play"></i><span> Reproducir</span>') {
+      $.post("cyclServer.php", { play: "true" });
+      play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
+    } else {
+      $.post("cyclServer.php", { play: "false" });
+      play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
+    }
   }
 };
 
 previous.onclick = function() {
+  var width = $(window).width();
+
   $.post("cyclServer.php", { previous: true, play: true});
-  play.innerHTML = '<i class="fas fa-pause"></i> Pausar';
+  if(width < 575.98) {
+    play.innerHTML = '<i class="fas fa-pause"></i>';
+  } else {
+    play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
+  }
 };
 
 next.onclick = function() {
   $.post("cyclServer.php", { next: true, play: true });
-  play.innerHTML = '<i class="fas fa-pause"></i> Pausar';
+  if(width < 575.98) {
+    play.innerHTML = '<i class="fas fa-pause"></i>';
+  } else {
+    play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
+  }
 };
 
 addA.onclick = function() {
