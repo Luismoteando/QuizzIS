@@ -17,7 +17,7 @@
   height: 100%;
 }
 
-#correct1 {
+#selec1 {
   display: none;
   position: absolute;
   top: 76%;
@@ -25,7 +25,7 @@
   width: 47%;
 }
 
-#correct2 {
+#selec2 {
   display: none;
   position: absolute;
   top: 76%;
@@ -33,7 +33,7 @@
   width: 47%;
 }
 
-#correct3 {
+#selec3 {
   display: none;
   position: absolute;
   bottom: 0%;
@@ -41,7 +41,7 @@
   width: 47%;
 }
 
-#correct4 {
+#selec4 {
   display: none;
   position: absolute;
   bottom: 0%;
