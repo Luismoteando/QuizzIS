@@ -23,6 +23,9 @@
   var selec4 = document.getElementById("selec4");
   var player1 = document.getElementById("player1");
   var player2 = document.getElementById("player2");
+
+  var semaphore = 1;
+  var play = "true";
   var video = 1;
   var option = 0;
 
@@ -35,7 +38,7 @@
       $.ajax({
         url: 'http://olistreaming.ddns.net:8888/server/bachServer.php',
         success: function (response) {
-          checkPlay(response[0]);
+          checkPlay(response);
           if(option != response[2].value) {
             changeOption(response);
           }
@@ -52,12 +55,14 @@
   };
 
   function checkPlay(response) {
+    play = response[0].value;
+
     if(player1.style.display != "none") {
-      if(response.value == "true") {
+      if(play == "true") {
         if(player1.paused) {
           player1.play();
         }
-      } else if(response.value == "false"){
+      } else if(play == "false"){
         if(!player1.paused) {
           player1.pause();
         }
@@ -79,17 +84,19 @@
     video = response[1].value;
 
     clearOptions();
-    if(video % 2 == 0) {
+    if(semaphore % 2 == 0) {
       player1.src = "media/video" + response[1].value + "/opcion0.mp4";
       setTimeout(function() {
         player2.style.display = "none";
         player1.style.display = "block";
+        semaphore++;
       }, 500);
     } else {
       player2.src = "media/video" + response[1].value + "/opcion0.mp4";
       setTimeout(function() {
         player1.style.display = "none";
         player2.style.display = "block";
+        semaphore++;
       }, 500);
     }
   }
@@ -122,34 +129,20 @@
 
     setTimeout(function() {
       clearOptions();
-      if(video % 2 == 0) {
-        if(option % 2 == 0) {
-          player1.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-          setTimeout(function() {
-            player2.style.display = "none";
-            player1.style.display = "block";
-          }, 500);
-        } else {
-          player2.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-          setTimeout(function() {
-            player1.style.display = "none";
-            player2.style.display = "block";
-          }, 500);
-        }
+      if(semaphore % 2 == 0) {
+        player1.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
+        setTimeout(function() {
+          player2.style.display = "none";
+          player1.style.display = "block";
+          semaphore++;
+        }, 500);
       } else {
-        if(option % 2 == 0) {
-          player2.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-          setTimeout(function() {
-            player1.style.display = "none";
-            player2.style.display = "block";
-          }, 500);
-        } else {
-          player1.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-          setTimeout(function() {
-            player2.style.display = "none";
-            player1.style.display = "block";
-          }, 500);
-        }
+        player2.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
+        setTimeout(function() {
+          player1.style.display = "none";
+          player2.style.display = "block";
+          semaphore++;
+        }, 500);
       }
     }, 3000);
   }
