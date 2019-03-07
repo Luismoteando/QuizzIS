@@ -174,6 +174,8 @@ play.onclick = function() {
 };
 
 previous.onclick = function() {
+  var width = $(window).width();
+
   $.post("bachServer.php", { previous: true, play: true});
   if(width < 575.98) {
     play.innerHTML = '<i class="fas fa-pause"></i>';
@@ -183,6 +185,8 @@ previous.onclick = function() {
 };
 
 next.onclick = function() {
+  var width = $(window).width();
+
   $.post("bachServer.php", { next: true, play: true });
   if(width < 575.98) {
     play.innerHTML = '<i class="fas fa-pause"></i>';

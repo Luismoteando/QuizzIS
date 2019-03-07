@@ -185,6 +185,8 @@ previous.onclick = function() {
 };
 
 next.onclick = function() {
+  var width = $(window).width();
+  
   $.post("cyclServer.php", { next: true, play: true });
   if(width < 575.98) {
     play.innerHTML = '<i class="fas fa-pause"></i>';
