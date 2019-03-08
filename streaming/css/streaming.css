@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'SansBeamHead';
+    src: url('../fonts/Stawix%20-%20SansBeamHead-Regular.otf') format('opentype');
+}
+
 .fullscreen-bg {
   position: fixed;
   top: 0;
@@ -15,6 +20,16 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+
+#timer {
+  font-size: 3.5pc;
+  font-family: 'SansBeamHead', Fallback, sans-serif;
+  display: none;
+  position: absolute;
+  top: 60.5%;
+  right: 2%;
 }
 
 #selec1 {

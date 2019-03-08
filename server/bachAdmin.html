@@ -39,6 +39,20 @@
                 </button>
               </div>
 
+              <div class="row timers">
+                <button id="timer10" type="button" class="btn">
+                  <i class="fas fa-stopwatch"></i><span> 10”</span>
+                </button>
+
+                <button id="timer15" type="button" class="btn">
+                  <i class="fas fa-stopwatch"></i><span> 15”</span>
+                </button>
+
+                <button id="timer20" type="button" class="btn">
+                  <i class="fas fa-stopwatch"></i><span> 20”</span>
+                </button>
+              </div>
+
               <div class="row options">
                 <button id="option1" type="button" class="btn">
                   Opción 1
@@ -140,19 +154,24 @@
 var previous = document.getElementById('previous');
 var play = document.getElementById('play');
 var next = document.getElementById('next');
+var timer10 = document.getElementById('timer10');
+var timer15 = document.getElementById('timer15');
+var timer20 = document.getElementById('timer20');
+var option1 = document.getElementById('option1');
+var option2 = document.getElementById('option2');
+var option3 = document.getElementById('option3');
+var option4 = document.getElementById('option4');
 var addA = document.getElementById('addA');
 var substractA = document.getElementById('substractA');
 var addB = document.getElementById('addB');
 var substractB = document.getElementById('substractB');
 var addC = document.getElementById('addC');
 var substractC = document.getElementById('substractC');
-var option1 = document.getElementById('option1');
-var option2 = document.getElementById('option2');
-var option3 = document.getElementById('option3');
-var option4 = document.getElementById('option4');
+
+var width;
 
 play.onclick = function() {
-  var width = $(window).width();
+  width = $(window).width();
 
   if(width < 575.98) {
     if(play.innerHTML == '<i class="fas fa-play"></i>') {
@@ -174,7 +193,7 @@ play.onclick = function() {
 };
 
 previous.onclick = function() {
-  var width = $(window).width();
+  width = $(window).width();
 
   $.post("bachServer.php", { previous: true, play: true});
   if(width < 575.98) {
@@ -185,7 +204,7 @@ previous.onclick = function() {
 };
 
 next.onclick = function() {
-  var width = $(window).width();
+  width = $(window).width();
 
   $.post("bachServer.php", { next: true, play: true });
   if(width < 575.98) {
@@ -234,6 +253,31 @@ option3.onclick = function() {
 option4.onclick = function() {
   $.post("bachServer.php", { option4: true });
 };
+
+timer10.onclick = function() {
+  time = 10;
+  countdown();
+}
+
+timer15.onclick = function() {
+  time = 15;
+  countdown();
+}
+
+timer20.onclick = function() {
+  time = 20;
+  countdown();
+}
+
+function countdown() {
+  if(time < 0) {
+    return
+  } else {
+    $.post("bachServer.php", { timer: time });
+    time -= 1;
+    setTimeout("countdown()", 1000);
+  }
+}
 </script>
 </body>
 </html>

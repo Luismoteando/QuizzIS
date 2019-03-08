@@ -9,6 +9,17 @@
   display: block;
 }
 
+.timers {
+  padding: 10px;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.timers button {
+  margin: 0 auto;
+  display: block;
+}
+
 .options {
   padding: 10px;
   width: 40%;
@@ -35,6 +46,14 @@
     display: none;
   }
 
+  .timers {
+    width: 100%;
+  }
+
+  .timers button {
+    width: 17.5%;
+  }
+
   .options {
     width: 100%;
   }
@@ -50,6 +69,10 @@
     width: 75%;
   }
 
+  .timers {
+    width: 75%;
+  }
+
   .options {
     width: 75%;
   }
@@ -58,6 +81,10 @@
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
   .controls {
+    width: 55%;
+  }
+
+  .timers {
     width: 55%;
   }
 

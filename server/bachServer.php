@@ -141,6 +141,14 @@ if(isset($_POST['option4'])) {
   );
 }
 
+if(isset($_POST['timer'])) {
+  $time = $_POST['timer'];
+  $result = $collection->updateOne(
+    ['_id' => 'timer'],
+    ['$set' => ['value' => $time]]
+  );
+}
+
 $play = $collection->findOne(
   ['_id' => 'play']
 );
@@ -159,7 +167,10 @@ $teamC = $collection ->findOne(
 $option = $collection ->findOne(
   ['_id' => 'option']
 );
+$time = $collection ->findOne(
+  ['_id' => 'timer']
+);
 
-$jsono = array($play, $state, $option, $teamA, $teamB, $teamC);
+$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time);
 
 echo json_encode($jsono);
