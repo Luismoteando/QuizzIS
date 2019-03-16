@@ -1,8 +1,6 @@
 #!/bin/bash
 file="/media/pi/DATA/config.txt"
 
-/usr/bin/python /var/www/html/pushbutton/raspduino.py
-
 while [[ ! -f "$file" ]]; do
   sleep 2
 done
