@@ -24,6 +24,10 @@ if(isset($_POST['previous'])) {
     ['_id' => 'option'],
     ['$set' => ['value' => 0]]
   );
+  $result = $collection->updateOne(
+    ['_id' => 'turn'],
+    ['$set' => ['value' => null]]
+  );
 }
 
 if(isset($_POST['play'])) {
@@ -50,6 +54,10 @@ if(isset($_POST['next'])) {
   $result = $collection->updateOne(
     ['_id' => 'option'],
     ['$set' => ['value' => 0]]
+  );
+  $result = $collection->updateOne(
+    ['_id' => 'turn'],
+    ['$set' => ['value' => null]]
   );
 }
 

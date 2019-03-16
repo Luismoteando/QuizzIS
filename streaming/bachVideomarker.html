@@ -27,10 +27,13 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>
+  var body = document.getElementsByTagName("body")[0];
+  var alias = document.getElementById("alias");
   var score = document.getElementById("score");
   var videomarker = 0;
   var team = "";
-  var alias = "";
+  var name = "";
+  var turn = null;
 
   $(document).ready(function () {
     setTeam();
@@ -43,13 +46,28 @@
       $.ajax({
         url: 'http://olistreaming.ddns.net:8888/server/bachServer.php',
         success: function (response) {
+          turn = response[6].value;
           if(team == "teamA") {
             score.innerHTML = response[3].value;
+            if(turn == "a\r\n") {
+              setTurn();
+            } else {
+              quitTurn();
+            }
           } else if(team == "teamB") {
             score.innerHTML = response[4].value;
+            if(turn == "b\r\n") {
+              setTurn();
+            } else {
+              quitTurn();
+            }
           } else if(team == "teamC") {
             score.innerHTML = response[5].value;
-
+            if(turn == "c\r\n") {
+              setTurn();
+            } else {
+              quitTurn();
+            }
           }
         },
         dataType: "json",
@@ -81,8 +99,20 @@
   }
 
   function setAlias() {
-    alias = getParameterByName("alias");
-    document.getElementById("alias").innerHTML = alias;
+    name = getParameterByName("alias");
+    document.getElementById("alias").innerHTML = name;
+  }
+
+  function setTurn() {
+    body.style.backgroundColor = "white";
+    alias.style.color = "red";
+    score.style.color = "black";
+  }
+
+  function quitTurn() {
+    body.style.backgroundColor = "#1f1d21";
+    alias.style.color = "#efd128";
+    score.style.color = "white";
   }
 </script>
 </body>
