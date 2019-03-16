@@ -46,7 +46,7 @@
       $.ajax({
         url: 'http://olistreaming.ddns.net:8888/server/bachServer.php',
         success: function (response) {
-          turn = response[6].value;
+          turn = response[7].value;
           if(team == "teamA") {
             score.innerHTML = response[3].value;
             if(turn == "a\r\n") {
