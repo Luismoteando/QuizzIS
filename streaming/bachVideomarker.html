@@ -49,21 +49,21 @@
           turn = response[7].value;
           if(team == "teamA") {
             score.innerHTML = response[3].value;
-            if(turn == "a\r\n") {
+            if(turn == "a") {
               setTurn();
             } else {
               quitTurn();
             }
           } else if(team == "teamB") {
             score.innerHTML = response[4].value;
-            if(turn == "b\r\n") {
+            if(turn == "b") {
               setTurn();
             } else {
               quitTurn();
             }
           } else if(team == "teamC") {
             score.innerHTML = response[5].value;
-            if(turn == "c\r\n") {
+            if(turn == "c") {
               setTurn();
             } else {
               quitTurn();
