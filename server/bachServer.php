@@ -121,31 +121,52 @@ if(isset($_POST['substractC'])) {
   );
 }
 
-if(isset($_POST['option1'])) {
+if(isset($_POST['option1in4'])) {
   $result = $collection->updateOne(
     ['_id' => 'option'],
-    ['$set' => ['value' => 1]]
+    ['$set' => ['value' => 14]]
   );
 }
 
-if(isset($_POST['option2'])) {
+if(isset($_POST['option2in4'])) {
   $result = $collection->updateOne(
     ['_id' => 'option'],
-    ['$set' => ['value' => 2]]
+    ['$set' => ['value' => 24]]
   );
 }
 
-if(isset($_POST['option3'])) {
+if(isset($_POST['option3in4'])) {
   $result = $collection->updateOne(
     ['_id' => 'option'],
-    ['$set' => ['value' => 3]]
+    ['$set' => ['value' => 34]]
   );
 }
 
-if(isset($_POST['option4'])) {
+if(isset($_POST['option4in4'])) {
   $result = $collection->updateOne(
     ['_id' => 'option'],
-    ['$set' => ['value' => 4]]
+    ['$set' => ['value' => 44]]
+  );
+}
+
+if(isset($_POST['option1in3'])) {
+  $result = $collection->updateOne(
+    ['_id' => 'option'],
+    ['$set' => ['value' => 13]]
+  );
+}
+
+if(isset($_POST['option2in3'])) {
+  $result = $collection->updateOne(
+    ['_id' => 'option'],
+    ['$set' => ['value' => 23]]
+  );
+}
+
+if(isset($_POST['option3in3'])) {
+  $result = $collection->updateOne(
+    ['_id' => 'option'],
+    ['$set' => ['value' => 33]]
   );
 }
 

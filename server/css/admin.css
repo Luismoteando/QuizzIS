@@ -20,6 +20,26 @@
   display: block;
 }
 
+.types {
+  padding: 10px;
+  width: 39%;
+  margin: 0 auto;
+}
+
+.types button {
+  margin: 0 auto;
+  display: block;
+  width: 39%;
+}
+
+#fourOptions {
+  display: none;
+}
+
+#threeOptions {
+  display: none;
+}
+
 .options {
   padding: 10px;
   width: 40%;

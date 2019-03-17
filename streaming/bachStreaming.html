@@ -7,10 +7,13 @@
 </head>
 <body>
   <span id="timer"></span>
-  <img id="selec1" src="media/selecarriba.svg"></img>
-  <img id="selec2" src="media/selecarriba.svg"></img>
-  <img id="selec3" src="media/selecabajo.svg"></img>
-  <img id="selec4" src="media/selecabajo.svg"></img>
+  <img id="selec14" src="media/selecarriba.svg"></img>
+  <img id="selec24" src="media/selecarriba.svg"></img>
+  <img id="selec34" src="media/selecabajo.svg"></img>
+  <img id="selec44" src="media/selecabajo.svg"></img>
+  <img id="selec13" src="media/selecabajo.svg"></img>
+  <img id="selec23" src="media/selecabajo.svg"></img>
+  <img id="selec33" src="media/selecabajo.svg"></img>
   <div class="fullscreen-bg">
     <video id="player1" src="media/video1/opcion0.mp4" autoplay muted></video>
     <video id="player2" src="media/video1/opcion0.mp4" autoplay muted></video>
@@ -19,10 +22,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>
   var timer = document.getElementById("timer");
-  var selec1 = document.getElementById("selec1");
-  var selec2 = document.getElementById("selec2");
-  var selec3 = document.getElementById("selec3");
-  var selec4 = document.getElementById("selec4");
+  var selec14 = document.getElementById("selec14");
+  var selec24 = document.getElementById("selec24");
+  var selec34 = document.getElementById("selec34");
+  var selec44 = document.getElementById("selec44");
+  var selec13 = document.getElementById("selec13");
+  var selec23 = document.getElementById("selec23");
+  var selec33 = document.getElementById("selec33");
   var player1 = document.getElementById("player1");
   var player2 = document.getElementById("player2");
 
@@ -123,26 +129,27 @@
     video = response[1].value;
     option = response[2].value;
 
-    if(option == 1) {
-      selec1.style.display = "block";
-      selec2.style.display = "none";
-      selec3.style.display = "none";
-      selec4.style.display = "none";
-    } else if(option == 2) {
-      selec1.style.display = "none";
-      selec2.style.display = "block";
-      selec3.style.display = "none";
-      selec4.style.display = "none";
-    } else if(option == 3) {
-      selec1.style.display = "none";
-      selec2.style.display = "none";
-      selec3.style.display = "block";
-      selec4.style.display = "none";
-    } else if(option == 4) {
-      selec1.style.display = "none";
-      selec2.style.display = "none";
-      selec3.style.display = "none";
-      selec4.style.display = "block";
+    if(option == 14) {
+      clearOptions();
+      selec14.style.display = "block";
+    } else if(option == 24) {
+      clearOptions();
+      selec24.style.display = "block";
+    } else if(option == 34) {
+      clearOptions();
+      selec34.style.display = "block";
+    } else if(option == 44) {
+      clearOptions();
+      selec44.style.display = "block";
+    } else if(option == 13) {
+      clearOptions();
+      selec13.style.display = "block";
+    } else if(option == 23) {
+      clearOptions();
+      selec23.style.display = "block";
+    } else if(option == 33) {
+      clearOptions();
+      selec33.style.display = "block";
     }
 
     setTimeout(function() {
@@ -166,10 +173,13 @@
   }
 
   function clearOptions() {
-    selec1.style.display = "none";
-    selec2.style.display = "none";
-    selec3.style.display = "none";
-    selec4.style.display = "none";
+    selec14.style.display = "none";
+    selec24.style.display = "none";
+    selec34.style.display = "none";
+    selec44.style.display = "none";
+    selec13.style.display = "none";
+    selec23.style.display = "none";
+    selec33.style.display = "none";
   }
   </script>
 </body>
