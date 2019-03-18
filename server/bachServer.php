@@ -67,7 +67,7 @@ if(isset($_POST['addA'])) {
   $teamA = iterator_to_array($teamA);
   $result = $collection->updateOne(
     ['_id' => 'teamA'],
-    ['$set' => ['value' => $teamA['value'] + 1]]
+    ['$set' => ['value' => $teamA['value'] + 10]]
   );
 }
 
@@ -77,7 +77,7 @@ if(isset($_POST['substractA'])) {
   $teamA = iterator_to_array($teamA);
   $result = $collection->updateOne(
     ['_id' => 'teamA'],
-    ['$set' => ['value' => $teamA['value'] - 1]]
+    ['$set' => ['value' => $teamA['value'] - 10]]
   );
 }
 
@@ -87,7 +87,7 @@ if(isset($_POST['addB'])) {
   $teamB = iterator_to_array($teamB);
   $result = $collection->updateOne(
     ['_id' => 'teamB'],
-    ['$set' => ['value' => $teamB['value'] + 1]]
+    ['$set' => ['value' => $teamB['value'] + 10]]
   );
 }
 
@@ -97,7 +97,7 @@ if(isset($_POST['substractB'])) {
   $teamB = iterator_to_array($teamB);
   $result = $collection->updateOne(
     ['_id' => 'teamB'],
-    ['$set' => ['value' => $teamB['value'] - 1]]
+    ['$set' => ['value' => $teamB['value'] - 10]]
   );
 }
 
@@ -107,7 +107,7 @@ if(isset($_POST['addC'])) {
   $teamC = iterator_to_array($teamC);
   $result = $collection->updateOne(
     ['_id' => 'teamC'],
-    ['$set' => ['value' => $teamC['value'] + 1]]
+    ['$set' => ['value' => $teamC['value'] + 10]]
   );
 }
 
@@ -117,7 +117,7 @@ if(isset($_POST['substractC'])) {
   $teamC = iterator_to_array($teamC);
   $result = $collection->updateOne(
     ['_id' => 'teamC'],
-    ['$set' => ['value' => $teamC['value'] - 1]]
+    ['$set' => ['value' => $teamC['value'] - 10]]
   );
 }
 

@@ -269,16 +269,20 @@ substractC.onclick = function() {
 
 function togOneInFour() {
   if (fourOptions.style.display === "none") {
+    threeOptions.style.display = "none";
     fourOptions.style.display = "block";
   } else {
+    threeOptions.style.display = "none";
     fourOptions.style.display = "none";
   }
 }
 
 function togOneInThree() {
   if (threeOptions.style.display === "none") {
+    fourOptions.style.display = "none";
     threeOptions.style.display = "block";
   } else {
+    fourOptions.style.display = "none";
     threeOptions.style.display = "none";
   }
 }

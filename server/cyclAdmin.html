@@ -39,27 +39,69 @@
                 </button>
               </div>
 
-              <div class="row options">
-                <button id="option1" type="button" class="btn">
-                  Opción 1
+              <div class="row timers">
+                <button id="timer10" type="button" class="btn">
+                  <i class="fas fa-stopwatch"></i><span> 10”</span>
                 </button>
 
-                <button id="option2" type="button" class="btn">
-                  Opción 2
+                <button id="timer15" type="button" class="btn">
+                  <i class="fas fa-stopwatch"></i><span> 15”</span>
+                </button>
+
+                <button id="timer20" type="button" class="btn">
+                  <i class="fas fa-stopwatch"></i><span> 20”</span>
                 </button>
               </div>
 
-              <div class="row options">
-                <button id="option3" type="button" class="btn">
-                  Opción 3
+              <div class="row types">
+                <button id="oneInFour" type="button" class="btn" onclick="togOneInFour()">
+                  <i class="fas fa-ellipsis-v"></i><span> Una entre cuatro</span>
                 </button>
 
-                <button id="option4" type="button" class="btn">
-                  Opción 4
+                <button id="oneInThree" type="button" class="btn" onclick="togOneInThree()">
+                  <i class="fas fa-ellipsis-v"></i><span> Una entre tres</span>
                 </button>
+              </div>
+
+              <div id="fourOptions">
+                <div class="row options">
+                  <button id="option1in4" type="button" class="btn">
+                    Opción 1
+                  </button>
+
+                  <button id="option2in4" type="button" class="btn">
+                    Opción 2
+                  </button>
+                </div>
+                <div class="row options">
+                  <button id="option3in4" type="button" class="btn">
+                    Opción 3
+                  </button>
+
+                  <button id="option4in4" type="button" class="btn">
+                    Opción 4
+                  </button>
+                </div>
+              </div>
+
+              <div id="threeOptions">
+                <div class="row controls">
+                  <button id="option1in3" type="button" class="btn">
+                    Opción 1
+                  </button>
+
+                  <button id="option2in3" type="button" class="btn">
+                    Opción 2
+                  </button>
+
+                  <button id="option3in3" type="button" class="btn">
+                    Opción 3
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+
           <div class="col-md-4 col-sm-12">
             <div class="jumbotron m-1">
               <h3>
@@ -140,19 +182,25 @@
 var previous = document.getElementById('previous');
 var play = document.getElementById('play');
 var next = document.getElementById('next');
+var timer10 = document.getElementById('timer10');
+var timer15 = document.getElementById('timer15');
+var timer20 = document.getElementById('timer20');
+var fourOptions = document.getElementById('fourOptions');
+var option1in4 = document.getElementById('option1in4');
+var option2in4 = document.getElementById('option2in4');
+var option3in4 = document.getElementById('option3in4');
+var option4in4 = document.getElementById('option4in4');
 var addA = document.getElementById('addA');
 var substractA = document.getElementById('substractA');
 var addB = document.getElementById('addB');
 var substractB = document.getElementById('substractB');
 var addC = document.getElementById('addC');
 var substractC = document.getElementById('substractC');
-var option1 = document.getElementById('option1');
-var option2 = document.getElementById('option2');
-var option3 = document.getElementById('option3');
-var option4 = document.getElementById('option4');
+
+var width;
 
 play.onclick = function() {
-  var width = $(window).width();
+  width = $(window).width();
 
   if(width < 575.98) {
     if(play.innerHTML == '<i class="fas fa-play"></i>') {
@@ -174,7 +222,7 @@ play.onclick = function() {
 };
 
 previous.onclick = function() {
-  var width = $(window).width();
+  width = $(window).width();
 
   $.post("cyclServer.php", { previous: true, play: true});
   if(width < 575.98) {
@@ -185,8 +233,8 @@ previous.onclick = function() {
 };
 
 next.onclick = function() {
-  var width = $(window).width();
-  
+  width = $(window).width();
+
   $.post("cyclServer.php", { next: true, play: true });
   if(width < 575.98) {
     play.innerHTML = '<i class="fas fa-pause"></i>';
@@ -219,21 +267,78 @@ substractC.onclick = function() {
   $.post("cyclServer.php", { substractC: true });
 };
 
-option1.onclick = function() {
-  $.post("cyclServer.php", { option1: true });
+function togOneInFour() {
+  if (fourOptions.style.display === "none") {
+    threeOptions.style.display = "none";
+    fourOptions.style.display = "block";
+  } else {
+    threeOptions.style.display = "none";
+    fourOptions.style.display = "none";
+  }
+}
+
+function togOneInThree() {
+  if (threeOptions.style.display === "none") {
+    fourOptions.style.display = "none";
+    threeOptions.style.display = "block";
+  } else {
+    fourOptions.style.display = "none";
+    threeOptions.style.display = "none";
+  }
+}
+
+option1in4.onclick = function() {
+  $.post("cyclServer.php", { option1in4: true });
 };
 
-option2.onclick = function() {
-  $.post("cyclServer.php", { option2: true });
+option2in4.onclick = function() {
+  $.post("cyclServer.php", { option2in4: true });
 };
 
-option3.onclick = function() {
-  $.post("cyclServer.php", { option3: true });
+option3in4.onclick = function() {
+  $.post("cyclServer.php", { option3in4: true });
 };
 
-option4.onclick = function() {
-  $.post("cyclServer.php", { option4: true });
+option4in4.onclick = function() {
+  $.post("cyclServer.php", { option4in4: true });
 };
+
+option1in3.onclick = function() {
+  $.post("cyclServer.php", { option1in3: true });
+};
+
+option2in3.onclick = function() {
+  $.post("cyclServer.php", { option2in3: true });
+};
+
+option3in3.onclick = function() {
+  $.post("cyclServer.php", { option3in3: true });
+};
+
+timer10.onclick = function() {
+  time = 10;
+  countdown();
+}
+
+timer15.onclick = function() {
+  time = 15;
+  countdown();
+}
+
+timer20.onclick = function() {
+  time = 20;
+  countdown();
+}
+
+function countdown() {
+  if(time < 0) {
+    return
+  } else {
+    $.post("cyclServer.php", { timer: time });
+    time -= 1;
+    setTimeout("countdown()", 1000);
+  }
+}
 </script>
 </body>
 </html>
