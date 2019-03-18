@@ -336,7 +336,7 @@ function countdown() {
   } else {
     $.post("bachServer.php", { timer: time });
     time -= 1;
-    setTimeout("countdown()", 750);
+    setTimeout("countdown()", 1000);
   }
 }
 </script>
