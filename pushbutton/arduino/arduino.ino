@@ -15,7 +15,7 @@ void setPressed(int i) {
     return;
   digitalWrite(LEDs[i], HIGH);
   pressed[i] = 1;
-  Serial.println(events[i]);
+  Serial.print(events[i]);
 }
 void clearPressed(int i) {
   if (!pressed[i])

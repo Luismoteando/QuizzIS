@@ -30,10 +30,16 @@
   var body = document.getElementsByTagName("body")[0];
   var alias = document.getElementById("alias");
   var score = document.getElementById("score");
-  var videomarker = 0;
+
+  var semaphore = 0;
   var team = "";
   var name = "";
-  var turn = null;
+  var scoreA = 0;
+  var scoreA = 0;
+  var scoreA = 0;
+  var turn1 = null;
+  var turn2 = null;
+  var locked = "false";
 
   $(document).ready(function () {
     setTeam();
@@ -46,28 +52,11 @@
       $.ajax({
         url: 'http://olistreaming.ddns.net:8888/server/bachServer.php',
         success: function (response) {
-          turn = response[7].value;
-          if(team == "teamA") {
-            score.innerHTML = response[3].value;
-            if(turn == "a") {
-              setTurn();
-            } else {
-              quitTurn();
-            }
-          } else if(team == "teamB") {
-            score.innerHTML = response[4].value;
-            if(turn == "b") {
-              setTurn();
-            } else {
-              quitTurn();
-            }
-          } else if(team == "teamC") {
-            score.innerHTML = response[5].value;
-            if(turn == "c") {
-              setTurn();
-            } else {
-              quitTurn();
-            }
+          locked = response[8].value;
+
+          setScore(response);
+          if(locked == "false") {
+            manageTurn(response);
           }
         },
         dataType: "json",
@@ -103,10 +92,59 @@
     document.getElementById("alias").innerHTML = name;
   }
 
-  function setTurn() {
+  function setScore(response) {
+    scoreA = response[3].value;
+    scoreB = response[4].value;
+    scoreC = response[5].value;
+
+    if(team == "teamA") {
+      score.innerHTML = scoreA;
+    } else if(team == "teamB") {
+      score.innerHTML = scoreB;
+    } else if(team == "teamC") {
+      score.innerHTML = scoreC;
+    }
+  }
+
+  function manageTurn(response) {
+    turn1 = response[7].value[0];
+    turn2 = response[7].value[1];
+
+    if(team == "teamA") {
+      if(turn1 == "a") {
+        setTurn1();
+      } else if(turn2 == "a") {
+        setTurn2();
+      } else {
+        quitTurn();
+      }
+    } else if(team == "teamB") {
+      if(turn1 == "b") {
+        setTurn1();
+      } else if(turn2 == "b") {
+        setTurn2();
+      } else {
+        quitTurn();
+      }
+    } else if(team == "teamC") {
+      if(turn1 == "c") {
+        setTurn1();
+      } else if(turn2 == "c") {
+        setTurn2();
+      } else {
+        quitTurn();
+      }
+    }
+  }
+
+  function setTurn1() {
     body.style.backgroundColor = "white";
     alias.style.color = "red";
     score.style.color = "black";
+  }
+
+  function setTurn2() {
+    body.style.backgroundColor = "red";
   }
 
   function quitTurn() {

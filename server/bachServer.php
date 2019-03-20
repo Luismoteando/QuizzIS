@@ -182,7 +182,25 @@ if(isset($_POST['turn'])) {
   $turn = $_POST['turn'];
   $result = $collection->updateOne(
     ['_id' => 'turn'],
-    ['$set' => ['value' => $turn]]
+    ['$set' => ['value.0' => $turn[0]]]
+  );
+  if(substr ($turn, 1, 1) != "") {
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value.1' => $turn[1]]]
+    );
+  }
+  $result = $collection->updateOne(
+    ['_id' => 'turn'],
+    ['$set' => ['value'[0] => $turn[0]]]
+  );
+}
+
+if(isset($_POST['lock'])) {
+  $lock = $_POST['lock'];
+  $result = $collection->updateOne(
+    ['_id' => 'lock'],
+    ['$set' => ['value' => $lock]]
   );
 }
 
@@ -210,7 +228,10 @@ $time = $collection ->findOne(
 $turn = $collection ->findOne(
   ['_id' => 'turn']
 );
+$lock = $collection ->findOne(
+  ['_id' => 'lock']
+);
 
-$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time, $turn);
+$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time, $turn, $lock);
 
 echo json_encode($jsono);
