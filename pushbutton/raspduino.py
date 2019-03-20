@@ -2,9 +2,16 @@ import serial
 import requests
 import time
 
-arduino = serial.Serial('/dev/ttyACM0', 9600)
+def serial_data(port, baudrate)
+    ser = serial.Serial(port, baudrate)
 
-while 1:
-    print(arduino.read())
+    while True:
+        yield ser.readline()
 
-arduino.close()
+    ser.close()
+
+for line in serial_data('/dev/ttyACM0', 9600):
+    data += line.strip()
+
+print(data)
+requests.post(url = 'http://olistreaming:8888/server/bachServer.php', data = {'turn': data})
