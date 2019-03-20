@@ -179,15 +179,25 @@ if(isset($_POST['timer'])) {
 }
 
 if(isset($_POST['turn'])) {
-  $turn = $_POST['turn'];
-  $result = $collection->updateOne(
-    ['_id' => 'turn'],
-    ['$set' => ['value' => [$turn[0],null]]]
+  $lock = $collection ->findOne(
+    ['_id' => 'lock']
   );
-  if(substr($turn,1,1) != "") {
+  if($lock == "false") {
+    $turn = $_POST['turn'];
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => [$turn[0], $turn[1]]]]
+      ['$set' => ['value' => [$turn[0],null]]]
+    );
+    if(substr($turn,1,1) != "") {
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['value' => [$turn[0], $turn[1]]]]
+      );
+    }
+  } else {
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [null,null]]]
     );
   }
 }
