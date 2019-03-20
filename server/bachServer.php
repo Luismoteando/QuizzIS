@@ -26,7 +26,7 @@ if(isset($_POST['previous'])) {
   );
   $result = $collection->updateOne(
     ['_id' => 'turn'],
-    ['$set' => ['value' => null]]
+    ['$set' => ['value' => [null,null]}]]
   );
 }
 
@@ -57,7 +57,7 @@ if(isset($_POST['next'])) {
   );
   $result = $collection->updateOne(
     ['_id' => 'turn'],
-    ['$set' => ['value' => null]]
+    ['$set' => ['value' => [null,null]]]
   );
 }
 
