@@ -57,6 +57,8 @@
           setScore(response);
           if(locked == "false") {
             manageTurn(response);
+          } else {
+            quitTurn();
           }
         },
         dataType: "json",
