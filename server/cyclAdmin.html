@@ -20,10 +20,18 @@
           </h3>
         </div>
         <div class="row text-center" style="padding: 10px;">
-          <div class="col-md-12 col-sm-12">
+          <div class="col-md-4 col-sm-12">
             <div class="jumbotron m-1">
               <h3>
-                Vídeo
+                Sonidos
+              </h3>
+            </div>
+          </div>
+
+          <div class="col-md-8 col-sm-12">
+            <div class="jumbotron m-1">
+              <h3>
+                Preguntas
               </h3>
               <div class="row controls">
                 <button id="previous" type="button" class="btn">
@@ -40,25 +48,17 @@
               </div>
 
               <div class="row timers">
-                <button id="timer10" type="button" class="btn">
-                  <i class="fas fa-stopwatch"></i><span> 10”</span>
-                </button>
-
-                <button id="timer15" type="button" class="btn">
-                  <i class="fas fa-stopwatch"></i><span> 15”</span>
-                </button>
-
-                <button id="timer20" type="button" class="btn">
-                  <i class="fas fa-stopwatch"></i><span> 20”</span>
+                <button id="timer16" type="button" class="btn">
+                  <i class="fas fa-stopwatch"></i><span> 16”</span>
                 </button>
               </div>
 
               <div class="row types">
-                <button id="oneInFour" type="button" class="btn" onclick="togOneInFour()">
+                <button id="oneInFour" type="button" class="btn">
                   <i class="fas fa-ellipsis-v"></i><span> Una entre cuatro</span>
                 </button>
 
-                <button id="oneInThree" type="button" class="btn" onclick="togOneInThree()">
+                <button id="oneInThree" type="button" class="btn">
                   <i class="fas fa-ellipsis-v"></i><span> Una entre tres</span>
                 </button>
               </div>
@@ -102,71 +102,80 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-sm-12">
+
+          <div class="col-md-12 col-sm-12">
             <div class="jumbotron m-1">
               <h3>
-                Marcador A
+                Marcadores
               </h3>
-              <div class="row marcador-container" style="padding: 10px;">
-                <div class="col-md-2 col-sm-2" style="margin: auto;">
-
-                  <button id="addA" type="button" class="btn">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+              <div class="row pushbuttons">
+                <button id="lock" type="button" class="btn">
+                  <i class="fas fa-lock-open"></i><span> Bloquear pulsadores</span>
+                </button>
               </div>
-              <div class="row marcador-container" style="padding: 10px;">
-                <div class="col-md-2 col-sm-2" style="margin: auto;">
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <h4>
+                    Marcador A
+                  </h4>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
 
-                  <button id="substractA" type="button" class="btn">
-                    <i class="fas fa-minus"></i>
-                  </button>
+                      <button id="addA" type="button" class="btn">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                      <button id="substractA" type="button" class="btn">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-12">
-            <div class="jumbotron m-1">
-              <h3>
-                Marcador B
-              </h3>
-              <div class="row marcador-container" style="padding: 10px;">
-                <div class="col-md-2 col-sm-2" style="margin: auto;">
+                <div class="col-md-4 col-sm-12">
+                  <h4>
+                    Marcador B
+                  </h4>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
 
-                  <button id="addB" type="button" class="btn">
-                    <i class="fas fa-plus"></i>
-                  </button>
+                      <button id="addB" type="button" class="btn">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                      <button id="substractB" type="button" class="btn">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="row marcador-container" style="padding: 10px;">
-                <div class="col-md-2 col-sm-2" style="margin: auto;">
+                <div class="col-md-4 col-sm-12">
+                  <h4>
+                    Marcador C
+                  </h4>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
 
-                  <button id="substractB" type="button" class="btn">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-12">
-            <div class="jumbotron m-1">
-              <h3>
-                Marcador C
-              </h3>
-              <div class="row marcador-container" style="padding: 10px;">
-                <div class="col-md-2 col-sm-2" style="margin: auto;">
+                      <button id="addC" type="button" class="btn">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
 
-                  <button id="addC" type="button" class="btn">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="row marcador-container" style="padding: 10px;">
-                <div class="col-md-2 col-sm-2" style="margin: auto;">
-
-                  <button id="substractC" type="button" class="btn">
-                    <i class="fas fa-minus"></i>
-                  </button>
+                      <button id="substractC" type="button" class="btn">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -179,46 +188,65 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
-var previous = document.getElementById('previous');
-var play = document.getElementById('play');
-var next = document.getElementById('next');
-var timer10 = document.getElementById('timer10');
-var timer15 = document.getElementById('timer15');
-var timer20 = document.getElementById('timer20');
-var fourOptions = document.getElementById('fourOptions');
-var option1in4 = document.getElementById('option1in4');
-var option2in4 = document.getElementById('option2in4');
-var option3in4 = document.getElementById('option3in4');
-var option4in4 = document.getElementById('option4in4');
-var addA = document.getElementById('addA');
-var substractA = document.getElementById('substractA');
-var addB = document.getElementById('addB');
-var substractB = document.getElementById('substractB');
-var addC = document.getElementById('addC');
-var substractC = document.getElementById('substractC');
-
 var width;
+var playing = "true";
+var locked = "false";
+
+$(document).ready(function () {
+  runPoll();
+  autoPause(7000);
+});
+
+function runPoll() {
+  setTimeout(function () {
+    $.ajax({
+      url: 'http://olistreaming.ddns.net:8888/server/cyclServer.php',
+      success: function (response) {
+        playing = response[0].value;
+        locked = response[8].value;
+      },
+      dataType: "json",
+      complete: function () {
+        runPoll();
+      }
+    })
+  }, 100);
+};
+
+function autoPause(timeout) {
+  width = $(window).width();
+
+  setTimeout(function() {
+    $.post("cyclServer.php", { play: false });
+    if(width < 575.98) {
+      play.innerHTML = '<i class="fas fa-play"></i>';
+    } else {
+      play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
+    }
+  }, timeout);
+}
 
 play.onclick = function() {
   width = $(window).width();
 
   if(width < 575.98) {
-    if(play.innerHTML == '<i class="fas fa-play"></i>') {
-      $.post("cyclServer.php", { play: "true" });
+    if(playing == "false") {
+      $.post("cyclServer.php", { play: true });
       play.innerHTML = '<i class="fas fa-pause"></i>';
     } else {
-      $.post("cyclServer.php", { play: "false" });
+      $.post("cyclServer.php", { play: false });
       play.innerHTML = '<i class="fas fa-play"></i>';
     }
   } else {
-    if(play.innerHTML == '<i class="fas fa-play"></i><span> Reproducir</span>') {
-      $.post("cyclServer.php", { play: "true" });
+    if(playing == "false") {
+      $.post("cyclServer.php", { play: true });
       play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
     } else {
-      $.post("cyclServer.php", { play: "false" });
+      $.post("cyclServer.php", { play: false });
       play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
     }
   }
+  autoPause(29000);
 };
 
 previous.onclick = function() {
@@ -230,6 +258,7 @@ previous.onclick = function() {
   } else {
     play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
   }
+  autoPause(7000);
 };
 
 next.onclick = function() {
@@ -241,34 +270,37 @@ next.onclick = function() {
   } else {
     play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
   }
+  autoPause(7000);
 };
 
-addA.onclick = function() {
-  $.post("cyclServer.php", { addA: true });
-};
+function timeout() {
+  if(time >= 0) {
+    time -= 1;
+    $.post("cyclServer.php", { timer: time });
+    setTimeout("timeout()", 1000);
+  } else {
+    time = 6;
+    counterattack();
+  }
+}
 
-substractA.onclick = function() {
-  $.post("cyclServer.php", { substractA: true });
-};
+function counterattack() {
+  if(time >= 0) {
+    time -= 1;
+    $.post("cyclServer.php", { timer: time });
+    setTimeout("counterattack()", 1000);
+  } else {
+    return
+  }
+}
 
-addB.onclick = function() {
-  $.post("cyclServer.php", { addB: true });
-};
+timer16.onclick = function() {
+  time = 17;
+  timeout();
+}
 
-substractB.onclick = function() {
-  $.post("cyclServer.php", { substractB: true });
-};
-
-addC.onclick = function() {
-  $.post("cyclServer.php", { addC: true });
-};
-
-substractC.onclick = function() {
-  $.post("cyclServer.php", { substractC: true });
-};
-
-function togOneInFour() {
-  if (fourOptions.style.display === "none") {
+oneInFour.onclick = function() {
+  if (fourOptions.style.display == "none") {
     threeOptions.style.display = "none";
     fourOptions.style.display = "block";
   } else {
@@ -277,8 +309,8 @@ function togOneInFour() {
   }
 }
 
-function togOneInThree() {
-  if (threeOptions.style.display === "none") {
+oneInThree.onclick = function() {
+  if (threeOptions.style.display == "none") {
     fourOptions.style.display = "none";
     threeOptions.style.display = "block";
   } else {
@@ -315,30 +347,39 @@ option3in3.onclick = function() {
   $.post("cyclServer.php", { option3in3: true });
 };
 
-timer10.onclick = function() {
-  time = 10;
-  countdown();
-}
-
-timer15.onclick = function() {
-  time = 15;
-  countdown();
-}
-
-timer20.onclick = function() {
-  time = 20;
-  countdown();
-}
-
-function countdown() {
-  if(time < 0) {
-    return
+lock.onclick = function() {
+  if(locked == "false") {
+    $.post("cyclServer.php", { lock: "true" });
+    lock.innerHTML = '<i class="fas fa-lock"></i><span> Desloquear pulsadores</span>';
   } else {
-    $.post("cyclServer.php", { timer: time });
-    time -= 1;
-    setTimeout("countdown()", 1000);
+    $.post("cyclServer.php", { lock: "false" });
+    lock.innerHTML = '<i class="fas fa-lock-open"></i><span> Bloquear pulsadores</span>';
   }
 }
+
+addA.onclick = function() {
+  $.post("cyclServer.php", { addA: true });
+};
+
+substractA.onclick = function() {
+  $.post("cyclServer.php", { substractA: true });
+};
+
+addB.onclick = function() {
+  $.post("cyclServer.php", { addB: true });
+};
+
+substractB.onclick = function() {
+  $.post("cyclServer.php", { substractB: true });
+};
+
+addC.onclick = function() {
+  $.post("cyclServer.php", { addC: true });
+};
+
+substractC.onclick = function() {
+  $.post("cyclServer.php", { substractC: true });
+};
 </script>
 </body>
 </html>

@@ -10,24 +10,24 @@ $collection = $db->cyclStreaming;
 if(isset($_POST['previous'])) {
   $state = $collection ->findOne(
     ['_id' => 'state']);
-  $state = iterator_to_array($state);
-  $result = $collection->updateOne(
-    ['_id' => 'state'],
-    ['$set' => ['value' => $state['value'] - 1]]
-  );
-  $play = $_POST['play'];
-  $result = $collection->updateOne(
-    ['_id' => 'play'],
-    ['$set' => ['value' => $play]]
-  );
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 0]]
-  );
-  $result = $collection->updateOne(
-    ['_id' => 'turn'],
-    ['$set' => ['value' => null]]
-  );
+    $state = iterator_to_array($state);
+    $result = $collection->updateOne(
+      ['_id' => 'state'],
+      ['$set' => ['value' => $state['value'] - 1]]
+    );
+    $play = $_POST['play'];
+    $result = $collection->updateOne(
+      ['_id' => 'play'],
+      ['$set' => ['value' => $play]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'option'],
+      ['$set' => ['value' => 0]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [null,null]]]
+    );
 }
 
 if(isset($_POST['play'])) {
@@ -41,79 +41,79 @@ if(isset($_POST['play'])) {
 if(isset($_POST['next'])) {
   $state = $collection ->findOne(
     ['_id' => 'state']);
-  $state = iterator_to_array($state);
-  $result = $collection->updateOne(
-    ['_id' => 'state'],
-    ['$set' => ['value' => $state['value'] + 1]]
-  );
-  $play = $_POST['play'];
-  $result = $collection->updateOne(
-    ['_id' => 'play'],
-    ['$set' => ['value' => $play]]
-  );
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 0]]
-  );
-  $result = $collection->updateOne(
-    ['_id' => 'turn'],
-    ['$set' => ['value' => null]]
-  );
+    $state = iterator_to_array($state);
+    $result = $collection->updateOne(
+      ['_id' => 'state'],
+      ['$set' => ['value' => $state['value'] + 1]]
+    );
+    $play = $_POST['play'];
+    $result = $collection->updateOne(
+      ['_id' => 'play'],
+      ['$set' => ['value' => $play]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'option'],
+      ['$set' => ['value' => 0]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [null,null]]]
+    );
 }
 
 if(isset($_POST['addA'])) {
   $teamA = $collection ->findOne(
     ['_id' => 'teamA']);
-  $teamA = iterator_to_array($teamA);
-  $result = $collection->updateOne(
-    ['_id' => 'teamA'],
-    ['$set' => ['value' => $teamA['value'] + 10]]
-  );
-}
+    $teamA = iterator_to_array($teamA);
+    $result = $collection->updateOne(
+      ['_id' => 'teamA'],
+      ['$set' => ['value' => $teamA['value'] + 10]]
+    );
+  }
 
 if(isset($_POST['substractA'])) {
   $teamA = $collection ->findOne(
     ['_id' => 'teamA']);
-  $teamA = iterator_to_array($teamA);
-  $result = $collection->updateOne(
-    ['_id' => 'teamA'],
-    ['$set' => ['value' => $teamA['value'] - 10]]
-  );
-}
+    $teamA = iterator_to_array($teamA);
+    $result = $collection->updateOne(
+      ['_id' => 'teamA'],
+      ['$set' => ['value' => $teamA['value'] - 10]]
+    );
+  }
 
 if(isset($_POST['addB'])) {
   $teamB = $collection ->findOne(
     ['_id' => 'teamB']);
-  $teamB = iterator_to_array($teamB);
-  $result = $collection->updateOne(
-    ['_id' => 'teamB'],
-    ['$set' => ['value' => $teamB['value'] + 10]]
-  );
-}
+    $teamB = iterator_to_array($teamB);
+    $result = $collection->updateOne(
+      ['_id' => 'teamB'],
+      ['$set' => ['value' => $teamB['value'] + 10]]
+    );
+  }
 
 if(isset($_POST['substractB'])) {
   $teamB = $collection ->findOne(
     ['_id' => 'teamB']);
-  $teamB = iterator_to_array($teamB);
-  $result = $collection->updateOne(
-    ['_id' => 'teamB'],
-    ['$set' => ['value' => $teamB['value'] - 10]]
-  );
-}
+    $teamB = iterator_to_array($teamB);
+    $result = $collection->updateOne(
+      ['_id' => 'teamB'],
+      ['$set' => ['value' => $teamB['value'] - 10]]
+    );
+  }
 
 if(isset($_POST['addC'])) {
   $teamC = $collection ->findOne(
     ['_id' => 'teamC']);
-  $teamC = iterator_to_array($teamC);
-  $result = $collection->updateOne(
-    ['_id' => 'teamC'],
-    ['$set' => ['value' => $teamC['value'] + 10]]
-  );
-}
+    $teamC = iterator_to_array($teamC);
+    $result = $collection->updateOne(
+      ['_id' => 'teamC'],
+      ['$set' => ['value' => $teamC['value'] + 10]]
+    );
+  }
 
 if(isset($_POST['substractC'])) {
-  $teamC = $collection ->findOne(
-    ['_id' => 'teamC']);
+$teamC = $collection ->findOne(
+  ['_id' => 'teamC']);
   $teamC = iterator_to_array($teamC);
   $result = $collection->updateOne(
     ['_id' => 'teamC'],
@@ -179,10 +179,34 @@ if(isset($_POST['timer'])) {
 }
 
 if(isset($_POST['turn'])) {
-  $turn = $_POST['turn'];
+  $lock = $collection ->findOne(
+    ['_id' => 'lock']
+  );
+  if($lock == "false") {
+    $turn = $_POST['turn'];
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [$turn[0],null]]]
+    );
+    if(substr($turn,1,1) != "") {
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['value' => [$turn[0], $turn[1]]]]
+      );
+    }
+  } else {
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [null,null]]]
+    );
+  }
+}
+
+if(isset($_POST['lock'])) {
+  $lock = $_POST['lock'];
   $result = $collection->updateOne(
-    ['_id' => 'turn'],
-    ['$set' => ['value' => $turn]]
+    ['_id' => 'lock'],
+    ['$set' => ['value' => $lock]]
   );
 }
 
@@ -210,7 +234,10 @@ $time = $collection ->findOne(
 $turn = $collection ->findOne(
   ['_id' => 'turn']
 );
+$lock = $collection ->findOne(
+  ['_id' => 'lock']
+);
 
-$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time, $turn);
+$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time, $turn, $lock);
 
 echo json_encode($jsono);

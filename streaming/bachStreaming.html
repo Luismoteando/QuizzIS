@@ -93,14 +93,12 @@
   function setTimer(response) {
     time = response[6].value;
 
-    if(time > 0) {
+    if(time >= 0) {
       timer.innerHTML = time;
       timer.style.display = "block";
     } else {
-      timer.innerHTML = time;
-      setTimeout(function() {
+      timer.innerHTML = "";
       timer.style.display = "none";
-      }, 1000);
     }
   }
 
@@ -153,10 +151,10 @@
     }
 
     setTimeout(function() {
-      clearOptions();
       if(semaphore % 2 == 0) {
         player1.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
         setTimeout(function() {
+          clearOptions();
           player2.style.display = "none";
           player1.style.display = "block";
           semaphore++;
@@ -164,12 +162,13 @@
       } else {
         player2.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
         setTimeout(function() {
+          clearOptions();
           player1.style.display = "none";
           player2.style.display = "block";
           semaphore++;
         }, 500);
       }
-    }, 3000);
+    }, 6000);
   }
 
   function clearOptions() {

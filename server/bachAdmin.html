@@ -48,16 +48,8 @@
               </div>
 
               <div class="row timers">
-                <button id="timer10" type="button" class="btn">
-                  <i class="fas fa-stopwatch"></i><span> 10”</span>
-                </button>
-
-                <button id="timer15" type="button" class="btn">
-                  <i class="fas fa-stopwatch"></i><span> 15”</span>
-                </button>
-
-                <button id="timer20" type="button" class="btn">
-                  <i class="fas fa-stopwatch"></i><span> 20”</span>
+                <button id="timer16" type="button" class="btn">
+                  <i class="fas fa-stopwatch"></i><span> 16”</span>
                 </button>
               </div>
 
@@ -122,70 +114,70 @@
                 </button>
               </div>
               <div class="row">
-              <div class="col-md-4 col-sm-12">
-                <h4>
-                  Marcador A
-                </h4>
-                <div class="row marcador-container" style="padding: 10px;">
-                  <div class="col-md-2 col-sm-2" style="margin: auto;">
+                <div class="col-md-4 col-sm-12">
+                  <h4>
+                    Marcador A
+                  </h4>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
 
-                    <button id="addA" type="button" class="btn">
-                      <i class="fas fa-plus"></i>
-                    </button>
+                      <button id="addA" type="button" class="btn">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                      <button id="substractA" type="button" class="btn">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div class="row marcador-container" style="padding: 10px;">
-                  <div class="col-md-2 col-sm-2" style="margin: auto;">
+                <div class="col-md-4 col-sm-12">
+                  <h4>
+                    Marcador B
+                  </h4>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
 
-                    <button id="substractA" type="button" class="btn">
-                      <i class="fas fa-minus"></i>
-                    </button>
+                      <button id="addB" type="button" class="btn">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                      <button id="substractB" type="button" class="btn">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <h4>
+                    Marcador C
+                  </h4>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                      <button id="addC" type="button" class="btn">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row marcador-container" style="padding: 10px;">
+                    <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                      <button id="substractC" type="button" class="btn">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 col-sm-12">
-                <h4>
-                  Marcador B
-                </h4>
-                <div class="row marcador-container" style="padding: 10px;">
-                  <div class="col-md-2 col-sm-2" style="margin: auto;">
-
-                    <button id="addB" type="button" class="btn">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="row marcador-container" style="padding: 10px;">
-                  <div class="col-md-2 col-sm-2" style="margin: auto;">
-
-                    <button id="substractB" type="button" class="btn">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-12">
-                <h4>
-                  Marcador C
-                </h4>
-                <div class="row marcador-container" style="padding: 10px;">
-                  <div class="col-md-2 col-sm-2" style="margin: auto;">
-
-                    <button id="addC" type="button" class="btn">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="row marcador-container" style="padding: 10px;">
-                  <div class="col-md-2 col-sm-2" style="margin: auto;">
-
-                    <button id="substractC" type="button" class="btn">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
             </div>
           </div>
         </div>
@@ -202,6 +194,7 @@ var locked = "false";
 
 $(document).ready(function () {
   runPoll();
+  autoPause(7000);
 });
 
 function runPoll() {
@@ -220,26 +213,40 @@ function runPoll() {
   }, 100);
 };
 
+function autoPause(timeout) {
+  width = $(window).width();
+
+  setTimeout(function() {
+    $.post("bachServer.php", { play: false });
+    if(width < 575.98) {
+      play.innerHTML = '<i class="fas fa-play"></i>';
+    } else {
+      play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
+    }
+  }, timeout);
+}
+
 play.onclick = function() {
   width = $(window).width();
 
   if(width < 575.98) {
     if(playing == "false") {
-      $.post("bachServer.php", { play: "true" });
+      $.post("bachServer.php", { play: true });
       play.innerHTML = '<i class="fas fa-pause"></i>';
     } else {
-      $.post("bachServer.php", { play: "false" });
+      $.post("bachServer.php", { play: false });
       play.innerHTML = '<i class="fas fa-play"></i>';
     }
   } else {
     if(playing == "false") {
-      $.post("bachServer.php", { play: "true" });
+      $.post("bachServer.php", { play: true });
       play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
     } else {
-      $.post("bachServer.php", { play: "false" });
+      $.post("bachServer.php", { play: false });
       play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
     }
   }
+  autoPause(29000);
 };
 
 previous.onclick = function() {
@@ -251,6 +258,7 @@ previous.onclick = function() {
   } else {
     play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
   }
+  autoPause(7000);
 };
 
 next.onclick = function() {
@@ -262,37 +270,39 @@ next.onclick = function() {
   } else {
     play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
   }
+  autoPause(7000);
 };
 
-function countdown() {
-  if(time < 0) {
-    return
-  } else {
-    $.post("bachServer.php", { timer: time });
+function timeout() {
+  if(time >= 0) {
     time -= 1;
-    setTimeout("countdown()", 1000);
+    $.post("bachServer.php", { timer: time });
+    setTimeout("timeout()", 1000);
+  } else {
+    time = 6;
+    counterattack();
   }
 }
 
-timer10.onclick = function() {
-  time = 10;
-  countdown();
+function counterattack() {
+  if(time >= 0) {
+    time -= 1;
+    $.post("bachServer.php", { timer: time });
+    setTimeout("counterattack()", 1000);
+  } else {
+    return
+  }
 }
 
-timer15.onclick = function() {
-  time = 15;
-  countdown();
-}
-
-timer20.onclick = function() {
-  time = 20;
-  countdown();
+timer16.onclick = function() {
+  time = 17;
+  timeout();
 }
 
 oneInFour.onclick = function() {
-  if (fourOptions.style.displaying === "none") {
+  if (fourOptions.style.display == "none") {
     threeOptions.style.display = "none";
-    fourOptions.style.display = "lock";
+    fourOptions.style.display = "block";
   } else {
     threeOptions.style.display = "none";
     fourOptions.style.display = "none";
@@ -300,9 +310,9 @@ oneInFour.onclick = function() {
 }
 
 oneInThree.onclick = function() {
-  if (threeOptions.style.displaying === "none") {
+  if (threeOptions.style.display == "none") {
     fourOptions.style.display = "none";
-    threeOptions.style.display = "lock";
+    threeOptions.style.display = "block";
   } else {
     fourOptions.style.display = "none";
     threeOptions.style.display = "none";
