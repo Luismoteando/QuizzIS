@@ -25,6 +25,22 @@
               <h3>
                 Sonidos
               </h3>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="correct" type="button" class="btn">
+                    <i class="fas fa-check-circle"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="incorrect" type="button" class="btn">
+                    <i class="fas fa-times-circle"></i>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -345,6 +361,14 @@ option2in3.onclick = function() {
 
 option3in3.onclick = function() {
   $.post("bachServer.php", { option3in3: true });
+};
+
+correct.onclick = function() {
+  $.post("bachServer.php", { sfx: 0 });
+};
+
+incorrect.onclick = function() {
+  $.post("bachServer.php", { sfx: 1 });
 };
 
 lock.onclick = function() {

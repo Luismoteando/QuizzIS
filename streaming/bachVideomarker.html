@@ -23,6 +23,8 @@
         </h2>
       </div>
     </div>
+    <audio id="correct" src="media/correct.wav"></audio>
+    <audio id="incorrect" src="media/incorrect.wav"></audio>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -40,6 +42,7 @@
   var turn1 = null;
   var turn2 = null;
   var locked = "false";
+  var sfx = null;
 
   $(document).ready(function () {
     setTeam();
@@ -54,6 +57,7 @@
         success: function (response) {
           locked = response[8].value;
 
+          playSFX(response);
           setScore(response);
           if(locked == "false") {
             manageTurn(response);
@@ -92,6 +96,18 @@
   function setAlias() {
     name = getParameterByName("alias");
     document.getElementById("alias").innerHTML = name;
+  }
+
+  function playSFX(response) {
+    sfx = response[9].value;
+
+    if(sfx == "0") {
+      correct.play();
+      $.post("http://olistreaming.ddns.net:8888/server/bachServer.php", { sfx: null });
+    } else if(sfx == "1") {
+      incorrect.play();
+      $.post("http://olistreaming.ddns.net:8888/server/bachServer.php", { sfx: null });
+    }
   }
 
   function setScore(response) {
