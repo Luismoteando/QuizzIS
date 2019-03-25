@@ -163,24 +163,39 @@ if(isset($_POST['lock'])) {
 
 if(isset($_POST['turn'])) {
   $lock = iterator_to_array($lock);
+  $oldBuffer = iterator_to_array($turn);
+  $oldBuffer = $oldBuffer['buffer'];
+  $buffer = $_POST['turn'];
   if($lock['value'] == "false") {
-    $turn = $_POST['turn'];
-    if(substr($turn,0,1) != "") {
-      $result = $collection->updateOne(
-        ['_id' => 'turn'],
-        ['$set' => ['value' => [$turn[0],null]]]
-      );
-      if(substr($turn,1,1) != "") {
+    if($buffer != $oldBuffer) {
+      for($i = 0; $i < strlen($buffer); $i++) {
+        if($buffer[$i] != $oldBuffer[$i])
+          $turn += $buffer[$i];
+      }
+      if(substr($turn,0,1) != "") {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$turn[0], $turn[1]]]]
+          ['$set' => ['value' => [$turn[0],null]]]
         );
+        if(substr($turn,1,1) != "") {
+          $result = $collection->updateOne(
+            ['_id' => 'turn'],
+            ['$set' => ['value' => [$turn[0], $turn[1]]]]
+          );
+        }
       }
+    } else {
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['buffer' => $buffer]],
+        ['$set' => ['value' => [null, null]]]
+      );
     }
   } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => [null,null]]]
+      ['$set' => ['buffer' => $buffer]],
+      ['$set' => ['value' => [null, null]]]
     );
   }
 }
