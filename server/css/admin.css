@@ -1,6 +1,5 @@
 .controls {
   padding: 10px;
-  width: 40%;
   margin: 0 auto;
 }
 
@@ -11,7 +10,6 @@
 
 .timers {
   padding: 10px;
-  width: 40%;
   margin: 0 auto;
 }
 
@@ -22,14 +20,12 @@
 
 .types {
   padding: 10px;
-  width: 39%;
   margin: 0 auto;
 }
 
 .types button {
   margin: 0 auto;
   display: block;
-  width: 39%;
 }
 
 #fourOptions {
@@ -42,19 +38,16 @@
 
 .options {
   padding: 10px;
-  width: 40%;
   margin: 0 auto;
 }
 
 .options button {
   margin: 0 auto;
   display: block;
-  width: 43.5%;
 }
 
 .pushbuttons {
   padding: 10px;
-  width: 40%;
   margin: 0 auto;
 }
 
@@ -70,7 +63,7 @@
   }
 
   .controls button {
-    width: 17.5%;
+    width: 20%;
   }
 
   .controls button span {
@@ -82,7 +75,15 @@
   }
 
   .timers button {
-    width: 17.5%;
+    width: 20%;
+  }
+
+  .types {
+    width: 100%;
+  }
+
+  .types button {
+    width: 36%;
   }
 
   .options {
@@ -90,46 +91,146 @@
   }
 
   .options button {
-    width: 35%;
+    width: 36%;
   }
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
   .controls {
-    width: 75%;
+    width: 100%;
+  }
+
+  .controls button{
+    width: 30%;
   }
 
   .timers {
-    width: 75%;
+    width: 100%;
+  }
+
+  .timers button {
+    width: 30%;
+  }
+
+  .types {
+    width: 100%;
+  }
+
+  .types button {
+    width: 45%
   }
 
   .options {
-    width: 75%;
+    width: 100%;
+  }
+
+  .options button {
+    width: 45%;
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
   .controls {
-    width: 55%;
+    width: 100%;
+  }
+
+  .controls button{
+    width: 30%;
   }
 
   .timers {
-    width: 55%;
+    width: 100%;
+  }
+
+  .timers button {
+    width: 30%;
+  }
+
+  .types {
+    width: 100%;
+  }
+
+  .types button {
+    width: 45%;
   }
 
   .options {
-    width: 55%;
+    width: 100%;
+  }
+
+  .options button {
+    width: 45%;
   }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
+  .controls {
+    width: 80%;
+  }
 
+  .controls button{
+    width: 30%;
+  }
+
+  .timers {
+    width: 80%;
+  }
+
+  .timers button {
+    width: 30%;
+  }
+
+  .types {
+    width: 80%;
+  }
+
+  .types button {
+    width: 45%;
+  }
+
+  .options {
+    width: 80%;
+  }
+
+  .options button {
+    width: 45%;
+  }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+  .controls {
+    width: 70%;
+  }
 
+  .controls button {
+    width: 27.5%;
+  }
+
+  .timers {
+    width: 70%;
+  }
+
+  .timers button {
+    width: 27.5%;
+  }
+
+  .types {
+    width: 70%;
+  }
+
+  .types button {
+    width: 45%;
+  }
+
+  .options {
+    width: 70%;
+  }
+
+  .options button {
+    width: 45%;
+  }
 }

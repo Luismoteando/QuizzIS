@@ -16,7 +16,7 @@
             Panel de control
           </h1>
           <h3>
-            Ciclos formativos
+            cyclillerato
           </h3>
         </div>
         <div class="row text-center" style="padding: 10px;">
@@ -25,6 +25,22 @@
               <h3>
                 Sonidos
               </h3>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="correct" type="button" class="btn">
+                    <i class="fas fa-check-circle"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="row marcador-container" style="padding: 10px;">
+                <div class="col-md-2 col-sm-2" style="margin: auto;">
+
+                  <button id="incorrect" type="button" class="btn">
+                    <i class="fas fa-times-circle"></i>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -194,7 +210,6 @@ var locked = "false";
 
 $(document).ready(function () {
   runPoll();
-  autoPause(7000);
 });
 
 function runPoll() {
@@ -246,7 +261,6 @@ play.onclick = function() {
       play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
     }
   }
-  autoPause(29000);
 };
 
 previous.onclick = function() {
@@ -258,7 +272,6 @@ previous.onclick = function() {
   } else {
     play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
   }
-  autoPause(7000);
 };
 
 next.onclick = function() {
@@ -270,7 +283,6 @@ next.onclick = function() {
   } else {
     play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
   }
-  autoPause(7000);
 };
 
 function timeout() {
@@ -347,12 +359,20 @@ option3in3.onclick = function() {
   $.post("cyclServer.php", { option3in3: true });
 };
 
+correct.onclick = function() {
+  $.post("cyclServer.php", { sfx: 0 });
+};
+
+incorrect.onclick = function() {
+  $.post("cyclServer.php", { sfx: 1 });
+};
+
 lock.onclick = function() {
   if(locked == "false") {
-    $.post("cyclServer.php", { lock: "true" });
+    $.post("cyclServer.php", { lock: true });
     lock.innerHTML = '<i class="fas fa-lock"></i><span> Desloquear pulsadores</span>';
   } else {
-    $.post("cyclServer.php", { lock: "false" });
+    $.post("cyclServer.php", { lock: false });
     lock.innerHTML = '<i class="fas fa-lock-open"></i><span> Bloquear pulsadores</span>';
   }
 }

@@ -34,6 +34,9 @@ $turn = $collection ->findOne(
 $lock = $collection ->findOne(
   ['_id' => 'lock']
 );
+$sfx = $collection ->findOne(
+  ['_id' => 'sfx']
+);
 
 if(isset($_POST['previous'])) {
     $state = iterator_to_array($state);
@@ -142,6 +145,14 @@ if(isset($_POST['option3in3'])) {
   );
 }
 
+if(isset($_POST['sfx'])) {
+  $sfx = $_POST['sfx'];
+  $result = $collection->updateOne(
+    ['_id' => 'sfx'],
+    ['$set' => ['value' => $sfx]]
+  );
+}
+
 if(isset($_POST['lock'])) {
   $lock = $_POST['lock'];
   $result = $collection->updateOne(
@@ -152,24 +163,29 @@ if(isset($_POST['lock'])) {
 
 if(isset($_POST['turn'])) {
   $lock = iterator_to_array($lock);
+  $serial = $_POST['turn'];
+  $buffer = iterator_to_array($turn);
+  $buffer = $buffer['buffer'];
   if($lock['value'] == "false") {
-    $turn = $_POST['turn'];
-    if(substr($turn,0,1) != "") {
+    $buffer1 = str_split($serial, 1);
+    $buffer2 = str_split($buffer, 1);
+    $diff = array_diff_assoc($buffer1, $buffer2);
+    if($first = reset($diff)) {
       $result = $collection->updateOne(
         ['_id' => 'turn'],
-        ['$set' => ['value' => [$turn[0],null]]]
+        ['$set' => ['value' => [$first, null], 'buffer' => $serial]]
       );
-      if(substr($turn,1,1) != "") {
+      if($second = next($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$turn[0], $turn[1]]]]
+          ['$set' => ['value' => [$first, $second], 'buffer' => $serial]]
         );
       }
     }
   } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => [null,null]]]
+      ['$set' => ['value' => ["", ""]]]
     );
   }
 }
@@ -222,5 +238,5 @@ if(isset($_POST['substractC'])) {
   );
 }
 
-$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time, $turn, $lock);
+$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time, $turn, $lock, $sfx);
 echo json_encode($jsono);

@@ -163,39 +163,29 @@ if(isset($_POST['lock'])) {
 
 if(isset($_POST['turn'])) {
   $lock = iterator_to_array($lock);
-  $oldBuffer = iterator_to_array($turn);
-  $oldBuffer = $oldBuffer['buffer'];
-  $buffer = $_POST['turn'];
+  $serial = $_POST['turn'];
+  $buffer = iterator_to_array($turn);
+  $buffer = $buffer['buffer'];
   if($lock['value'] == "false") {
-    if($buffer != $oldBuffer) {
-      for($i = 0; $i < strlen($buffer); $i++) {
-        if($buffer[$i] != $oldBuffer[$i])
-          $turn += $buffer[$i];
-      }
-      if(substr($turn,0,1) != "") {
-        $result = $collection->updateOne(
-          ['_id' => 'turn'],
-          ['$set' => ['value' => [$turn[0],null]]]
-        );
-        if(substr($turn,1,1) != "") {
-          $result = $collection->updateOne(
-            ['_id' => 'turn'],
-            ['$set' => ['value' => [$turn[0], $turn[1]]]]
-          );
-        }
-      }
-    } else {
+    $buffer1 = str_split($serial, 1);
+    $buffer2 = str_split($buffer, 1);
+    $diff = array_diff_assoc($buffer1, $buffer2);
+    if($first = reset($diff)) {
       $result = $collection->updateOne(
         ['_id' => 'turn'],
-        ['$set' => ['buffer' => $buffer]],
-        ['$set' => ['value' => [null, null]]]
+        ['$set' => ['value' => [$first, null], 'buffer' => $serial]]
       );
+      if($second = next($diff)) {
+        $result = $collection->updateOne(
+          ['_id' => 'turn'],
+          ['$set' => ['value' => [$first, $second], 'buffer' => $serial]]
+        );
+      }
     }
   } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['buffer' => $buffer]],
-      ['$set' => ['value' => [null, null]]]
+      ['$set' => ['value' => ["", ""]]]
     );
   }
 }
