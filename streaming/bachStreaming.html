@@ -43,7 +43,7 @@
   });
 
   function runPoll() {
-    setTimeout(function () {
+    window.requestAnimationFrame(function () {
       $.ajax({
         url: 'http://olistreaming.ddns.net:8888/server/bachServer.php',
         success: function (response) {
@@ -61,8 +61,14 @@
           runPoll();
         }
       })
-    }, 100);
+    });
   };
+
+  var  w = window, foundRequestAnimationFrame = w.requestAnimationFrame ||
+                  w.webkitRequestAnimationFrame || w.msRequestAnimationFrame ||
+                  w.mozRequestAnimationFrame    || w.oRequestAnimationFrame  ||
+                        function(poll) { setTimeout(poll, 100); };
+  window.requestAnimationFrame  = foundRequestAnimationFrame;
 
   function checkPlay(response) {
     play = response[0].value;
