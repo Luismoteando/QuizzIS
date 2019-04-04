@@ -43,7 +43,7 @@
   });
 
   function runPoll() {
-    window.requestAnimationFrame(function () {
+    setTimeout(function () {
       $.ajax({
         url: 'http://olistreaming.ddns.net:8888/server/bachServer.php',
         success: function (response) {
@@ -61,14 +61,8 @@
           runPoll();
         }
       })
-    });
+    }, 100);
   };
-
-  var  w = window, foundRequestAnimationFrame = w.requestAnimationFrame ||
-                  w.webkitRequestAnimationFrame || w.msRequestAnimationFrame ||
-                  w.mozRequestAnimationFrame    || w.oRequestAnimationFrame  ||
-                        function(poll) { setTimeout(poll, 100); };
-  window.requestAnimationFrame  = foundRequestAnimationFrame;
 
   function checkPlay(response) {
     play = response[0].value;
@@ -159,20 +153,20 @@
     setTimeout(function() {
       if(semaphore % 2 == 0) {
         player1.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-        setTimeout(function() {
+        player1.ready(function() {
           clearOptions();
           player2.style.display = "none";
           player1.style.display = "block";
           semaphore++;
-        }, 500);
+        });
       } else {
         player2.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-        setTimeout(function() {
+        player2.ready(function() {
           clearOptions();
           player1.style.display = "none";
           player2.style.display = "block";
           semaphore++;
-        }, 500);
+        });
       }
     }, 6000);
   }
