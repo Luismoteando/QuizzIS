@@ -69,7 +69,7 @@
 
     if(player1.style.display != "none") {
       if(play == "true") {
-        if(player1.paused) {
+        if(player1.readyState == 4 && player1.paused) {
           player1.play();
         }
       } else if(play == "false"){
@@ -79,7 +79,7 @@
       }
     } else if(player2.style.display != "none") {
       if(play == "true") {
-        if(player2.paused) {
+        if(player2.readyState == 4 && player2.paused) {
           player2.play();
         }
       } else if(play == "false"){
@@ -108,18 +108,18 @@
     clearOptions();
     if(semaphore % 2 == 0) {
       player1.src = "media/video" + response[1].value + "/opcion0.mp4";
-      setTimeout(function() {
+      if(player1.readyState == 4) {
         player2.style.display = "none";
         player1.style.display = "block";
         semaphore++;
-      }, 500);
+      }
     } else {
       player2.src = "media/video" + response[1].value + "/opcion0.mp4";
-      setTimeout(function() {
+      if(player2.readyState == 4) {
         player1.style.display = "none";
         player2.style.display = "block";
         semaphore++;
-      }, 500);
+      }
     }
   }
 
@@ -153,20 +153,20 @@
     setTimeout(function() {
       if(semaphore % 2 == 0) {
         player1.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-        player1.ready(function() {
+        if(player1.readyState == 4) {
           clearOptions();
           player2.style.display = "none";
           player1.style.display = "block";
           semaphore++;
-        });
+        }
       } else {
         player2.src = "media/video" + response[1].value + "/opcion" + option + ".mp4";
-        player2.ready(function() {
+        if(player2.readyState == 4) {
           clearOptions();
           player1.style.display = "none";
           player2.style.display = "block";
           semaphore++;
-        });
+        }
       }
     }, 6000);
   }
