@@ -64,7 +64,7 @@
               </div>
 
               <div class="row timers">
-                <button id="timer16" type="button" class="btn">
+                <button id="timer" type="button" class="btn">
                   <i class="fas fa-stopwatch"></i><span> 16”</span>
                 </button>
               </div>
@@ -285,31 +285,32 @@ next.onclick = function() {
   }
 };
 
+timer.onclick = function() {
+  time = 17;
+  timeout();
+}
+
 function timeout() {
   if(time >= 0) {
     time -= 1;
     $.post("bachServer.php", { timer: time });
     setTimeout("timeout()", 1000);
   } else {
-    time = 6;
-    counterattack();
-  }
-}
-
-function counterattack() {
-  if(time >= 0) {
-    time -= 1;
-    $.post("bachServer.php", { timer: time });
-    setTimeout("counterattack()", 1000);
-  } else {
     return
+    //time = 6;
+    //setTimeout("counterattack()", 1000);
   }
 }
 
-timer16.onclick = function() {
-  time = 17;
-  timeout();
-}
+// function counterattack() {
+//   if(time >= 0) {
+//     time -= 1;
+//     $.post("bachServer.php", { timer: time });
+//     setTimeout("counterattack()", 1000);
+//   } else {
+//     return
+//   }
+// }
 
 oneInFour.onclick = function() {
   if (fourOptions.style.display == "none") {

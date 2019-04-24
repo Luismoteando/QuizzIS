@@ -37,6 +37,7 @@
   var video = 1;
   var option = 0;
   var time = 0;
+  var counterattack = 0;
 
   $(document).ready(function () {
     runPoll();
@@ -50,7 +51,9 @@
           checkPlay(response);
           setTimer(response);
           if(option != response[2].value) {
-            changeOption(response);
+            showOption(response);
+            counterattack = 5;
+            setCounterattack();
           }
           if(video != response[1].value) {
             changeVideo(response);
@@ -102,6 +105,39 @@
     }
   }
 
+  function setCounterattack() {
+      if(counterattack >= 0) {
+        timer.innerHTML = counterattack;
+        timer.style.display = "block";
+        counterattack -= 1;
+        setTimeout("setCounterattack()", 1000);
+      } else {
+        timer.innerHTML = "";
+        timer.style.display = "none";
+        showSolution();
+      }
+  }
+
+  function showSolution() {
+    if(semaphore % 2 == 0) {
+      player1.src = "media/video" + video + "/opcion" + option + ".mp4";
+      player1.oncanplaythrough = function() {
+        clearOptions();
+        player2.style.display = "none";
+        player1.style.display = "block";
+        semaphore++;
+      }
+    } else {
+      player2.src = "media/video" + video + "/opcion" + option + ".mp4";
+      player2.oncanplaythrough = function() {
+        clearOptions();
+        player1.style.display = "none";
+        player2.style.display = "block";
+        semaphore++;
+      }
+    }
+  }
+
   function changeVideo(response) {
     video = response[1].value;
 
@@ -123,8 +159,7 @@
     }
   }
 
-  function changeOption(response) {
-    video = response[1].value;
+  function showOption(response) {
     option = response[2].value;
 
     if(option == 14) {
@@ -149,26 +184,6 @@
       clearOptions();
       selec33.style.display = "block";
     }
-
-    setTimeout(function() {
-      if(semaphore % 2 == 0) {
-        player1.src = "media/video" + video + "/opcion" + option + ".mp4";
-        player1.oncanplaythrough = function() {
-          clearOptions();
-          player2.style.display = "none";
-          player1.style.display = "block";
-          semaphore++;
-        }
-      } else {
-        player2.src = "media/video" + video + "/opcion" + option + ".mp4";
-        player2.oncanplaythrough = function() {
-          clearOptions();
-          player1.style.display = "none";
-          player2.style.display = "block";
-          semaphore++;
-        }
-      }
-    }, 6000);
   }
 
   function clearOptions() {
