@@ -7,6 +7,7 @@
 </head>
 <body>
   <span id="timer"></span>
+  <span id="counterattack"></span>
   <img id="selec14" src="media/selecarriba.svg"></img>
   <img id="selec24" src="media/selecarriba.svg"></img>
   <img id="selec34" src="media/selecabajo.svg"></img>
@@ -37,7 +38,7 @@
   var video = 1;
   var option = 0;
   var time = 0;
-  var counterattack = 0;
+  var ctime = 0;
 
   $(document).ready(function () {
     runPoll();
@@ -52,8 +53,10 @@
           setTimer(response);
           if(option != response[2].value) {
             showOption(response);
-            counterattack = 5;
-            setCounterattack();
+            if(option != 0) {
+              ctime = 5;
+              setCounterattack();
+            }
           }
           if(video != response[1].value) {
             changeVideo(response);
@@ -106,14 +109,14 @@
   }
 
   function setCounterattack() {
-      if(counterattack >= 0) {
-        timer.innerHTML = counterattack;
-        timer.style.display = "block";
-        counterattack -= 1;
+      if(ctime >= 0) {
+        counterattack.innerHTML = "Contra " + ctime;
+        counterattack.style.display = "block";
+        ctime -= 1;
         setTimeout("setCounterattack()", 1000);
       } else {
-        timer.innerHTML = "";
-        timer.style.display = "none";
+        counterattack.innerHTML = "";
+        counterattack.style.display = "none";
         showSolution();
       }
   }

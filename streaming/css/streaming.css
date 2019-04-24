@@ -31,6 +31,15 @@
   right: 3%;
 }
 
+#counterattack {
+  font-size: 3.5pc;
+  font-family: 'SansBeamHead', Fallback, sans-serif;
+  display: none;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
 #selec14 {
   display: none;
   position: absolute;
