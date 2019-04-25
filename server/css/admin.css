@@ -1,3 +1,13 @@
+.nav-pills .pill .nav-link:not(.active) {
+  color: #1d2124;
+  background-color: transparent;
+}
+
+.nav-pills .pill .nav-link {
+  color: #fff;
+  background-color: #1d2124;
+}
+
 .controls {
   padding: 10px;
   margin: 0 auto;
@@ -63,7 +73,7 @@
   }
 
   .controls button {
-    width: 20%;
+    width: 27%;
   }
 
   .controls button span {
@@ -75,7 +85,7 @@
   }
 
   .timers button {
-    width: 20%;
+    width: 27%;
   }
 
   .types {
@@ -83,7 +93,7 @@
   }
 
   .types button {
-    width: 36%;
+    width: 44%;
   }
 
   .options {
@@ -91,7 +101,7 @@
   }
 
   .options button {
-    width: 36%;
+    width: 44%;
   }
 }
 
@@ -172,7 +182,7 @@
   }
 
   .controls button{
-    width: 30%;
+    width: 31%;
   }
 
   .timers {
@@ -207,7 +217,7 @@
   }
 
   .controls button {
-    width: 27.5%;
+    width: 28.5%;
   }
 
   .timers {

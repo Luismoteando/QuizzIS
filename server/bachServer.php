@@ -164,28 +164,32 @@ if(isset($_POST['lock'])) {
 if(isset($_POST['turn'])) {
   $lock = iterator_to_array($lock);
   $serial = $_POST['turn'];
-  $buffer = iterator_to_array($turn);
-  $buffer = $buffer['buffer'];
+  $turn = iterator_to_array($turn);
+  $buffer = $turn['buffer'];
+  $value = $turn['value'];
   if($lock['value'] == "false") {
     $buffer1 = str_split($serial, 1);
     $buffer2 = str_split($buffer, 1);
     $diff = array_diff_assoc($buffer1, $buffer2);
-    if($first = reset($diff)) {
-      $result = $collection->updateOne(
-        ['_id' => 'turn'],
-        ['$set' => ['value' => [$first, null], 'buffer' => $serial]]
-      );
-      if($second = next($diff)) {
+    if($value[0] == "") {
+      if($first = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$first, $second], 'buffer' => $serial]]
+          ['$set' => ['value' => [$first, null], 'buffer' => $serial]]
+        );
+      }
+    } elseif($value[1] == "") {
+      if($second = reset($diff)) {
+        $result = $collection->updateOne(
+          ['_id' => 'turn'],
+          ['$set' => ['value' => [$value[0], $second], 'buffer' => $serial]]
         );
       }
     }
   } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => ["", ""]]]
+      ['$set' => ['value' => ["", ""], 'buffer' => $serial]]
     );
   }
 }
