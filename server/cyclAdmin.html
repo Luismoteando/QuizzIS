@@ -282,56 +282,23 @@
 
       setTimeout(function() {
         $.post("cyclServer.php", { play: false });
-        if(width < 575.98) {
-          play.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-          play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
-        }
       }, timeout);
     }
 
     play.onclick = function() {
-      width = $(window).width();
-
-      if(width < 575.98) {
         if(playing == "false") {
           $.post("cyclServer.php", { play: true });
-          play.innerHTML = '<i class="fas fa-pause"></i>';
         } else {
           $.post("cyclServer.php", { play: false });
-          play.innerHTML = '<i class="fas fa-play"></i>';
         }
-      } else {
-        if(playing == "false") {
-          $.post("cyclServer.php", { play: true });
-          play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
-        } else {
-          $.post("cyclServer.php", { play: false });
-          play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
-        }
-      }
     };
 
     previous.onclick = function() {
-      width = $(window).width();
-
       $.post("cyclServer.php", { previous: true, play: true});
-      if(width < 575.98) {
-        play.innerHTML = '<i class="fas fa-pause"></i>';
-      } else {
-        play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
-      }
     };
 
     next.onclick = function() {
-      width = $(window).width();
-
       $.post("cyclServer.php", { next: true, play: true });
-      if(width < 575.98) {
-        play.innerHTML = '<i class="fas fa-pause"></i>';
-      } else {
-        play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
-      }
     };
 
     timer.onclick = function() {
@@ -411,18 +378,14 @@
       if(width < 575.98) {
         if(locked == "false") {
           $.post("cyclServer.php", { lock: true });
-          lock.innerHTML = '<i class="fas fa-lock"></i>';
         } else {
           $.post("cyclServer.php", { lock: false });
-          lock.innerHTML = '<i class="fas fa-lock-open"></i>';
         }
       } else {
         if(locked == "false") {
           $.post("cyclServer.php", { lock: true });
-          lock.innerHTML = '<i class="fas fa-lock"></i><span> Desloquear pulsadores</span>';
         } else {
           $.post("cyclServer.php", { lock: false });
-          lock.innerHTML = '<i class="fas fa-lock-open"></i><span> Bloquear pulsadores</span>';
         }
       }
     }
@@ -506,15 +469,15 @@
       }
       if(width < 575.98) {
         if(locked == "false") {
-          lock.innerHTML = '<i class="fas fa-lock"></i>';
-        } else {
           lock.innerHTML = '<i class="fas fa-lock-open"></i>';
+        } else {
+          lock.innerHTML = '<i class="fas fa-lock"></i>';
         }
       } else {
         if(locked == "false") {
-          lock.innerHTML = '<i class="fas fa-lock"></i><span> Desloquear pulsadores</span>';
-        } else {
           lock.innerHTML = '<i class="fas fa-lock-open"></i><span> Bloquear pulsadores</span>';
+        } else {
+          lock.innerHTML = '<i class="fas fa-lock"></i><span> Desbloquear pulsadores</span>';
         }
       }
     }

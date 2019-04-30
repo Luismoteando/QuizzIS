@@ -22,17 +22,6 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>
-  var timer = document.getElementById("timer");
-  var selec14 = document.getElementById("selec14");
-  var selec24 = document.getElementById("selec24");
-  var selec34 = document.getElementById("selec34");
-  var selec44 = document.getElementById("selec44");
-  var selec13 = document.getElementById("selec13");
-  var selec23 = document.getElementById("selec23");
-  var selec33 = document.getElementById("selec33");
-  var player1 = document.getElementById("player1");
-  var player2 = document.getElementById("player2");
-
   var semaphore = 1;
   var play = "true";
   var video = 1;
@@ -94,6 +83,20 @@
         }
       }
     }
+  }
+
+  player1.onended = function() {
+      $.post("bachServer.php", { play: false });
+      if(!player1.paused) {
+        player1.pause();
+      }
+  }
+
+  player2.onended = function() {
+      $.post("bachServer.php", { play: false });
+      if(!player2.paused) {
+        player2.pause();
+      }
   }
 
   function setTimer(response) {

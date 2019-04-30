@@ -7,6 +7,7 @@
 </head>
 <body>
   <span id="timer"></span>
+  <span id="counterattack"></span>
   <img id="selec14" src="media/selecarriba.svg"></img>
   <img id="selec24" src="media/selecarriba.svg"></img>
   <img id="selec34" src="media/selecabajo.svg"></img>
@@ -21,22 +22,12 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>
-  var timer = document.getElementById("timer");
-  var selec14 = document.getElementById("selec14");
-  var selec24 = document.getElementById("selec24");
-  var selec34 = document.getElementById("selec34");
-  var selec44 = document.getElementById("selec44");
-  var selec13 = document.getElementById("selec13");
-  var selec23 = document.getElementById("selec23");
-  var selec33 = document.getElementById("selec33");
-  var player1 = document.getElementById("player1");
-  var player2 = document.getElementById("player2");
-
   var semaphore = 1;
   var play = "true";
   var video = 1;
   var option = 0;
   var time = 0;
+  var ctime = 0;
 
   $(document).ready(function () {
     runPoll();
@@ -50,7 +41,11 @@
           checkPlay(response);
           setTimer(response);
           if(option != response[2].value) {
-            changeOption(response);
+            showOption(response);
+            if(option != 0) {
+              ctime = 5;
+              setCounterattack();
+            }
           }
           if(video != response[1].value) {
             changeVideo(response);
@@ -90,6 +85,20 @@
     }
   }
 
+  player1.onended = function() {
+      $.post("cyclServer.php", { play: false });
+      if(!player1.paused) {
+        player1.pause();
+      }
+  }
+
+  player2.onended = function() {
+      $.post("cyclServer.php", { play: false });
+      if(!player2.paused) {
+        player2.pause();
+      }
+  }
+
   function setTimer(response) {
     time = response[6].value;
 
@@ -99,6 +108,39 @@
     } else {
       timer.innerHTML = "";
       timer.style.display = "none";
+    }
+  }
+
+  function setCounterattack() {
+      if(ctime >= 0) {
+        counterattack.innerHTML = "Contra " + ctime;
+        counterattack.style.display = "block";
+        ctime -= 1;
+        setTimeout("setCounterattack()", 1000);
+      } else {
+        counterattack.innerHTML = "";
+        counterattack.style.display = "none";
+        showSolution();
+      }
+  }
+
+  function showSolution() {
+    if(semaphore % 2 == 0) {
+      player1.src = "media/video" + video + "/opcion" + option + ".mp4";
+      player1.oncanplaythrough = function() {
+        clearOptions();
+        player2.style.display = "none";
+        player1.style.display = "block";
+        semaphore++;
+      }
+    } else {
+      player2.src = "media/video" + video + "/opcion" + option + ".mp4";
+      player2.oncanplaythrough = function() {
+        clearOptions();
+        player1.style.display = "none";
+        player2.style.display = "block";
+        semaphore++;
+      }
     }
   }
 
@@ -123,8 +165,7 @@
     }
   }
 
-  function changeOption(response) {
-    video = response[1].value;
+  function showOption(response) {
     option = response[2].value;
 
     if(option == 14) {
@@ -149,26 +190,6 @@
       clearOptions();
       selec33.style.display = "block";
     }
-
-    setTimeout(function() {
-      if(semaphore % 2 == 0) {
-        player1.src = "media/video" + video + "/opcion" + option + ".mp4";
-        player1.oncanplaythrough = function() {
-          clearOptions();
-          player2.style.display = "none";
-          player1.style.display = "block";
-          semaphore++;
-        }
-      } else {
-        player2.src = "media/video" + video + "/opcion" + option + ".mp4";
-        player2.oncanplaythrough = function() {
-          clearOptions();
-          player1.style.display = "none";
-          player2.style.display = "block";
-          semaphore++;
-        }
-      }
-    }, 6000);
   }
 
   function clearOptions() {
