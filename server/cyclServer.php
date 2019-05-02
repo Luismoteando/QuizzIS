@@ -37,6 +37,9 @@ $lock = $collection ->findOne(
 $sfx = $collection ->findOne(
   ['_id' => 'sfx']
 );
+$solution = $collection ->findOne(
+  ['_id' => 'solution']
+);
 
 if(isset($_POST['previous'])) {
     $state = iterator_to_array($state);
@@ -145,6 +148,14 @@ if(isset($_POST['option3in3'])) {
   );
 }
 
+if(isset($_POST['solution'])) {
+  $solution = $_POST['solution'];
+  $result = $collection->updateOne(
+    ['_id' => 'solution'],
+    ['$set' => ['value' => $solution]]
+  );
+}
+
 if(isset($_POST['sfx'])) {
   $sfx = $_POST['sfx'];
   $result = $collection->updateOne(
@@ -242,5 +253,5 @@ if(isset($_POST['substractC'])) {
   );
 }
 
-$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time, $turn, $lock, $sfx);
+$jsono = array($play, $state, $option, $teamA, $teamB, $teamC, $time, $turn, $lock, $sfx, $solution);
 echo json_encode($jsono);

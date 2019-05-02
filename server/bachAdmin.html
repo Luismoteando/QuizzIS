@@ -125,6 +125,12 @@
                         </button>
                       </div>
                     </div>
+
+                    <div class="row">
+                      <button id="solution" type="button" class="btn btn-light">
+                        <i class="fas fa-check-circle"></i><span> Mostrar solución</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -294,11 +300,11 @@
     };
 
     previous.onclick = function() {
-      $.post("bachServer.php", { previous: true, play: true});
+      $.post("bachServer.php", { previous: true, solution: false, play: true});
     };
 
     next.onclick = function() {
-      $.post("bachServer.php", { next: true, play: true });
+      $.post("bachServer.php", { next: true, solution: false, play: true });
     };
 
     timer.onclick = function() {
@@ -364,6 +370,10 @@
       $.post("bachServer.php", { option3in3: true });
     };
 
+    solution.onclick = function() {
+      $.post("bachServer.php", { solution: true });
+    }
+
     correct.onclick = function() {
       $.post("bachServer.php", { sfx: 0 });
     };
@@ -418,15 +428,15 @@
       width = $(window).width();
       if(width < 575.98) {
         if(playing == "false") {
-          play.innerHTML = '<i class="fas fa-pause"></i>';
-        } else {
           play.innerHTML = '<i class="fas fa-play"></i>';
+        } else {
+          play.innerHTML = '<i class="fas fa-pause"></i>';
         }
       } else {
         if(playing == "false") {
-          play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
-        } else {
           play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
+        } else {
+          play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
         }
       }
       question.innerHTML = response[1].value;
