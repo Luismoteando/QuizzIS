@@ -67,23 +67,27 @@
     play = response[0].value;
 
     if(player1.style.display != "none") {
-      if(play == "true") {
-        if(player1.paused) {
-          player1.play();
-        }
-      } else if(play == "false"){
-        if(!player1.paused) {
-          player1.pause();
+      if(!player1.ended) {
+        if(play == "true") {
+          if(player1.paused) {
+            player1.play();
+          }
+        } else if(play == "false") {
+          if(!player1.paused) {
+            player1.pause();
+          }
         }
       }
     } else if(player2.style.display != "none") {
-      if(play == "true") {
-        if(player2.paused) {
-          player2.play();
-        }
-      } else if(play == "false"){
-        if(!player2.paused) {
-          player2.pause();
+      if(!player2.ended) {
+        if(play == "true") {
+          if(player2.paused) {
+            player2.play();
+          }
+        } else if(play == "false"){
+          if(!player2.paused) {
+            player2.pause();
+          }
         }
       }
     }
