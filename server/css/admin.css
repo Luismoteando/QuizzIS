@@ -8,6 +8,10 @@
   background-color: #1d2124;
 }
 
+.breadcrumb .breadcrumb-item a {
+  color: #1d2124;
+}
+
 .controls {
   padding: 10px;
   margin: 0 auto;
@@ -38,12 +42,22 @@
   display: block;
 }
 
-#fourOptions {
+#divCuatroOp {
   display: none;
 }
 
-#threeOptions {
+#divCuatroOp button {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+#divTresOp {
   display: none;
+}
+
+#divTresOp button {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
 }
 
 .options {
@@ -52,6 +66,20 @@
 }
 
 .options button {
+  margin: 0 auto;
+  display: block;
+}
+
+#divSolucion {
+  display: none;
+}
+
+.solution {
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.solution button {
   margin: 0 auto;
   display: block;
 }

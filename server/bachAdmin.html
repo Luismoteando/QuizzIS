@@ -10,9 +10,23 @@
 <body>
   <div class="container text-center">
     <h1>Panel de administración</h1>
-    <h3>Bachillerato</h3>
 
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<nav>
+    				<ol class="breadcrumb">
+    					<li class="breadcrumb-item">
+    						<a href="index.html">Categorías</a>
+    					</li>
+    					<li class="breadcrumb-item active">
+    						Bachillerato
+    					</li>
+    				</ol>
+    			</nav>
+    		</div>
+    	</div>
+
+    <ul class="nav nav-pills mb-3" id="pills-tab-first" role="tablist">
       <li class="nav-item pill">
         <a class="nav-link active" id="pills-controles-tab" data-toggle="pill" href="#pills-controles" role="tab" aria-controls="pills-home" aria-selected="true">Controles</a>
       </li>
@@ -55,81 +69,114 @@
                 </div>
 
                 <div class="col-md-8 col-sm-12">
-                  <div class="jumbotron m-1">
-                    <h3>
-                      Preguntas
-                    </h3>
-                    <div class="row controls">
-                      <button id="previous" type="button" class="btn btn-light">
-                        <i class="fas fa-backward"></i><span> Anterior</span>
-                      </button>
+                  <ul class="nav nav-pills mb-3" id="pills-tab-second" role="tablist">
+                    <li class="nav-item pill">
+                      <a class="nav-link active" id="tabPreguntas" data-toggle="pill" href="#divPreguntas" role="tab" aria-controls="pills-home" aria-selected="true">Preguntas</a>
+                    </li>
+                    <li class="nav-item pill">
+                      <a class="nav-link" id="tabEntradillas" data-toggle="pill" href="#divEntradillas" role="tab" aria-controls="pills-profile" aria-selected="false">Entradillas</a>
+                    </li>
+                  </ul>
 
-                      <button id="play" type="button" class="btn btn-light">
-                        <i class="fas fa-pause"></i><span> Pausar</span>
-                      </button>
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="divPreguntas" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="jumbotron m-1">
+                        <h3>
+                          Preguntas
+                        </h3>
+                        <div class="row controls">
+                          <button id="btnAntPreg" type="button" class="btn btn-light">
+                            <i class="fas fa-backward"></i><span> Anterior</span>
+                          </button>
 
-                      <button id="next" type="button" class="btn btn-light">
-                        <i class="fas fa-forward"></i><span> Siguiente</span>
-                      </button>
-                    </div>
+                          <button id="btnPlayPreg" type="button" class="btn btn-light">
+                            <i class="fas fa-pause"></i><span> Pausar</span>
+                          </button>
 
-                    <div class="row timers">
-                      <button id="timer" type="button" class="btn btn-light">
-                        <i class="fas fa-stopwatch"></i><span> 16”</span>
-                      </button>
-                    </div>
+                          <button id="btnSigPreg" type="button" class="btn btn-light">
+                            <i class="fas fa-forward"></i><span> Siguiente</span>
+                          </button>
+                        </div>
 
-                    <div class="row types">
-                      <button id="oneInFour" type="button" class="btn btn-light">
-                        <i class="fas fa-ellipsis-v"></i><span> Una entre cuatro</span>
-                      </button>
+                        <div class="row timers">
+                          <button id="btnTempo" type="button" class="btn btn-light">
+                            <i class="fas fa-stopwatch"></i><span> 16”</span>
+                          </button>
+                        </div>
 
-                      <button id="oneInThree" type="button" class="btn btn-light">
-                        <i class="fas fa-ellipsis-v"></i><span> Una entre tres</span>
-                      </button>
-                    </div>
+                        <div class="row types">
+                          <button id="btnUnaCuatro" type="button" class="btn btn-light">
+                            <i class="fas fa-ellipsis-v"></i><span> Una entre cuatro</span>
+                          </button>
 
-                    <div id="fourOptions">
-                      <div class="row options">
-                        <button id="option1in4" type="button" class="btn btn-light">
-                          Opción 1
-                        </button>
+                          <button id="btnUnaTres" type="button" class="btn btn-light">
+                            <i class="fas fa-ellipsis-v"></i><span> Una entre tres</span>
+                          </button>
+                        </div>
 
-                        <button id="option2in4" type="button" class="btn btn-light">
-                          Opción 2
-                        </button>
+                        <div id="divCuatroOp">
+                          <div class="row options">
+                            <button id="btnPrimeraCuatro" type="button" class="btn btn-light">
+                              Opción 1
+                            </button>
+
+                            <button id="btnSegundaCuatro" type="button" class="btn btn-light">
+                              Opción 2
+                            </button>
+                          </div>
+                          <div class="row options">
+                            <button id="btnTerceraCuatro" type="button" class="btn btn-light">
+                              Opción 3
+                            </button>
+
+                            <button id="btnCuartaCuatro" type="button" class="btn btn-light">
+                              Opción 4
+                            </button>
+                          </div>
+                        </div>
+
+                        <div id="divTresOp">
+                          <div class="row controls">
+                            <button id="btnPrimeraTres" type="button" class="btn btn-light">
+                              Opción 1
+                            </button>
+
+                            <button id="btnSegundaTres" type="button" class="btn btn-light">
+                              Opción 2
+                            </button>
+
+                            <button id="btnTerceraTres" type="button" class="btn btn-light">
+                              Opción 3
+                            </button>
+                          </div>
+                        </div>
+
+                        <div id="divSolucion" class="row solution">
+                          <button id="solution" type="button" class="btn btn-light">
+                            <i class="fas fa-check-circle"></i><span> Mostrar solución</span>
+                          </button>
+                        </div>
                       </div>
-                      <div class="row options">
-                        <button id="option3in4" type="button" class="btn btn-light">
-                          Opción 3
-                        </button>
-
-                        <button id="option4in4" type="button" class="btn btn-light">
-                          Opción 4
-                        </button>
-                      </div>
                     </div>
+                    <div class="tab-pane fade" id="divEntradillas" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="jumbotron m-1">
+                        <h3>
+                          Entradillas
+                        </h3>
+                        <div class="row controls">
+                          <button id="btnAntEntr" type="button" class="btn btn-light">
+                            <i class="fas fa-backward"></i><span> Anterior</span>
+                          </button>
 
-                    <div id="threeOptions">
-                      <div class="row controls">
-                        <button id="option1in3" type="button" class="btn btn-light">
-                          Opción 1
-                        </button>
+                          <button id="btnPlayEntr" type="button" class="btn btn-light">
+                            <i class="fas fa-pause"></i><span> Pausar</span>
+                          </button>
 
-                        <button id="option2in3" type="button" class="btn btn-light">
-                          Opción 2
-                        </button>
-
-                        <button id="option3in3" type="button" class="btn btn-light">
-                          Opción 3
-                        </button>
+                          <button id="btnSigEntr" type="button" class="btn btn-light">
+                            <i class="fas fa-forward"></i><span> Siguiente</span>
+                          </button>
+                        </div>
                       </div>
-                    </div>
-
-                    <div class="row">
-                      <button id="solution" type="button" class="btn btn-light">
-                        <i class="fas fa-check-circle"></i><span> Mostrar solución</span>
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -254,6 +301,10 @@
           </div>
         </div>
       </div>
+
+      <button id="reset" type="button" class="btn btn-outline-danger">
+				Restablecer valores
+			</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -283,31 +334,41 @@
       }, 100);
     };
 
-    function autoPause(timeout) {
-      width = $(window).width();
-
-      setTimeout(function() {
+    btnPlayPreg.onclick = function() {
+      if(playing == "false") {
+        $.post("bachServer.php", { play: true });
+      } else {
         $.post("bachServer.php", { play: false });
-      }, timeout);
-    }
-
-    play.onclick = function() {
-        if(playing == "false") {
-          $.post("bachServer.php", { play: true });
-        } else {
-          $.post("bachServer.php", { play: false });
-        }
+      }
     };
 
-    previous.onclick = function() {
-      $.post("bachServer.php", { previous: true, solution: false, play: true});
+    btnAntPreg.onclick = function() {
+      $.post("bachServer.php", { mode: "questions", previous: true, play: true, solution: false });
+      divSolucion.style.display = "none";
     };
 
-    next.onclick = function() {
-      $.post("bachServer.php", { next: true, solution: false, play: true });
+    btnSigPreg.onclick = function() {
+      $.post("bachServer.php", { mode: "questions", next: true, play: true, solution: false });
+      divSolucion.style.display = "none";
     };
 
-    timer.onclick = function() {
+    btnPlayEntr.onclick = function() {
+      if(playing == "false") {
+        $.post("bachServer.php", { play: true });
+      } else {
+        $.post("bachServer.php", { play: false });
+      }
+    };
+
+    btnAntEntr.onclick = function() {
+      $.post("bachServer.php", { mode: "leads", previous: true, play: true, solution: false });
+    };
+
+    btnSigEntr.onclick = function() {
+      $.post("bachServer.php", { mode: "leads", next: true, play: true, solution: false });
+    };
+
+    btnTempo.onclick = function() {
       time = 17;
       timeout();
     }
@@ -322,52 +383,62 @@
       }
     }
 
-    oneInFour.onclick = function() {
-      if (fourOptions.style.display == "none") {
-        threeOptions.style.display = "none";
-        fourOptions.style.display = "block";
+    btnUnaCuatro.onclick = function() {
+      divSolucion.style.display = "none";
+      if (divCuatroOp.style.display == "none") {
+        divTresOp.style.display = "none";
+        divCuatroOp.style.display = "block";
+
       } else {
-        threeOptions.style.display = "none";
-        fourOptions.style.display = "none";
+        divTresOp.style.display = "none";
+        divCuatroOp.style.display = "none";
       }
     }
 
-    oneInThree.onclick = function() {
-      if (threeOptions.style.display == "none") {
-        fourOptions.style.display = "none";
-        threeOptions.style.display = "block";
+    btnUnaTres.onclick = function() {
+      divSolucion.style.display = "none";
+      if (divTresOp.style.display == "none") {
+        divCuatroOp.style.display = "none";
+        divTresOp.style.display = "block";
       } else {
-        fourOptions.style.display = "none";
-        threeOptions.style.display = "none";
+        divCuatroOp.style.display = "none";
+        divTresOp.style.display = "none";
       }
     }
 
-    option1in4.onclick = function() {
+    btnPrimeraCuatro.onclick = function() {
       $.post("bachServer.php", { option1in4: true, lock: false });
+      divSolucion.style.display = "block";
     };
 
-    option2in4.onclick = function() {
+    btnSegundaCuatro.onclick = function() {
       $.post("bachServer.php", { option2in4: true, lock: false });
+      divSolucion.style.display = "block";
     };
 
-    option3in4.onclick = function() {
+    btnTerceraCuatro.onclick = function() {
       $.post("bachServer.php", { option3in4: true, lock: false });
+      divSolucion.style.display = "block";
     };
 
-    option4in4.onclick = function() {
+    btnCuartaCuatro.onclick = function() {
       $.post("bachServer.php", { option4in4: true, lock: false });
+      divSolucion.style.display = "block";
     };
 
-    option1in3.onclick = function() {
+    btnPrimeraTres.onclick = function() {
       $.post("bachServer.php", { option1in3: true, lock: false });
+      divSolucion.style.display = "block";
     };
 
-    option2in3.onclick = function() {
+    btnSegundaTres.onclick = function() {
       $.post("bachServer.php", { option2in3: true, lock: false });
+      divSolucion.style.display = "block";
     };
 
-    option3in3.onclick = function() {
+    btnTerceraTres.onclick = function() {
       $.post("bachServer.php", { option3in3: true, lock: false });
+      divSolucion.style.display = "block";
     };
 
     solution.onclick = function() {
@@ -424,19 +495,27 @@
       $.post("bachServer.php", { substractC: true });
     };
 
+    reset.onclick = function() {
+        $.post("bachServer.php", { play: true, option: 0, teamA: 0, teamB: 0, teamC: 0, timer: "-1", turn: { value: [null, null], buffer: null }, lock: true, sfx: null, solution: false, mode: "leads", question: 1, lead: 1  });
+    }
+
     function updateState(response) {
       width = $(window).width();
       if(width < 575.98) {
         if(playing == "false") {
-          play.innerHTML = '<i class="fas fa-play"></i>';
+          btnPlayPreg.innerHTML = '<i class="fas fa-play"></i>';
+          btnPlayEntr.innerHTML = '<i class="fas fa-play"></i>';
         } else {
-          play.innerHTML = '<i class="fas fa-pause"></i>';
+          btnPlayPreg.innerHTML = '<i class="fas fa-pause"></i>';
+          btnPlayEntr.innerHTML = '<i class="fas fa-pause"></i>';
         }
       } else {
         if(playing == "false") {
-          play.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
+          btnPlayPreg.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
+          btnPlayEntr.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
         } else {
-          play.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
+          btnPlayPreg.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
+          btnPlayEntr.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
         }
       }
       question.innerHTML = response[1].value;
