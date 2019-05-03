@@ -325,7 +325,7 @@
     function runPoll() {
       setTimeout(function () {
         $.ajax({
-          url: 'http://olistreaming.ddns.net:8888/server/Server.php',
+          url: 'http://olistreaming.ddns.net:8888/server/cyclServer.php',
           success: function (response) {
             playing = response[0].value;
             locked = response[8].value;
@@ -341,44 +341,44 @@
 
     btnPlayPreg.onclick = function() {
       if(playing == "false") {
-        $.post("Server.php", { play: true });
+        $.post("cyclServer.php", { play: true });
       } else {
-        $.post("Server.php", { play: false });
+        $.post("cyclServer.php", { play: false });
       }
     };
 
     btnAntPreg.onclick = function() {
-      $.post("Server.php", { mode: "questions", previous: true, play: true, solution: false });
+      $.post("cyclServer.php", { mode: "questions", previous: true, play: true, solution: false });
       divSolucion.style.display = "none";
     };
 
     btnSigPreg.onclick = function() {
-      $.post("Server.php", { mode: "questions", next: true, play: true, solution: false });
+      $.post("cyclServer.php", { mode: "questions", next: true, play: true, solution: false });
       divSolucion.style.display = "none";
     };
 
     btnEntr1.onclick = function() {
-      $.post("Server.php", { mode: "leads", lead: 1, play: true, solution: false });
+      $.post("cyclServer.php", { mode: "leads", lead: 1, play: true, solution: false });
     }
 
     btnEntr2.onclick = function() {
-      $.post("Server.php", { mode: "leads", lead: 2, play: true, solution: false });
+      $.post("cyclServer.php", { mode: "leads", lead: 2, play: true, solution: false });
     }
 
     btnEntr3.onclick = function() {
-      $.post("Server.php", { mode: "leads", lead: 3, play: true, solution: false });
+      $.post("cyclServer.php", { mode: "leads", lead: 3, play: true, solution: false });
     }
 
     btnEntr4.onclick = function() {
-      $.post("Server.php", { mode: "leads", lead: 4, play: true, solution: false });
+      $.post("cyclServer.php", { mode: "leads", lead: 4, play: true, solution: false });
     }
 
     btnEntr5.onclick = function() {
-      $.post("Server.php", { mode: "leads", lead: 5, play: true, solution: false });
+      $.post("cyclServer.php", { mode: "leads", lead: 5, play: true, solution: false });
     }
 
     btnEntr6.onclick = function() {
-      $.post("Server.php", { mode: "leads", lead: 6, play: true, solution: false });
+      $.post("cyclServer.php", { mode: "leads", lead: 6, play: true, solution: false });
     }
 
     btnTempo.onclick = function() {
@@ -389,7 +389,7 @@
     function timeout() {
       if(time >= 0) {
         time -= 1;
-        $.post("Server.php", { timer: time });
+        $.post("cyclServer.php", { timer: time });
         setTimeout("timeout()", 1000);
       } else {
         return
@@ -420,50 +420,50 @@
     }
 
     btnPrimeraCuatro.onclick = function() {
-      $.post("Server.php", { option1in4: true, lock: false });
+      $.post("cyclServer.php", { option1in4: true, lock: false });
       divSolucion.style.display = "block";
     };
 
     btnSegundaCuatro.onclick = function() {
-      $.post("Server.php", { option2in4: true, lock: false });
+      $.post("cyclServer.php", { option2in4: true, lock: false });
       divSolucion.style.display = "block";
     };
 
     btnTerceraCuatro.onclick = function() {
-      $.post("Server.php", { option3in4: true, lock: false });
+      $.post("cyclServer.php", { option3in4: true, lock: false });
       divSolucion.style.display = "block";
     };
 
     btnCuartaCuatro.onclick = function() {
-      $.post("Server.php", { option4in4: true, lock: false });
+      $.post("cyclServer.php", { option4in4: true, lock: false });
       divSolucion.style.display = "block";
     };
 
     btnPrimeraTres.onclick = function() {
-      $.post("Server.php", { option1in3: true, lock: false });
+      $.post("cyclServer.php", { option1in3: true, lock: false });
       divSolucion.style.display = "block";
     };
 
     btnSegundaTres.onclick = function() {
-      $.post("Server.php", { option2in3: true, lock: false });
+      $.post("cyclServer.php", { option2in3: true, lock: false });
       divSolucion.style.display = "block";
     };
 
     btnTerceraTres.onclick = function() {
-      $.post("Server.php", { option3in3: true, lock: false });
+      $.post("cyclServer.php", { option3in3: true, lock: false });
       divSolucion.style.display = "block";
     };
 
     solution.onclick = function() {
-      $.post("Server.php", { solution: true });
+      $.post("cyclServer.php", { solution: true });
     }
 
     correct.onclick = function() {
-      $.post("Server.php", { sfx: 0 });
+      $.post("cyclServer.php", { sfx: 0 });
     };
 
     incorrect.onclick = function() {
-      $.post("Server.php", { sfx: 1 });
+      $.post("cyclServer.php", { sfx: 1 });
     };
 
     lock.onclick = function() {
@@ -471,45 +471,45 @@
 
       if(width < 575.98) {
         if(locked == "false") {
-          $.post("Server.php", { lock: true });
+          $.post("cyclServer.php", { lock: true });
         } else {
-          $.post("Server.php", { lock: false });
+          $.post("cyclServer.php", { lock: false });
         }
       } else {
         if(locked == "false") {
-          $.post("Server.php", { lock: true });
+          $.post("cyclServer.php", { lock: true });
         } else {
-          $.post("Server.php", { lock: false });
+          $.post("cyclServer.php", { lock: false });
         }
       }
     }
 
     addA.onclick = function() {
-      $.post("Server.php", { addA: true });
+      $.post("cyclServer.php", { addA: true });
     };
 
     substractA.onclick = function() {
-      $.post("Server.php", { substractA: true });
+      $.post("cyclServer.php", { substractA: true });
     };
 
     addB.onclick = function() {
-      $.post("Server.php", { addB: true });
+      $.post("cyclServer.php", { addB: true });
     };
 
     substractB.onclick = function() {
-      $.post("Server.php", { substractB: true });
+      $.post("cyclServer.php", { substractB: true });
     };
 
     addC.onclick = function() {
-      $.post("Server.php", { addC: true });
+      $.post("cyclServer.php", { addC: true });
     };
 
     substractC.onclick = function() {
-      $.post("Server.php", { substractC: true });
+      $.post("cyclServer.php", { substractC: true });
     };
 
     reset.onclick = function() {
-        $.post("Server.php", { play: true, option: 0, teamA: 0, teamB: 0, teamC: 0, timer: "-1", turn: { value: [null, null], buffer: null }, lock: true, sfx: null, solution: false, mode: "leads", question: 0, lead: 1  });
+        $.post("cyclServer.php", { play: true, option: 0, teamA: 0, teamB: 0, teamC: 0, timer: "-1", turn: null, lock: true, sfx: null, solution: false, mode: "leads", question: 0, lead: 1  });
     }
 
     function updateState(response) {

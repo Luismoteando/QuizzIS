@@ -29,6 +29,8 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>
+  var body = document.getElementsByTagName("body")[0];
+
   var semaphore = 0;
   var team = "";
   var name = "";
@@ -123,13 +125,16 @@
   function manageTurn(response) {
     turn1 = response[7].value[0];
     turn2 = response[7].value[1];
+    turn3 = response[7].value[1];
 
     if(team == "teamA") {
       if(turn1 == "a") {
         setTurn1();
       } else if(turn2 == "a") {
         setTurn2();
-      } else {
+      } else if(turn3 == "a") {
+        setTurn3();
+      } else{
         quitTurn();
       }
     } else if(team == "teamB") {
@@ -137,7 +142,9 @@
         setTurn1();
       } else if(turn2 == "b") {
         setTurn2();
-      } else {
+      } else if(turn3 == "b") {
+        setTurn3();
+      } else{
         quitTurn();
       }
     } else if(team == "teamC") {
@@ -145,19 +152,23 @@
         setTurn1();
       } else if(turn2 == "c") {
         setTurn2();
-      } else {
+      } else if(turn3 == "c") {
+        setTurn3();
+      } else{
         quitTurn();
       }
     }
   }
 
   function setTurn1() {
-    body.style.backgroundColor = "white";
-    alias.style.color = "red";
-    score.style.color = "black";
+    body.style.backgroundColor = "green";
   }
 
   function setTurn2() {
+    body.style.backgroundColor = "orange";
+  }
+
+  function setTurn3() {
     body.style.backgroundColor = "red";
   }
 

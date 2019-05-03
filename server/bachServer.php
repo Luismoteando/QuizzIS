@@ -88,7 +88,7 @@ if(isset($_POST['previous'])) {
   );
   $result = $collection->updateOne(
     ['_id' => 'turn'],
-    ['$set' => ['value' => [null,null]]]
+    ['$set' => ['value' => ['', '', '']]]
   );
 }
 
@@ -117,7 +117,7 @@ if(isset($_POST['next'])) {
   );
   $result = $collection->updateOne(
     ['_id' => 'turn'],
-    ['$set' => ['value' => [null,null]]]
+    ['$set' => ['value' => ['', '', '']]]
   );
 }
 
@@ -226,11 +226,18 @@ if(isset($_POST['turn'])) {
           ['$set' => ['value' => [$value[0], $second], 'buffer' => $serial]]
         );
       }
+    } elseif($value[3] == '') {
+      if($third = reset($diff)) {
+        $result = $collection->updateOne(
+          ['_id' => 'turn'],
+          ['$set' => ['value' => [$value[0], $value[2], $third], 'buffer' => $serial]]
+        );
+      }
     }
   } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => ['', ''], 'buffer' => $serial]]
+      ['$set' => ['value' => ['', '', ''], 'buffer' => $serial]]
     );
   }
 }

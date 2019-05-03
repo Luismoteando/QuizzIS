@@ -509,7 +509,7 @@
     };
 
     reset.onclick = function() {
-        $.post("bachServer.php", { play: true, option: 0, teamA: 0, teamB: 0, teamC: 0, timer: "-1", turn: { value: [null, null], buffer: null }, lock: true, sfx: null, solution: false, mode: "leads", question: 0, lead: 1  });
+        $.post("bachServer.php", { play: true, option: 0, teamA: 0, teamB: 0, teamC: 0, timer: "-1", turn: null, lock: true, sfx: null, solution: false, mode: "leads", question: 0, lead: 1  });
     }
 
     function updateState(response) {
