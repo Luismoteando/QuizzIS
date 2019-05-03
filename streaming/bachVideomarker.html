@@ -39,6 +39,7 @@
   var scoreA = 0;
   var turn1 = null;
   var turn2 = null;
+  var turn3 = null;
   var locked = "false";
   var sfx = null;
 
@@ -125,7 +126,7 @@
   function manageTurn(response) {
     turn1 = response[7].value[0];
     turn2 = response[7].value[1];
-    turn3 = response[7].value[1];
+    turn3 = response[7].value[2];
 
     if(team == "teamA") {
       if(turn1 == "a") {

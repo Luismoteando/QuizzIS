@@ -88,7 +88,7 @@ if(isset($_POST['previous'])) {
   );
   $result = $collection->updateOne(
     ['_id' => 'turn'],
-    ['$set' => ['value' => ['', '', '']]]
+    ['$set' => ['value' => [null, null, null]]]
   );
 }
 
@@ -117,7 +117,7 @@ if(isset($_POST['next'])) {
   );
   $result = $collection->updateOne(
     ['_id' => 'turn'],
-    ['$set' => ['value' => ['', '', '']]]
+    ['$set' => ['value' => [null, null, null]]]
   );
 }
 
@@ -212,32 +212,32 @@ if(isset($_POST['turn'])) {
     $buffer1 = str_split($serial, 1);
     $buffer2 = str_split($buffer, 1);
     $diff = array_diff_assoc($buffer1, $buffer2);
-    if($value[0] == '') {
+    if($value[0] == null) {
       if($first = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
           ['$set' => ['value' => [$first, null, null], 'buffer' => $serial]]
         );
       }
-    } elseif($value[1] == '') {
+    } elseif($value[1] == null) {
       if($second = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
           ['$set' => ['value' => [$value[0], $second, null], 'buffer' => $serial]]
         );
       }
-    } elseif($value[3] == '') {
+    } elseif($value[2] == null) {
       if($third = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$value[0], $value[2], $third], 'buffer' => $serial]]
+          ['$set' => ['value' => [$value[0], $value[1], $third], 'buffer' => $serial]]
         );
       }
     }
   } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => ['', '', ''], 'buffer' => $serial]]
+      ['$set' => ['value' => [null, null, null], 'buffer' => $serial]]
     );
   }
 }
