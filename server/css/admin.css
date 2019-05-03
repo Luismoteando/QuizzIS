@@ -84,6 +84,16 @@
   display: block;
 }
 
+.entradillas {
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.entradillas button {
+  margin: 0 auto;
+  display: block;
+}
+
 .pushbuttons {
   padding: 10px;
   margin: 0 auto;

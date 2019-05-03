@@ -72,47 +72,24 @@ if(isset($_POST['question'])) {
 }
 
 if(isset($_POST['previous'])) {
-  $mode = $_POST['mode'];
-
-  if($mode == 'questions') {
-    $question = iterator_to_array($question);
-    $result = $collection->updateOne(
-      ['_id' => 'question'],
-      ['$set' => ['value' => $question['value'] - 1]]
-    );
-    $play = $_POST['play'];
-    $result = $collection->updateOne(
-      ['_id' => 'play'],
-      ['$set' => ['value' => $play]]
-    );
-    $result = $collection->updateOne(
-      ['_id' => 'option'],
-      ['$set' => ['value' => 0]]
-    );
-    $result = $collection->updateOne(
-      ['_id' => 'turn'],
-      ['$set' => ['value' => [null,null]]]
-    );
-  } elseif($mode == 'leads') {
-    $lead = iterator_to_array($lead);
-    $result = $collection->updateOne(
-      ['_id' => 'lead'],
-      ['$set' => ['value' => $lead['value'] - 1]]
-    );
-    $play = $_POST['play'];
-    $result = $collection->updateOne(
-      ['_id' => 'play'],
-      ['$set' => ['value' => $play]]
-    );
-    $result = $collection->updateOne(
-      ['_id' => 'option'],
-      ['$set' => ['value' => 0]]
-    );
-    $result = $collection->updateOne(
-      ['_id' => 'turn'],
-      ['$set' => ['value' => [null,null]]]
-    );
-  }
+  $question = iterator_to_array($question);
+  $result = $collection->updateOne(
+    ['_id' => 'question'],
+    ['$set' => ['value' => $question['value'] - 1]]
+  );
+  $play = $_POST['play'];
+  $result = $collection->updateOne(
+    ['_id' => 'play'],
+    ['$set' => ['value' => $play]]
+  );
+  $result = $collection->updateOne(
+    ['_id' => 'option'],
+    ['$set' => ['value' => 0]]
+  );
+  $result = $collection->updateOne(
+    ['_id' => 'turn'],
+    ['$set' => ['value' => [null,null]]]
+  );
 }
 
 if(isset($_POST['play'])) {
@@ -124,45 +101,24 @@ if(isset($_POST['play'])) {
 }
 
 if(isset($_POST['next'])) {
-  if($mode == 'questions') {
-    $question = iterator_to_array($question);
-    $result = $collection->updateOne(
-      ['_id' => 'question'],
-      ['$set' => ['value' => $question['value'] + 1]]
-    );
-    $play = $_POST['play'];
-    $result = $collection->updateOne(
-      ['_id' => 'play'],
-      ['$set' => ['value' => $play]]
-    );
-    $result = $collection->updateOne(
-      ['_id' => 'option'],
-      ['$set' => ['value' => 0]]
-    );
-    $result = $collection->updateOne(
-      ['_id' => 'turn'],
-      ['$set' => ['value' => [null,null]]]
-    );
-  } elseif($mode == 'leads') {
-    $lead = iterator_to_array($lead);
-    $result = $collection->updateOne(
-      ['_id' => 'lead'],
-      ['$set' => ['value' => $lead['value'] + 1]]
-    );
-    $play = $_POST['play'];
-    $result = $collection->updateOne(
-      ['_id' => 'play'],
-      ['$set' => ['value' => $play]]
-    );
-    $result = $collection->updateOne(
-      ['_id' => 'option'],
-      ['$set' => ['value' => 0]]
-    );
-    $result = $collection->updateOne(
-      ['_id' => 'turn'],
-      ['$set' => ['value' => [null,null]]]
-    );
-  }
+  $question = iterator_to_array($question);
+  $result = $collection->updateOne(
+    ['_id' => 'question'],
+    ['$set' => ['value' => $question['value'] + 1]]
+  );
+  $play = $_POST['play'];
+  $result = $collection->updateOne(
+    ['_id' => 'play'],
+    ['$set' => ['value' => $play]]
+  );
+  $result = $collection->updateOne(
+    ['_id' => 'option'],
+    ['$set' => ['value' => 0]]
+  );
+  $result = $collection->updateOne(
+    ['_id' => 'turn'],
+    ['$set' => ['value' => [null,null]]]
+  );
 }
 
 if(isset($_POST['timer'])) {
