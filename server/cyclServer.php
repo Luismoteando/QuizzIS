@@ -216,14 +216,14 @@ if(isset($_POST['turn'])) {
       if($first = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$first, null], 'buffer' => $serial]]
+          ['$set' => ['value' => [$first, null, null], 'buffer' => $serial]]
         );
       }
     } elseif($value[1] == '') {
       if($second = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$value[0], $second], 'buffer' => $serial]]
+          ['$set' => ['value' => [$value[0], $second, null], 'buffer' => $serial]]
         );
       }
     } elseif($value[3] == '') {
