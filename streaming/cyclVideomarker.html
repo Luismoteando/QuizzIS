@@ -1,183 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Videomarker</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/videomarker.css">
+    <meta charset="UTF-8">
+    <title>Videomarker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/videomarker.css">
 </head>
+
 <body>
-  <div class="container-fluid full-height">
-    <div class="row row-md-4">
-      <div class="col-md-12">
-        <h1 id="alias" class="v-center h-center">
-          Equipo
-        </h1>
-      </div>
+    <div class="container-fluid full-height">
+        <div class="row row-md-4">
+            <div class="col-md-12">
+                <h1 id="alias" class="v-center h-center">
+                    Equipo
+                </h1>
+            </div>
+        </div>
+        <div class="row row-md-8">
+            <div class="col-md-12">
+                <h2 id="score" class="v-center h-center">
+                    0
+                </h2>
+            </div>
+        </div>
+        <audio id="correct" src="media/correct.wav"></audio>
+        <audio id="incorrect" src="media/incorrect.wav"></audio>
     </div>
-    <div class="row row-md-8">
-      <div class="col-md-12">
-        <h2 id="score" class="v-center h-center">
-          0
-        </h2>
-      </div>
-    </div>
-    <audio id="correct" src="media/correct.wav"></audio>
-    <audio id="incorrect" src="media/incorrect.wav"></audio>
-  </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <script>
-  var body = document.getElementsByTagName("body")[0];
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script>
+        var body = document.getElementsByTagName("body")[0];
 
-  var semaphore = 0;
-  var team = "";
-  var name = "";
-  var scoreA = 0;
-  var scoreA = 0;
-  var scoreA = 0;
-  var turn1 = null;
-  var turn2 = null;
-  var turn3 = null;
-  var locked = "false";
-  var sfx = null;
+        var semaphore = 0;
+        var team = "";
+        var name = "";
+        var scoreA = 0;
+        var scoreA = 0;
+        var scoreA = 0;
+        var turn1 = null;
+        var turn2 = null;
+        var turn3 = null;
+        var locked = "false";
+        var sfx = null;
 
-  $(document).ready(function () {
-    setTeam();
-    setAlias();
-    runPoll();
-  });
+        $(document).ready(function() {
+            setTeam();
+            setAlias();
+            runPoll();
+        });
 
-  function runPoll() {
-    setTimeout(function () {
-      $.ajax({
-        url: 'http://olistreaming.ddns.net:8888/server/cyclServer.php',
-        success: function (response) {
-          locked = response[8].value;
+        function runPoll() {
+            setTimeout(function() {
+                $.ajax({
+                    url: 'http://olistreaming.ddns.net:8888/server/cyclServer.php',
+                    success: function(response) {
+                        locked = response[8].value;
 
-          playSFX(response);
-          setScore(response);
-          if(locked == "false") {
-            manageTurn(response);
-          } else {
-            quitTurn();
-          }
-        },
-        dataType: "json",
-        complete: function () {
-          runPoll();
+                        playSFX(response);
+                        setScore(response);
+                        if (locked == "false") {
+                            manageTurn(response);
+                        } else {
+                            quitTurn();
+                        }
+                    },
+                    dataType: "json",
+                    complete: function() {
+                        runPoll();
+                    }
+                })
+            }, 100);
+        };
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.href);
+            if (results == null) {
+                return "";
+            } else {
+                if ((results[1].indexOf('?')) > 0) {
+                    return decodeURIComponent(results[1].substring(0, results[1].indexOf('?')).replace(/\+/g, " "));
+                } else {
+                    return decodeURIComponent(results[1].replace(/\+/g, " "));
+                }
+            }
         }
-      })
-    }, 100);
-  };
 
-  function getParameterByName(name) {
-    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-    var regexS = "[\\?&]"+name+"=([^&#]*)";
-    var regex = new RegExp( regexS );
-    var results = regex.exec( window.location.href );
-    if(results == null) {
-      return "";
-    } else {
-      if ((results[1].indexOf('?')) > 0) {
-        return decodeURIComponent(results[1].substring(0,results[1].indexOf('?')).replace(/\+/g, " "));
-      } else {
-        return decodeURIComponent(results[1].replace(/\+/g, " "));
-      }
-    }
-  }
+        function setTeam() {
+            team = getParameterByName("team");
+        }
 
-  function setTeam() {
-    team = getParameterByName("team");
-  }
+        function setAlias() {
+            name = getParameterByName("alias");
+            document.getElementById("alias").innerHTML = name;
+        }
 
-  function setAlias() {
-    name = getParameterByName("alias");
-    document.getElementById("alias").innerHTML = name;
-  }
+        function playSFX(response) {
+            sfx = response[9].value;
 
-  function playSFX(response) {
-    sfx = response[9].value;
+            if (sfx == "0") {
+                correct.play();
+                $.post("http://olistreaming.ddns.net:8888/server/cyclServer.php", {
+                    sfx: null
+                });
+            } else if (sfx == "1") {
+                incorrect.play();
+                $.post("http://olistreaming.ddns.net:8888/server/cyclServer.php", {
+                    sfx: null
+                });
+            }
+        }
 
-    if(sfx == "0") {
-      correct.play();
-      $.post("http://olistreaming.ddns.net:8888/server/cyclServer.php", { sfx: null });
-    } else if(sfx == "1") {
-      incorrect.play();
-      $.post("http://olistreaming.ddns.net:8888/server/cyclServer.php", { sfx: null });
-    }
-  }
+        function setScore(response) {
+            scoreA = response[3].value;
+            scoreB = response[4].value;
+            scoreC = response[5].value;
 
-  function setScore(response) {
-    scoreA = response[3].value;
-    scoreB = response[4].value;
-    scoreC = response[5].value;
+            if (team == "teamA") {
+                score.innerHTML = scoreA;
+            } 
+            else if (team == "teamB") {
+                score.innerHTML = scoreB;
+            } 
+            else if (team == "teamC") {
+                score.innerHTML = scoreC;
+            }
+        }
 
-    if(team == "teamA") {
-      score.innerHTML = scoreA;
-    } else if(team == "teamB") {
-      score.innerHTML = scoreB;
-    } else if(team == "teamC") {
-      score.innerHTML = scoreC;
-    }
-  }
+        function manageTurn(response) {
+            turn1 = response[7].value[0];
+            turn2 = response[7].value[1];
+            turn3 = response[7].value[2];
 
-  function manageTurn(response) {
-    turn1 = response[7].value[0];
-    turn2 = response[7].value[1];
-    turn3 = response[7].value[2];
+            if (team == "teamA") {
+                if (turn1 == "a") {
+                    setTurn1();
+                } else if (turn2 == "a") {
+                    setTurn2();
+                } else if (turn3 == "a") {
+                    setTurn3();
+                } else {
+                    quitTurn();
+                }
+            } else if (team == "teamB") {
+                if (turn1 == "b") {
+                    setTurn1();
+                } else if (turn2 == "b") {
+                    setTurn2();
+                } else if (turn3 == "b") {
+                    setTurn3();
+                } else {
+                    quitTurn();
+                }
+            } else if (team == "teamC") {
+                if (turn1 == "c") {
+                    setTurn1();
+                } else if (turn2 == "c") {
+                    setTurn2();
+                } else if (turn3 == "c") {
+                    setTurn3();
+                } else {
+                    quitTurn();
+                }
+            }
+        }
 
-    if(team == "teamA") {
-      if(turn1 == "a") {
-        setTurn1();
-      } else if(turn2 == "a") {
-        setTurn2();
-      } else if(turn3 == "a") {
-        setTurn3();
-      } else{
-        quitTurn();
-      }
-    } else if(team == "teamB") {
-      if(turn1 == "b") {
-        setTurn1();
-      } else if(turn2 == "b") {
-        setTurn2();
-      } else if(turn3 == "b") {
-        setTurn3();
-      } else{
-        quitTurn();
-      }
-    } else if(team == "teamC") {
-      if(turn1 == "c") {
-        setTurn1();
-      } else if(turn2 == "c") {
-        setTurn2();
-      } else if(turn3 == "c") {
-        setTurn3();
-      } else{
-        quitTurn();
-      }
-    }
-  }
+        function setTurn1() {
+            body.style.backgroundColor = "green";
+        }
 
-  function setTurn1() {
-    body.style.backgroundColor = "green";
-  }
+        function setTurn2() {
+            body.style.backgroundColor = "orange";
+        }
 
-  function setTurn2() {
-    body.style.backgroundColor = "orange";
-  }
+        function setTurn3() {
+            body.style.backgroundColor = "red";
+        }
 
-  function setTurn3() {
-    body.style.backgroundColor = "red";
-  }
-
-  function quitTurn() {
-    body.style.backgroundColor = "#1f1d21";
-    alias.style.color = "#efd128";
-    score.style.color = "white";
-  }
-</script>
+        function quitTurn() {
+            body.style.backgroundColor = "#1f1d21";
+            alias.style.color = "#efd128";
+            score.style.color = "white";
+        }
+    </script>
 </body>
+
 </html>
