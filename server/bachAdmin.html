@@ -1,322 +1,363 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Panel de administración</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/admin.css">
+  <meta charset="UTF-8">
+  <title>Panel de administración</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 
 <body>
-    <div class="container text-center">
-        <h1>Panel de administración</h1>
+  <div class="container text-center">
+    <h1>Panel de administración</h1>
 
-        <div class="row">
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Categorías</a>
+            </li>
+            <li class="breadcrumb-item active">
+              Bachillerato
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <ul class="nav nav-pills mb-3" id="pills-tab-first" role="tablist">
+      <li class="nav-item pill">
+        <a class="nav-link active" id="pills-controles-tab" data-toggle="pill" href="#pills-controles" role="tab" aria-controls="pills-home" aria-selected="true">Controles</a>
+      </li>
+      <li class="nav-item pill">
+        <a class="nav-link" id="pills-estado-tab" data-toggle="pill" href="#pills-estado" role="tab" aria-controls="pills-profile" aria-selected="false">Estado del concurso</a>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-controles" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="container-fluid">
+          <div class="row" style="padding: 10px;">
             <div class="col-md-12">
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="index.html">Categorías</a>
-                        </li>
-                        <li class="breadcrumb-item active">
-                            Bachillerato
-                        </li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-
-        <ul class="nav nav-pills mb-3" id="pills-tab-first" role="tablist">
-            <li class="nav-item pill">
-                <a class="nav-link active" id="pills-controles-tab" data-toggle="pill" href="#pills-controles" role="tab" aria-controls="pills-home" aria-selected="true">Controles</a>
-            </li>
-            <li class="nav-item pill">
-                <a class="nav-link" id="pills-estado-tab" data-toggle="pill" href="#pills-estado" role="tab" aria-controls="pills-profile" aria-selected="false">Estado del concurso</a>
-            </li>
-        </ul>
-
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-controles" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="container-fluid">
+              <div class="page-header text-center">
+                <h2>Controles</h2>
+              </div>
+              <div class="row text-center" style="padding: 10px;">
+                <div class="col-md-4 col-sm-12">
+                  <div class="jumbotron m-1">
+                    <h3>Sonidos</h3>
                     <div class="row" style="padding: 10px;">
-                        <div class="col-md-12">
-                            <div class="page-header text-center">
-                                <h2>Controles</h2>
-                            </div>
-                            <div class="row text-center" style="padding: 10px;">
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="jumbotron m-1">
-                                        <h3>Sonidos</h3>
-                                        <div class="row" style="padding: 10px;">
-                                            <div class="col-md-2 col-sm-2" style="margin: auto;">
-                                                <button id="correct" type="button" class="btn btn-light">
-                                                    <i class="fas fa-check-circle"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="padding: 10px;">
-                                            <div class="col-md-2 col-sm-2" style="margin: auto;">
-                                                <button id="incorrect" type="button" class="btn btn-light">
-                                                    <i class="fas fa-times-circle"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-8 col-sm-12">
-                                    <ul class="nav nav-pills mb-3" id="pills-tab-second" role="tablist">
-                                        <li class="nav-item pill">
-                                            <a class="nav-link active" id="tabPreguntas" data-toggle="pill" href="#divPreguntas" role="tab" aria-controls="pills-home" aria-selected="true">Preguntas</a>
-                                        </li>
-                                        <li class="nav-item pill">
-                                            <a class="nav-link" id="tabEntradillas" data-toggle="pill" href="#divEntradillas" role="tab" aria-controls="pills-profile" aria-selected="false">Entradillas</a>
-                                        </li>
-                                    </ul>
-
-                                    <div class="tab-content" id="pills-tabContent">
-                                        <div class="tab-pane fade show active" id="divPreguntas" role="tabpanel" aria-labelledby="pills-home-tab">
-                                            <div class="jumbotron m-1">
-                                                <h3>Preguntas</h3>
-                                                <div class="row controls">
-                                                    <button id="btnAntPreg" type="button" class="btn btn-light">
-                                                        <i class="fas fa-backward"></i><span> Anterior</span>
-                                                    </button>
-
-                                                    <button id="btnPlayPreg" type="button" class="btn btn-light">
-                                                        <i class="fas fa-pause"></i><span> Pausar</span>
-                                                    </button>
-
-                                                    <button id="btnSigPreg" type="button" class="btn btn-light">
-                                                        <i class="fas fa-forward"></i><span> Siguiente</span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="row timers">
-                                                    <button id="btnTempo" type="button" class="btn btn-light">
-                                                        <i class="fas fa-stopwatch"></i><span> 16”</span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="row types">
-                                                    <button id="btnUnaCuatro" type="button" class="btn btn-light">
-                                                        <i class="fas fa-ellipsis-v"></i><span> Una entre cuatro</span>
-                                                    </button>
-
-                                                    <button id="btnUnaTres" type="button" class="btn btn-light">
-                                                        <i class="fas fa-ellipsis-v"></i><span> Una entre tres</span>
-                                                    </button>
-                                                </div>
-
-                                                <div id="divCuatroOp">
-                                                    <div class="row options">
-                                                        <button id="btnPrimeraCuatro" type="button" class="btn btn-light">
-                                                            Opción 1
-                                                        </button>
-
-                                                        <button id="btnSegundaCuatro" type="button" class="btn btn-light">
-                                                            Opción 2
-                                                        </button>
-                                                    </div>
-                                                    <div class="row options">
-                                                        <button id="btnTerceraCuatro" type="button" class="btn btn-light">
-                                                            Opción 3
-                                                        </button>
-
-                                                        <button id="btnCuartaCuatro" type="button" class="btn btn-light">
-                                                            Opción 4
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <div id="divTresOp">
-                                                    <div class="row controls">
-                                                        <button id="btnPrimeraTres" type="button" class="btn btn-light">
-                                                            Opción 1
-                                                        </button>
-
-                                                        <button id="btnSegundaTres" type="button" class="btn btn-light">
-                                                            Opción 2
-                                                        </button>
-
-                                                        <button id="btnTerceraTres" type="button" class="btn btn-light">
-                                                            Opción 3
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <div id="divSolucion" class="row solution">
-                                                    <button id="solution" type="button" class="btn btn-light">
-                                                        <i class="fas fa-check-circle"></i><span> Mostrar solución</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="divEntradillas" role="tabpanel" aria-labelledby="pills-home-tab">
-                                            <div class="jumbotron m-1">
-                                                <h3>Entradillas</h3>
-                                                <div class="row entradillas">
-                                                    <div class="col-md-4">
-                                                        <button id="btnEntr1" type="button" class="btn btn-light">
-                                                            1
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button id="btnEntr2" type="button" class="btn btn-light">
-                                                            2
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button id="btnEntr3" type="button" class="btn btn-light">
-                                                            3
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row entradillas">
-                                                    <div class="col-md-4">
-                                                        <button id="btnEntr4" type="button" class="btn btn-light">
-                                                            4
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button id="btnEntr5" type="button" class="btn btn-light">
-                                                            5
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button id="btnEntr6" type="button" class="btn btn-light">
-                                                            6
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="jumbotron m-1">
-                                        <h3>Marcadores</h3>
-                                        <div class="row pushbuttons">
-                                            <button id="lock" type="button" class="btn btn-light">
-                                                <i class="fas fa-lock-open"></i><span> Bloquear pulsadores</span>
-                                            </button>
-                                        </div>
-                                        <div class="row pushbuttons">
-                                            <div class="col-md-4 col-sm-12">
-                                                <h4>Marcador A</h4>
-                                                <div class="row" style="padding: 10px;">
-                                                    <div class="col-md-2 col-sm-2" style="margin: auto;">
-                                                        <button id="addA" type="button" class="btn btn-light">
-                                                            <i class="fas fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row" style="padding: 10px;">
-                                                    <div class="col-md-2 col-sm-2" style="margin: auto;">
-                                                        <button id="substractA" type="button" class="btn btn-light">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-12">
-                                                <h4>Marcador B</h4>
-                                                <div class="row" style="padding: 10px;">
-                                                    <div class="col-md-2 col-sm-2" style="margin: auto;">
-                                                        <button id="addB" type="button" class="btn btn-light">
-                                                            <i class="fas fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row" style="padding: 10px;">
-                                                    <div class="col-md-2 col-sm-2" style="margin: auto;">
-                                                        <button id="substractB" type="button" class="btn btn-light">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-4 col-sm-12">
-                                                <h4>Marcador C</h4>
-                                                <div class="row" style="padding: 10px;">
-                                                    <div class="col-md-2 col-sm-2" style="margin: auto;">
-                                                        <button id="addC" type="button" class="btn btn-light">
-                                                            <i class="fas fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row" style="padding: 10px;">
-                                                    <div class="col-md-2 col-sm-2" style="margin: auto;">
-                                                        <button id="substractC" type="button" class="btn btn-light">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      <div class="col-md-2 col-sm-2" style="margin: auto;">
+                        <button id="correct" type="button" class="btn btn-light">
+                          <i class="fas fa-check-circle"></i>
+                        </button>
+                      </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="tab-pane fade" id="pills-estado" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <div class="container-fluid">
                     <div class="row" style="padding: 10px;">
-                        <div class="col-md-12">
-                            <div class="page-header text-center">
-                                <h2>Estado del concurso</h2>
-                            </div>
-                            <div class="row" style="padding: 10px;">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="jumbotron m-1">
-                                        <ul style="text-align: left;">
-                                            <li class="list-item">
-                                                Pregunta: <strong id="question"></strong>
-                                            </li>
-                                            <li class="list-item">
-                                                Tiempo restante: <strong id="timeleft"></strong>
-                                            </li>
-                                            <li class="list-item">
-                                                Turnos: <strong id="turn1"></strong><strong id="turn2"></strong>
-                                            </li>
-                                            <li class="list-item">
-                                                Opción seleccionada: <strong id="option"></strong>
-                                            </li>
-                                            <li class="list-item">
-                                                Equipo A: <strong id="teamA"></strong>
-                                            </li>
-                                            <li class="list-item">
-                                                Equipo B: <strong id="teamB"></strong>
-                                            </li>
-                                            <li class="list-item">
-                                                Equipo C: <strong id="teamC"></strong>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      <div class="col-md-2 col-sm-2" style="margin: auto;">
+                        <button id="incorrect" type="button" class="btn btn-light">
+                          <i class="fas fa-times-circle"></i>
+                        </button>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
 
-            <button id="reset" type="button" class="btn btn-outline-danger">
-                Restablecer valores
-            </button>
+                <div class="col-md-8 col-sm-12">
+                  <ul class="nav nav-pills mb-3" id="pills-tab-second" role="tablist">
+                    <li class="nav-item pill">
+                      <a class="nav-link active" id="tabPreguntas" data-toggle="pill" href="#divPreguntas" role="tab" aria-controls="pills-home" aria-selected="true">Preguntas</a>
+                    </li>
+                    <li class="nav-item pill">
+                      <a class="nav-link" id="tabEntradillas" data-toggle="pill" href="#divEntradillas" role="tab" aria-controls="pills-profile" aria-selected="false">Entradillas</a>
+                    </li>
+                    <li class="nav-item pill">
+                      <a class="nav-link" id="tabPuntuaciones" data-toggle="pill" href="#divPuntuaciones" role="tab" aria-controls="pills-profile" aria-selected="false">Puntuaciones</a>
+                    </li>
+                  </ul>
+
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="divPreguntas" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="jumbotron m-1">
+                        <h3>Preguntas</h3>
+                        <div class="row controls">
+                          <button id="btnAntPreg" type="button" class="btn btn-light">
+                            <i class="fas fa-backward"></i><span> Anterior</span>
+                          </button>
+
+                          <button id="btnPlayPreg" type="button" class="btn btn-light">
+                            <i class="fas fa-pause"></i><span> Pausar</span>
+                          </button>
+
+                          <button id="btnSigPreg" type="button" class="btn btn-light">
+                            <i class="fas fa-forward"></i><span> Siguiente</span>
+                          </button>
+                        </div>
+
+                        <div class="row timers">
+                          <button id="btnTempo" type="button" class="btn btn-light">
+                            <i class="fas fa-stopwatch"></i><span> 16”</span>
+                          </button>
+                        </div>
+
+                        <div class="row types">
+                          <button id="btnUnaCuatro" type="button" class="btn btn-light">
+                            <i class="fas fa-ellipsis-v"></i><span> Una entre cuatro</span>
+                          </button>
+
+                          <button id="btnUnaTres" type="button" class="btn btn-light">
+                            <i class="fas fa-ellipsis-v"></i><span> Una entre tres</span>
+                          </button>
+                        </div>
+
+                        <div id="divCuatroOp">
+                          <div class="row options">
+                            <button id="btnPrimeraCuatro" type="button" class="btn btn-light">
+                              Opción 1
+                            </button>
+
+                            <button id="btnSegundaCuatro" type="button" class="btn btn-light">
+                              Opción 2
+                            </button>
+                          </div>
+                          <div class="row options">
+                            <button id="btnTerceraCuatro" type="button" class="btn btn-light">
+                              Opción 3
+                            </button>
+
+                            <button id="btnCuartaCuatro" type="button" class="btn btn-light">
+                              Opción 4
+                            </button>
+                          </div>
+                        </div>
+
+                        <div id="divTresOp">
+                          <div class="row controls">
+                            <button id="btnPrimeraTres" type="button" class="btn btn-light">
+                              Opción 1
+                            </button>
+
+                            <button id="btnSegundaTres" type="button" class="btn btn-light">
+                              Opción 2
+                            </button>
+
+                            <button id="btnTerceraTres" type="button" class="btn btn-light">
+                              Opción 3
+                            </button>
+                          </div>
+                        </div>
+
+                        <div id="divSolucion" class="row solution">
+                          <button id="solution" type="button" class="btn btn-light">
+                            <i class="fas fa-check-circle"></i><span> Mostrar solución</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="divEntradillas" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="jumbotron m-1">
+                        <h3>Entradillas</h3>
+                        <div class="row entradillas">
+                          <div class="col-md-4">
+                            <button id="btnEntr1" type="button" class="btn btn-light">
+                              1
+                            </button>
+                          </div>
+                          <div class="col-md-4">
+                            <button id="btnEntr2" type="button" class="btn btn-light">
+                              2
+                            </button>
+                          </div>
+                          <div class="col-md-4">
+                            <button id="btnEntr3" type="button" class="btn btn-light">
+                              3
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row entradillas">
+                          <div class="col-md-4">
+                            <button id="btnEntr4" type="button" class="btn btn-light">
+                              4
+                            </button>
+                          </div>
+                          <div class="col-md-4">
+                            <button id="btnEntr5" type="button" class="btn btn-light">
+                              5
+                            </button>
+                          </div>
+                          <div class="col-md-4">
+                            <button id="btnEntr6" type="button" class="btn btn-light">
+                              6
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="divPuntuaciones" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="jumbotron m-1">
+                        <h3>Puntuaciones</h3>
+                        <div class="row puntuaciones">
+                          <div class="col-md-12">
+                            <button id="btnPuntuaciones" type="button" class="btn btn-light">
+                              <i class="fas fa-list-ol"></i> Mostrar puntuaciones
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12">
+                  <div class="jumbotron m-1">
+                    <h3>Marcadores</h3>
+                    <div class="row pushbuttons">
+                      <button id="lock" type="button" class="btn btn-light">
+                        <i class="fas fa-lock-open"></i><span> Bloquear pulsadores</span>
+                      </button>
+                    </div>
+                    <div class="row pushbuttons">
+                      <div class="col-md-4 col-sm-12">
+                        <h4>Marcador A</h4>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="turnA" type="button" class="btn btn-light">
+                              <i class="far fa-dot-circle"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="addA" type="button" class="btn btn-light">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="substractA" type="button" class="btn btn-light">
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-12">
+                        <h4>Marcador B</h4>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="turnB" type="button" class="btn btn-light">
+                              <i class="far fa-dot-circle"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="addB" type="button" class="btn btn-light">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="substractB" type="button" class="btn btn-light">
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-4 col-sm-12">
+                        <h4>Marcador C</h4>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="turnC" type="button" class="btn btn-light">
+                              <i class="far fa-dot-circle"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="addC" type="button" class="btn btn-light">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row" style="padding: 10px;">
+                          <div class="col-md-2 col-sm-2" style="margin: auto;">
+                            <button id="substractC" type="button" class="btn btn-light">
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-estado" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="container-fluid">
+          <div class="row" style="padding: 10px;">
+            <div class="col-md-12">
+              <div class="page-header text-center">
+                <h2>Estado del concurso</h2>
+              </div>
+              <div class="row" style="padding: 10px;">
+                <div class="col-md-12 col-sm-12">
+                  <div class="jumbotron m-1">
+                    <ul style="text-align: left;">
+                      <li class="list-item">
+                        Pregunta: <strong id="question"></strong>
+                      </li>
+                      <li class="list-item">
+                        Tiempo restante: <strong id="timeleft"></strong>
+                      </li>
+                      <li class="list-item">
+                        Turnos: <strong id="turn1"></strong><strong id="turn2"></strong>
+                      </li>
+                      <li class="list-item">
+                        Opción seleccionada: <strong id="option"></strong>
+                      </li>
+                      <li class="list-item">
+                        Equipo A: <strong id="teamA"></strong>
+                      </li>
+                      <li class="list-item">
+                        Equipo B: <strong id="teamB"></strong>
+                      </li>
+                      <li class="list-item">
+                        Equipo C: <strong id="teamC"></strong>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row reset">
+      <div class="col-md-12">
+        <button id="reset" type="button" class="btn btn-outline-danger">
+          Restablecer valores
+        </button>
+      </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
     var width;
     var playing = "true";
     var locked = "false";
+    var turn = null;
 
     $(document).ready(function () {
       runPoll();
@@ -381,6 +422,10 @@
       $.post("bachServer.php", { mode: "leads", lead: 6, play: true, solution: false });
     }
 
+    btnPuntuaciones.onclick = function() {
+      $.post("bachServer.php", { mode: "ranking", play: true, solution: false });
+    }
+
     btnTempo.onclick = function() {
       time = 17;
       timeout();
@@ -398,7 +443,7 @@
 
     btnUnaCuatro.onclick = function() {
       divSolucion.style.display = "none";
-      if (divCuatroOp.style.display == "none") {
+      if(divCuatroOp.style.display == "none") {
         divTresOp.style.display = "none";
         divCuatroOp.style.display = "block";
 
@@ -410,7 +455,7 @@
 
     btnUnaTres.onclick = function() {
       divSolucion.style.display = "none";
-      if (divTresOp.style.display == "none") {
+      if(divTresOp.style.display == "none") {
         divCuatroOp.style.display = "none";
         divTresOp.style.display = "block";
       } else {
@@ -484,6 +529,14 @@
       }
     }
 
+    turnA.onclick = function() {
+      if(turn == "a") {
+        $.post("bachServer.php", { turnAux: null, lock: true });
+      } else {
+        $.post("bachServer.php", { turnAux: "a", lock: true });
+      }
+    }
+
     addA.onclick = function() {
       $.post("bachServer.php", { addA: true });
     };
@@ -492,6 +545,14 @@
       $.post("bachServer.php", { substractA: true });
     };
 
+    turnB.onclick = function() {
+      if(turn == "b") {
+        $.post("bachServer.php", { turnAux: null, lock: true });
+      } else {
+        $.post("bachServer.php", { turnAux: "b", lock: true });
+      }
+    }
+
     addB.onclick = function() {
       $.post("bachServer.php", { addB: true });
     };
@@ -499,6 +560,14 @@
     substractB.onclick = function() {
       $.post("bachServer.php", { substractB: true });
     };
+
+    turnC.onclick = function() {
+      if(turn == "c") {
+        $.post("bachServer.php", { turnAux: null, lock: true });
+      } else {
+        $.post("bachServer.php", { turnAux: "c", lock: true });
+      }
+    }
 
     addC.onclick = function() {
       $.post("bachServer.php", { addC: true });
@@ -509,10 +578,11 @@
     };
 
     reset.onclick = function() {
-        $.post("bachServer.php", { play: true, option: 0, teamA: 0, teamB: 0, teamC: 0, timer: "-1", lock: true, sfx: null, solution: false, mode: "leads", question: 0, lead: 0  });
+      $.post("bachServer.php", { play: true, option: 0, teamA: 0, teamB: 0, teamC: 0, timer: "-1", lock: true, sfx: null, solution: false, mode: "leads", question: 0, lead: 0  });
     }
 
     function updateState(response) {
+      turn = response[7].value[0];
       width = $(window).width();
       if(width < 575.98) {
         if(playing == "false") {
@@ -527,14 +597,32 @@
           btnPlayPreg.innerHTML = '<i class="fas fa-pause"></i><span> Pausar</span>';
         }
       }
+      turn = response[7].value[0];
+      if(response[7].value[0] == "a") {
+        turnA.innerHTML = '<i class="fas fa-dot-circle"></i>';
+        turnB.innerHTML = '<i class="far fa-dot-circle"></i>';
+        turnC.innerHTML = '<i class="far fa-dot-circle"></i>';
+      } else if(response[7].value[0] == "b") {
+        turnB.innerHTML = '<i class="fas fa-dot-circle"></i>';
+        turnA.innerHTML = '<i class="far fa-dot-circle"></i>';
+        turnC.innerHTML = '<i class="far fa-dot-circle"></i>';
+      } else if(response[7].value[0] == "c") {
+        turnC.innerHTML = '<i class="fas fa-dot-circle"></i>';
+        turnA.innerHTML = '<i class="far fa-dot-circle"></i>';
+        turnB.innerHTML = '<i class="far fa-dot-circle"></i>';
+      } else {
+        turnC.innerHTML = '<i class="far fa-dot-circle"></i>';
+        turnA.innerHTML = '<i class="far fa-dot-circle"></i>';
+        turnB.innerHTML = '<i class="far fa-dot-circle"></i>';
+      }
       question.innerHTML = response[1].value;
-      if (response[2].value == 13 || response[2].value == 14) {
+      if(response[2].value == 13 || response[2].value == 14) {
         option.innerHTML = 1;
-      } else if (response[2].value == 23 || response[2].value == 24) {
+      } else if(response[2].value == 23 || response[2].value == 24) {
         option.innerHTML = 2;
-      } else if (response[2].value == 33 || response[2].value == 34) {
+      } else if(response[2].value == 33 || response[2].value == 34) {
         option.innerHTML = 3;
-      } else if (response[2].value == 44) {
+      } else if(response[2].value == 44) {
         option.innerHTML = 4;
       } else {
         option.innerHTML = "ninguna";
@@ -549,18 +637,18 @@
       }
       if(response[7].value[0] == "a") {
         turn1.innerHTML = "Equipo A primero";
-      } else if (response[7].value[0] == "b") {
+      } else if(response[7].value[0] == "b") {
         turn1.innerHTML = "Equipo B primero";
-      } else if (response[7].value[0] == "c") {
+      } else if(response[7].value[0] == "c") {
         turn1.innerHTML = "Equipo C primero";
       } else {
         turn1.innerHTML = "ninguno";
       }
       if(response[7].value[1] == "a") {
         turn2.innerHTML = ", Equipo A después";
-      } else if (response[7].value[1] == "b") {
+      } else if(response[7].value[1] == "b") {
         turn2.innerHTML = ", Equipo B después";
-      } else if (response[7].value[1] == "c") {
+      } else if(response[7].value[1] == "c") {
         turn2.innerHTML = ", Equipo C después";
       } else {
         turn2.innerHTML = "";

@@ -94,12 +94,32 @@
   display: block;
 }
 
+.puntuaciones {
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.puntuaciones button {
+  margin: 0 auto;
+  display: block;
+}
+
 .pushbuttons {
   padding: 10px;
   margin: 0 auto;
 }
 
 .pushbuttons button {
+  margin: 0 auto;
+  display: block;
+}
+
+.reset {
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.reset button {
   margin: 0 auto;
   display: block;
 }

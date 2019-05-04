@@ -235,6 +235,23 @@ if(isset($_POST['turn'])) {
       }
     }
   } else {
+    if($value[0] == null) {
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['value' => [null, null, null], 'buffer' => $serial]]
+      );
+    }
+  }
+}
+
+if(isset($_POST['turnAux'])) {
+  $turnAux = $_POST['turnAux'];
+  if($turnAux != "") {
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [$turnAux, null, null], 'buffer' => $serial]]
+    );
+  } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
       ['$set' => ['value' => [null, null, null], 'buffer' => $serial]]

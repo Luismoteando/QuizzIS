@@ -53,12 +53,14 @@
           if(solution != response[10].value) {
             showSolution(response);
           }
-          mode = response[11].value;
-          if(question != response[1].value && mode == "questions") {
+          if(question != response[1].value && response[11].value == "questions") {
             changeQuestion(response);
           }
-          if(lead != response[12].value && mode == "leads") {
+          if(lead != response[12].value && response[11].value == "leads") {
             changeLead(response);
+          }
+          if(mode != response[11].value && response[11].value == "ranking") {
+            changeRanking(response);
           }
         },
         dataType: "json",
@@ -183,6 +185,27 @@
       }
     } else {
       player2.src = "media/leads/" + lead + ".mp4";
+      player2.oncanplaythrough = function() {
+        player1.style.display = "none";
+        player2.style.display = "block";
+        semaphore++;
+      }
+    }
+  }
+
+  function changeRanking(response) {
+    mode = response[11].value;
+
+    clearOptions();
+    if(semaphore % 2 == 0) {
+      player1.src = "media/ranking/1.mp4";
+      player1.oncanplaythrough = function() {
+        player2.style.display = "none";
+        player1.style.display = "block";
+        semaphore++;
+      }
+    } else {
+      player2.src = "media/ranking/1.mp4";
       player2.oncanplaythrough = function() {
         player1.style.display = "none";
         player2.style.display = "block";
