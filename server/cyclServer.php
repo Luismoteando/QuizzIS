@@ -4,48 +4,43 @@ header('Access-Control-Allow-Origin: *');
 require 'vendor/autoload.php';
 
 $client = new MongoDB\Client;
-$db = $client->streaming;
-$collection = $db->cyclStreaming;
+$db = $client->olimpiada;
+$collection = $db->cycl;
+$dir = "/Applications/MAMP/htdocs/client/media/questions/cycl";
 
-$play = $collection->findOne(
-  ['_id' => 'play']
-);
-$question = $collection->findOne(
-  ['_id' => 'question']
-);
-$lead = $collection->findOne(
-  ['_id' => 'lead']
-);
-$teamA = $collection ->findOne(
-  ['_id' => 'teamA']
-);
-$teamB = $collection ->findOne(
-  ['_id' => 'teamB']
-);
-$teamC = $collection ->findOne(
-  ['_id' => 'teamC']
-);
-$option = $collection ->findOne(
-  ['_id' => 'option']
-);
-$time = $collection ->findOne(
-  ['_id' => 'timer']
-);
-$turn = $collection ->findOne(
-  ['_id' => 'turn']
-);
-$lock = $collection ->findOne(
-  ['_id' => 'lock']
-);
-$sfx = $collection ->findOne(
-  ['_id' => 'sfx']
-);
-$solution = $collection ->findOne(
-  ['_id' => 'solution']
-);
-$mode = $collection ->findOne(
-  ['_id' => 'mode']
-);
+$play = $collection->findOne(['_id' => 'play']);
+$mandatory = $collection->findOne(['_id' => 'mandatory']);
+$lead = $collection->findOne(['_id' => 'lead']);
+$teamA = $collection->findOne(['_id' => 'teamA']);
+$teamB = $collection->findOne(['_id' => 'teamB']);
+$teamC = $collection->findOne(['_id' => 'teamC']);
+$option = $collection->findOne(['_id' => 'option']);
+$time = $collection->findOne(['_id' => 'timer']);
+$turn = $collection->findOne(['_id' => 'turn']);
+$lock = $collection->findOne(['_id' => 'lock']);
+$sfx = $collection->findOne(['_id' => 'sfx']);
+$solution = $collection->findOne(['_id' => 'solution']);
+$mode = $collection->findOne(['_id' => 'mode']);
+$category = $collection->findOne(['_id' => 'category']);
+$general = $collection->findOne(['_id' => 'general']);
+
+$mandatory = iterator_to_array($mandatory);
+if($mandatory['value'][1] == null) {
+  $total  = count(glob("$dir/mandatory/*"), GLOB_ONLYDIR);
+  $result = $collection->updateOne(
+    ['_id' => 'mandatory'],
+    ['$set' => ['value.1' => $total]]
+  );
+}
+
+$general = iterator_to_array($general);
+if($general['value'][1] == null) {
+  $total  = count(glob("$dir/general/*"), GLOB_ONLYDIR);
+  $result = $collection->updateOne(
+    ['_id' => 'general'],
+    ['$set' => ['value.1' => $total]]
+  );
+}
 
 if(isset($_POST['mode'])) {
   $mode = $_POST['mode'];
@@ -63,33 +58,69 @@ if(isset($_POST['lead'])) {
   );
 }
 
-if(isset($_POST['question'])) {
-  $question = $_POST['question'];
+if(isset($_POST['category'])) {
+  $category = $_POST['category'];
   $result = $collection->updateOne(
-    ['_id' => 'question'],
-    ['$set' => ['value' => $question]]
+    ['_id' => 'category'],
+    ['$set' => ['value' => $category]]
+  );
+}
+
+if(isset($_POST['mandatory'])) {
+  $mandatory = $_POST['mandatory'];
+  $result = $collection->updateOne(
+    ['_id' => 'mandatory'],
+    ['$set' => ['value.0' => $mandatory]]
+  );
+}
+
+if(isset($_POST['general'])) {
+  $general = $_POST['general'];
+  $result = $collection->updateOne(
+    ['_id' => 'general'],
+    ['$set' => ['value.0' => $general]]
   );
 }
 
 if(isset($_POST['previous'])) {
-  $question = iterator_to_array($question);
-  $result = $collection->updateOne(
-    ['_id' => 'question'],
-    ['$set' => ['value' => $question['value'] - 1]]
-  );
-  $play = $_POST['play'];
-  $result = $collection->updateOne(
-    ['_id' => 'play'],
-    ['$set' => ['value' => $play]]
-  );
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 0]]
-  );
-  $result = $collection->updateOne(
-    ['_id' => 'turn'],
-    ['$set' => ['value' => [null, null, null]]]
-  );
+  $category = $_POST['category'];
+  if($category == "mandatory") {
+    $result = $collection->updateOne(
+      ['_id' => 'mandatory'],
+      ['$set' => ['value.0' => $mandatory['value'][0] - 1]]
+    );
+    $play = $_POST['play'];
+    $result = $collection->updateOne(
+      ['_id' => 'play'],
+      ['$set' => ['value' => $play]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'option'],
+      ['$set' => ['value' => 0]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [null, null, null]]]
+    );
+  } elseif($category == "general") {
+    $result = $collection->updateOne(
+      ['_id' => 'general'],
+      ['$set' => ['value.0' => $general['value'][0] - 1]]
+    );
+    $play = $_POST['play'];
+    $result = $collection->updateOne(
+      ['_id' => 'play'],
+      ['$set' => ['value' => $play]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'option'],
+      ['$set' => ['value' => 0]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [null, null, null]]]
+    );
+  }
 }
 
 if(isset($_POST['play'])) {
@@ -101,24 +132,44 @@ if(isset($_POST['play'])) {
 }
 
 if(isset($_POST['next'])) {
-  $question = iterator_to_array($question);
-  $result = $collection->updateOne(
-    ['_id' => 'question'],
-    ['$set' => ['value' => $question['value'] + 1]]
-  );
-  $play = $_POST['play'];
-  $result = $collection->updateOne(
-    ['_id' => 'play'],
-    ['$set' => ['value' => $play]]
-  );
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 0]]
-  );
-  $result = $collection->updateOne(
-    ['_id' => 'turn'],
-    ['$set' => ['value' => [null, null, null]]]
-  );
+  $category = $_POST['category'];
+  if($category == "mandatory") {
+    $result = $collection->updateOne(
+      ['_id' => 'mandatory'],
+      ['$set' => ['value.0' => $mandatory['value'][0] + 1]]
+    );
+    $play = $_POST['play'];
+    $result = $collection->updateOne(
+      ['_id' => 'play'],
+      ['$set' => ['value' => $play]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'option'],
+      ['$set' => ['value' => 0]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [null, null, null]]]
+    );
+  } elseif($category == "general") {
+    $result = $collection->updateOne(
+      ['_id' => 'general'],
+      ['$set' => ['value.0' => $general['value'][0] + 1]]
+    );
+    $play = $_POST['play'];
+    $result = $collection->updateOne(
+      ['_id' => 'play'],
+      ['$set' => ['value' => $play]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'option'],
+      ['$set' => ['value' => 0]]
+    );
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['value' => [null, null, null]]]
+    );
+  }
 }
 
 if(isset($_POST['timer'])) {
@@ -216,21 +267,21 @@ if(isset($_POST['turn'])) {
       if($first = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$first, null, null], 'buffer' => $serial]]
+          ['$set' => ['value.0' => $first, 'buffer' => $serial]]
         );
       }
     } elseif($value[1] == null) {
       if($second = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$value[0], $second, null], 'buffer' => $serial]]
+          ['$set' => ['value.1' => $second, 'buffer' => $serial]]
         );
       }
     } elseif($value[2] == null) {
       if($third = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value' => [$value[0], $value[1], $third], 'buffer' => $serial]]
+          ['$set' => ['value.2' => $third, 'buffer' => $serial]]
         );
       }
     }
@@ -249,12 +300,12 @@ if(isset($_POST['turnAux'])) {
   if($turnAux != "") {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => [$turnAux, null, null], 'buffer' => $serial]]
+      ['$set' => ['value.0' => $turnAux]]
     );
   } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => [null, null, null], 'buffer' => $serial]]
+      ['$set' => ['value' => [null, null, null]]]
     );
   }
 }
@@ -307,5 +358,5 @@ if(isset($_POST['substractC'])) {
   );
 }
 
-$jsono = array($play, $question, $option, $teamA, $teamB, $teamC, $time, $turn, $lock, $sfx, $solution, $mode, $lead);
+$jsono = array($play, $mandatory, $option, $teamA, $teamB, $teamC, $time, $turn, $lock, $sfx, $solution, $mode, $lead, $category, $general);
 echo json_encode($jsono);

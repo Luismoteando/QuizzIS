@@ -8,6 +8,11 @@
   background-color: #1d2124;
 }
 
+.nav-pills > li {
+    float: none;
+    display: inline-block;
+}
+
 .breadcrumb .breadcrumb-item a {
   color: #1d2124;
 }
@@ -87,6 +92,7 @@
 .entradillas {
   padding: 10px;
   margin: 0 auto;
+  width: 35%;
 }
 
 .entradillas button {

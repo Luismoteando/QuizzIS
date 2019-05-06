@@ -14,7 +14,7 @@ def receiving(ser):
             lines = buffer_string.split('\n')
             last_received = lines[-2]
             buffer_string = lines[-1]
-        requests.post(url = "http://olistreaming.ddns.net:8888/server/bachServer.php", data = {'turn' : buffer_string})
+        requests.post(url = "http://olimpiadaserver.ddns.net:8888/server/bachServer.php", data = {'turn' : buffer_string})
         # if len(buffer_string) > 2:
         #     buffer_string = ''
 

@@ -6,23 +6,23 @@ while [[ ! -f "$file" ]]; do
 done
 
 while IFS=" " read -r role category team alias; do
-  if [[ $role == "streaming" ]]; then
+  if [[ $role == "videoplayer" ]]; then
     if [[ $category ==  "bach" ]]; then
-      /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/bachStreaming.html"
+      /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/client/bachVideoplayer.html"
     elif [[ $category == "cycl" ]]; then
-      /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/cyclStreaming.html"
+      /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/client/cyclVideoplayer.html"
     fi
   elif [[ $role == "videomarker" ]]; then
     if [[ $category == "bach" ]]; then
       if [[ $team == "teamA" || $team == "teamB" || $team == "teamC" ]]; then
         if [[ $alias !=  "" ]]; then
-          /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/bachVideomarker.html?team=$team&alias=$alias"
+          /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/client/bachVideomarker.html?team=$team&alias=$alias"
         fi
       fi
     elif [[ $category == "cycl" ]]; then
       if [[ $team == "teamA" || $team == "teamB" || $team == "teamC" ]]; then
         if [[ $alias !=  "" ]]; then
-          /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/streaming/cyclVideomarker.html?team=$team&alias=$alias"
+          /usr/bin/chromium-browser --kiosk --disable-restore-session-state --app="http://localhost/client/cyclVideomarker.html?team=$team&alias=$alias"
         fi
       fi
     fi
