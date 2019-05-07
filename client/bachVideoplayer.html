@@ -8,18 +8,32 @@
 </head>
 
 <body>
-    <span id="timer"></span>
-    <span id="counterattack"></span>
-    <img id="selec14" src="media/selecarriba.svg"></img>
-    <img id="selec24" src="media/selecarriba.svg"></img>
-    <img id="selec34" src="media/selecabajo.svg"></img>
-    <img id="selec44" src="media/selecabajo.svg"></img>
-    <img id="selec13" src="media/selec.svg"></img>
-    <img id="selec23" src="media/selec.svg"></img>
-    <img id="selec33" src="media/selec.svg"></img>
+    <span id="spanTempo"></span>
+    <span id="spanContra"></span>
+
+    <img id="imgSelec14" src="media/selecarriba.svg"></img>
+    <img id="imgSelec24" src="media/selecarriba.svg"></img>
+    <img id="imgSelec34" src="media/selecabajo.svg"></img>
+    <img id="imgSelec44" src="media/selecabajo.svg"></img>
+
+    <img id="imgSelec13" src="media/selec.svg"></img>
+    <img id="imgSelec23" src="media/selec.svg"></img>
+    <img id="imgSelec33" src="media/selec.svg"></img>
+
+    <img id="imgPrimero" style="display: none;" src="media/primero.svg"></img>
+    <img id="imgSegundo" style="display: none;" src="media/segundo.svg"></img>
+    <img id="imgTercero" style="display: none;" src="media/tercero.svg"></img>
+
+    <strong><span id="spanAliasA"></span></strong>
+    <span id="spanScoreA"></span>
+    <strong><span id="spanAliasB"></span></strong>
+    <span id="spanScoreB"></span>
+    <strong><span id="spanAliasC"></span></strong>
+    <span id="spanScoreC"></span>
+
     <div class="fullscreen-bg">
-        <video id="player1" autoplay muted></video>
-        <video id="player2" autoplay muted></video>
+        <video id="videoPlayer1" autoplay muted></video>
+        <video id="videoPlayer2" autoplay muted></video>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -47,23 +61,23 @@
                     success: function(response) {
                         checkPlay(response);
                         setTimer(response);
-                        if (option != response[2].value) {
+                        if (option != response[7].value) {
                             showOption(response);
                             if (option != 0) {
                                 ctime = 5;
                                 setCounterattack();
                             }
                         }
-                        if (solution != response[10].value) {
+                        if (solution != response[8].value) {
                             showSolution(response);
                         }
-                        if ((mandatory != response[1].value[0] || general != response[14].value[0]) && response[11].value == "questions") {
+                        if ((mandatory != response[3].value[0] || general != response[4].value[0]) && response[0].value == "questions") {
                             changeQuestion(response);
                         }
-                        if (lead != response[12].value && response[11].value == "leads") {
+                        if (lead != response[1].value && response[0].value == "leads") {
                             changeLead(response);
                         }
-                        if (mode != response[11].value && response[11].value == "ranking") {
+                        if (mode != response[0].value && response[0].value == "ranking") {
                             changeRanking(response);
                         }
                     },
@@ -76,29 +90,29 @@
         };
 
         function checkPlay(response) {
-            play = response[0].value;
+            play = response[5].value;
 
-            if (player1.style.display != "none") {
-                if (!player1.ended) {
+            if (videoPlayer1.style.display != "none") {
+                if (!videoPlayer1.ended) {
                     if (play == "true") {
-                        if (player1.paused) {
-                            player1.play();
+                        if (videoPlayer1.paused) {
+                            videoPlayer1.play();
                         }
                     } else if (play == "false") {
-                        if (!player1.paused) {
-                            player1.pause();
+                        if (!videoPlayer1.paused) {
+                            videoPlayer1.pause();
                         }
                     }
                 }
-            } else if (player2.style.display != "none") {
-                if (!player2.ended) {
+            } else if (videoPlayer2.style.display != "none") {
+                if (!videoPlayer2.ended) {
                     if (play == "true") {
-                        if (player2.paused) {
-                            player2.play();
+                        if (videoPlayer2.paused) {
+                            videoPlayer2.play();
                         }
                     } else if (play == "false") {
-                        if (!player2.paused) {
-                            player2.pause();
+                        if (!videoPlayer2.paused) {
+                            videoPlayer2.pause();
                         }
                     }
                 }
@@ -109,52 +123,54 @@
             time = response[6].value;
 
             if (time >= 0) {
-                timer.innerHTML = time;
-                timer.style.display = "block";
+                spanTempo.innerHTML = time;
+                spanTempo.style.display = "block";
             } else {
-                timer.innerHTML = "";
-                timer.style.display = "none";
+                spanTempo.innerHTML = "";
+                spanTempo.style.display = "none";
             }
         }
 
         function setCounterattack() {
             if (ctime >= 0) {
-                counterattack.innerHTML = "Contra " + ctime;
-                counterattack.style.display = "block";
+                spanContra.innerHTML = "Contra " + ctime;
+                spanContra.style.display = "block";
                 ctime -= 1;
                 setTimeout("setCounterattack()", 1000);
             } else {
-                counterattack.innerHTML = "";
-                counterattack.style.display = "none";
+                spanContra.innerHTML = "";
+                spanContra.style.display = "none";
             }
         }
 
         function showSolution(response) {
-            solution = response[10].value;
+            solution = response[8].value;
 
             if (solution == "true") {
                 if (semaphore % 2 == 0) {
-                    if(category == "mandatory") {
-                      player1.src = "media/questions/bach/mandatory/" + mandatory + "/" + option + ".mp4";
-                    } else if(category == "general") {
-                      player1.src = "media/questions/bach/general/" + general + "/" + option + ".mp4";
+                    if (category == "mandatory") {
+                        videoPlayer1.src = "media/questions/bach/mandatory/" + mandatory + "/" + option + ".mp4";
+                    } else if (category == "general") {
+                        videoPlayer1.src = "media/questions/bach/general/" + general + "/" + option + ".mp4";
                     }
-                    player1.oncanplaythrough = function() {
+                    videoPlayer1.oncanplaythrough = function() {
                         clearOptions();
-                        player2.style.display = "none";
-                        player1.style.display = "block";
+                        clearRanking();
+                        videoPlayer2.style.display = "none";
+                        videoPlayer1.style.display = "block";
                         semaphore++;
                     }
                 } else {
-                    if(category == "mandatory") {
-                      player2.src = "media/questions/bach/mandatory/" + mandatory + "/" + option + ".mp4";
-                    } else if(category == "general") {
-                      player2.src = "media/questions/bach/general/" + general + "/" + option + ".mp4";
+                    if (category == "mandatory") {
+                        videoPlayer2.src = "media/questions/bach/mandatory/" + mandatory + "/" + option + ".mp4";
+                    } else if (category == "general") {
+                        videoPlayer2.src = "media/questions/bach/general/" + general + "/" + option + ".mp4";
                     }
-                    player2.oncanplaythrough = function() {
+                    videoPlayer2.oncanplaythrough = function() {
                         clearOptions();
-                        player1.style.display = "none";
-                        player2.style.display = "block";
+                        clearRanking();
+                        videoPlayer1.style.display = "none";
+                        videoPlayer2.style.display = "block";
                         semaphore++;
                     }
                 }
@@ -162,115 +178,181 @@
         }
 
         function changeQuestion(response) {
-            mode = response[11].value;
-            category = response[13].value;
-            mandatory = response[1].value[0];
-            general = response[14].value[0];
+            mode = response[0].value;
+            category = response[2].value;
+            mandatory = response[3].value[0];
+            general = response[4].value[0];
 
-            clearOptions();
             if (semaphore % 2 == 0) {
-                if(category == "mandatory") {
-                  player1.src = "media/questions/bach/mandatory/" + mandatory + "/0.mp4";
-                } else if(category == "general") {
-                  player1.src = "media/questions/bach/general/" + general + "/0.mp4";
+                if (category == "mandatory") {
+                    videoPlayer1.src = "media/questions/bach/mandatory/" + mandatory + "/0.mp4";
+                } else if (category == "general") {
+                    videoPlayer1.src = "media/questions/bach/general/" + general + "/0.mp4";
                 }
-                player1.oncanplaythrough = function() {
-                    player2.style.display = "none";
-                    player1.style.display = "block";
+                videoPlayer1.oncanplaythrough = function() {
+                    clearOptions();
+                    clearRanking();
+                    videoPlayer2.style.display = "none";
+                    videoPlayer1.style.display = "block";
                     semaphore++;
                 }
             } else {
-              if(category == "mandatory") {
-                player2.src = "media/questions/bach/mandatory/" + mandatory + "/0.mp4";
-              } else if(category == "general") {
-                player2.src = "media/questions/bach/general/" + general + "/0.mp4";
-              }
-                player2.oncanplaythrough = function() {
-                    player1.style.display = "none";
-                    player2.style.display = "block";
+                if (category == "mandatory") {
+                    videoPlayer2.src = "media/questions/bach/mandatory/" + mandatory + "/0.mp4";
+                } else if (category == "general") {
+                    videoPlayer2.src = "media/questions/bach/general/" + general + "/0.mp4";
+                }
+                videoPlayer2.oncanplaythrough = function() {
+                    clearOptions();
+                    clearRanking();
+                    videoPlayer1.style.display = "none";
+                    videoPlayer2.style.display = "block";
                     semaphore++;
                 }
             }
         }
 
         function changeLead(response) {
-            lead = response[12].value;
-            mode = response[11].value;
+            lead = response[1].value;
+            mode = response[0].value;
 
-            clearOptions();
             if (semaphore % 2 == 0) {
-                player1.src = "media/leads/" + lead + ".mp4";
-                player1.oncanplaythrough = function() {
-                    player2.style.display = "none";
-                    player1.style.display = "block";
+                videoPlayer1.src = "media/leads/" + lead + ".mp4";
+                videoPlayer1.oncanplaythrough = function() {
+                    clearOptions();
+                    clearRanking();
+                    videoPlayer2.style.display = "none";
+                    videoPlayer1.style.display = "block";
                     semaphore++;
                 }
             } else {
-                player2.src = "media/leads/" + lead + ".mp4";
-                player2.oncanplaythrough = function() {
-                    player1.style.display = "none";
-                    player2.style.display = "block";
+                videoPlayer2.src = "media/leads/" + lead + ".mp4";
+                videoPlayer2.oncanplaythrough = function() {
+                    clearOptions();
+                    clearRanking();
+                    videoPlayer1.style.display = "none";
+                    videoPlayer2.style.display = "block";
                     semaphore++;
                 }
             }
         }
 
         function changeRanking(response) {
-            mode = response[11].value;
+            mode = response[0].value;
 
-            clearOptions();
             if (semaphore % 2 == 0) {
-                player1.src = "media/ranking/1.mp4";
-                player1.oncanplaythrough = function() {
-                    player2.style.display = "none";
-                    player1.style.display = "block";
+                videoPlayer1.src = "media/ranking/1.mp4";
+                videoPlayer1.oncanplaythrough = function() {
+                    clearOptions();
+                    clearRanking();
+                    setRanking(response);
+                    videoPlayer2.style.display = "none";
+                    videoPlayer1.style.display = "block";
                     semaphore++;
                 }
             } else {
-                player2.src = "media/ranking/1.mp4";
-                player2.oncanplaythrough = function() {
-                    player1.style.display = "none";
-                    player2.style.display = "block";
+                videoPlayer2.src = "media/ranking/1.mp4";
+                videoPlayer2.oncanplaythrough = function() {
+                    clearOptions();
+                    clearRanking();
+                    setRanking(response);
+                    videoPlayer1.style.display = "none";
+                    videoPlayer2.style.display = "block";
                     semaphore++;
                 }
             }
         }
 
+        function setRanking(response) {
+            teamA = response[11];
+            teamB = response[12];
+            teamC = response[13];
+
+            var arr = [];
+            arr.push(teamA, teamB, teamC);
+            arr.sort(function(obj1, obj2) {
+                return obj1.value[1] - obj2.value[1];
+            });
+
+            $("#imgPrimero").addClass(arr[2]._id);
+            $("#imgSegundo").addClass(arr[1]._id);
+            $("#imgTercero").addClass(arr[0]._id);
+
+            imgPrimero.style.display = "block";
+            imgSegundo.style.display = "block";
+            imgTercero.style.display = "block";
+
+            spanAliasA.innerHTML = response[11].value[0];
+            spanAliasB.innerHTML = response[12].value[0];
+            spanAliasC.innerHTML = response[13].value[0];
+
+            spanAliasA.style.display = "block";
+            spanAliasB.style.display = "block";
+            spanAliasC.style.display = "block";
+
+            spanScoreA.innerHTML = response[11].value[1];
+            spanScoreB.innerHTML = response[12].value[1];
+            spanScoreC.innerHTML = response[13].value[1];
+
+            spanScoreA.style.display = "block";
+            spanScoreB.style.display = "block";
+            spanScoreC.style.display = "block";
+        }
+
         function showOption(response) {
-            option = response[2].value;
+            option = response[7].value;
 
             if (option == 14) {
                 clearOptions();
-                selec14.style.display = "block";
+                clearRanking();
+                imgSelec14.style.display = "block";
             } else if (option == 24) {
                 clearOptions();
-                selec24.style.display = "block";
+                clearRanking();
+                imgSelec24.style.display = "block";
             } else if (option == 34) {
                 clearOptions();
-                selec34.style.display = "block";
+                clearRanking();
+                imgSelec34.style.display = "block";
             } else if (option == 44) {
                 clearOptions();
-                selec44.style.display = "block";
+                clearRanking();
+                imgSelec44.style.display = "block";
             } else if (option == 13) {
                 clearOptions();
-                selec13.style.display = "block";
+                clearRanking();
+                imgSelec13.style.display = "block";
             } else if (option == 23) {
                 clearOptions();
-                selec23.style.display = "block";
+                clearRanking();
+                imgSelec23.style.display = "block";
             } else if (option == 33) {
                 clearOptions();
-                selec33.style.display = "block";
+                clearRanking();
+                imgSelec33.style.display = "block";
             }
         }
 
         function clearOptions() {
-            selec14.style.display = "none";
-            selec24.style.display = "none";
-            selec34.style.display = "none";
-            selec44.style.display = "none";
-            selec13.style.display = "none";
-            selec23.style.display = "none";
-            selec33.style.display = "none";
+            imgSelec14.style.display = "none";
+            imgSelec24.style.display = "none";
+            imgSelec34.style.display = "none";
+            imgSelec44.style.display = "none";
+            imgSelec13.style.display = "none";
+            imgSelec23.style.display = "none";
+            imgSelec33.style.display = "none";
+        }
+
+        function clearRanking() {
+            imgPrimero.style.display = "none";
+            imgSegundo.style.display = "none";
+            imgTercero.style.display = "none";
+            spanAliasA.style.display = "none";
+            spanAliasB.style.display = "none";
+            spanAliasC.style.display = "none";
+            spanScoreA.style.display = "none";
+            spanScoreB.style.display = "none";
+            spanScoreC.style.display = "none";
         }
     </script>
 </body>

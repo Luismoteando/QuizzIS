@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'SansBeamHead';
-    src: url('../fonts/Stawix%20-%20SansBeamHead-Regular.otf') format('opentype');
+  font-family: 'SansBeamHead';
+  src: url('../fonts/Stawix%20-%20SansBeamHead-Regular.otf') format('opentype');
 }
 
 .fullscreen-bg {
@@ -22,25 +22,26 @@
   height: 100%;
 }
 
-#timer {
+span {
   font-size: 3.5pc;
   font-family: 'SansBeamHead', Fallback, sans-serif;
+}
+
+#spanTempo {
   display: none;
   position: absolute;
   top: 3%;
   right: 3%;
 }
 
-#counterattack {
-  font-size: 3.5pc;
-  font-family: 'SansBeamHead', Fallback, sans-serif;
+#spanContra {
   display: none;
   position: absolute;
   top: 3%;
   right: 3%;
 }
 
-#selec14 {
+#imgSelec14 {
   display: none;
   position: absolute;
   top: 76%;
@@ -48,7 +49,7 @@
   width: 47%;
 }
 
-#selec24 {
+#imgSelec24 {
   display: none;
   position: absolute;
   top: 76%;
@@ -56,7 +57,7 @@
   width: 47%;
 }
 
-#selec34 {
+#imgSelec34 {
   display: none;
   position: absolute;
   bottom: 0%;
@@ -64,7 +65,7 @@
   width: 47%;
 }
 
-#selec44 {
+#imgSelec44 {
   display: none;
   position: absolute;
   bottom: 0%;
@@ -72,7 +73,7 @@
   width: 47%;
 }
 
-#selec13 {
+#imgSelec13 {
   display: none;
   position: absolute;
   bottom: 0%;
@@ -80,7 +81,7 @@
   width: 31.3%;
 }
 
-#selec23 {
+#imgSelec23 {
   display: none;
   position: absolute;
   left: 34.35%;
@@ -88,10 +89,73 @@
   width: 31.3%;
 }
 
-#selec33 {
+#imgSelec33 {
   display: none;
   position: absolute;
   bottom: 0%;
   right: 1.75%;
   width: 31.3%;
+}
+
+.teamA {
+  position: absolute;
+  bottom: 0%;
+  left: 1.75%;
+  width: 7.25%;
+}
+
+.teamB {
+  position: absolute;
+  left: 34.5%;
+  bottom: 0%;
+  width: 7.25%;
+}
+
+.teamC {
+  position: absolute;
+  bottom: 0%;
+  left: 67.25%;
+  width: 7.25%;
+}
+
+#spanAliasA {
+  display: none;
+  position: absolute;
+  bottom: 16%;
+  left: 16.5%;
+}
+
+#spanScoreA {
+  display: none;
+  position: absolute;
+  bottom: 2.5%;
+  left: 19.5%;
+}
+
+#spanAliasB {
+  display: none;
+  position: absolute;
+  bottom: 16%;
+  left: 50%;
+}
+
+#spanScoreB {
+  display: none;
+  position: absolute;
+  bottom: 2.5%;
+  left: 53%;
+}
+
+#spanAliasC {
+  display: none;
+  position: absolute;
+  bottom: 16%;
+  left: 83%;
+}
+
+#spanScoreC {
+  display: none;
+  position: absolute;
+  bottom: 2.5%;
+  left: 86%;
 }
