@@ -120,6 +120,18 @@
   display: block;
 }
 
+.points {
+  padding: 10px;
+  margin: 10px auto;
+  background-color: #f8f9fa;
+  border-radius: .25rem;
+}
+
+.points button {
+  margin: 0 auto;
+  display: block;
+}
+
 .reset {
   padding: 10px;
   margin: 0 auto;
@@ -167,6 +179,10 @@
   .options button {
     width: 44%;
   }
+
+  .points {
+    width: 45%;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -200,6 +216,10 @@
   }
 
   .options button {
+    width: 45%;
+  }
+
+  .points {
     width: 45%;
   }
 }
@@ -237,6 +257,10 @@
   .options button {
     width: 45%;
   }
+
+  .points {
+    width: 95%;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -272,6 +296,10 @@
   .options button {
     width: 45%;
   }
+
+  .points {
+    width: 60%;
+  }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -306,5 +334,9 @@
 
   .options button {
     width: 45%;
+  }
+
+  .points {
+    width: 50%;
   }
 }

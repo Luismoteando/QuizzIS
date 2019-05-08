@@ -23,6 +23,7 @@ $teamA = $collection->findOne(['_id' => 'teamA']);
 $teamB = $collection->findOne(['_id' => 'teamB']);
 $teamC = $collection->findOne(['_id' => 'teamC']);
 $sfx = $collection->findOne(['_id' => 'sfx']);
+$spectators = $collection->findOne(['_id' => 'spectators']);
 
 if (isset($_POST['mode'])) {
   $mode = $_POST['mode'];
@@ -346,7 +347,55 @@ if (isset($_POST['team'])) {
   }
 }
 
-if (isset($_POST['addA'])) {
+if (isset($_POST['add5A'])) {
+  $teamA = iterator_to_array($teamA);
+  $result = $collection->updateOne(
+    ['_id' => 'teamA'],
+    ['$set' => ['value.1' => $teamA['value'][1] + 5]]
+  );
+}
+
+if (isset($_POST['sub5A'])) {
+  $teamA = iterator_to_array($teamA);
+  $result = $collection->updateOne(
+    ['_id' => 'teamA'],
+    ['$set' => ['value.1' => $teamA['value'][1] - 5]]
+  );
+}
+
+if (isset($_POST['add5B'])) {
+  $teamB = iterator_to_array($teamB);
+  $result = $collection->updateOne(
+    ['_id' => 'teamB'],
+    ['$set' => ['value.1' => $teamB['value'][1] + 5]]
+  );
+}
+
+if (isset($_POST['sub5B'])) {
+  $teamB = iterator_to_array($teamB);
+  $result = $collection->updateOne(
+    ['_id' => 'teamB'],
+    ['$set' => ['value.1' => $teamB['value'][1] - 5]]
+  );
+}
+
+if (isset($_POST['add5C'])) {
+  $teamC = iterator_to_array($teamC);
+  $result = $collection->updateOne(
+    ['_id' => 'teamC'],
+    ['$set' => ['value.1' => $teamC['value'][1] + 5]]
+  );
+}
+
+if (isset($_POST['sub5C'])) {
+  $teamC = iterator_to_array($teamC);
+  $result = $collection->updateOne(
+    ['_id' => 'teamC'],
+    ['$set' => ['value.1' => $teamC['value'][1] - 5]]
+  );
+}
+
+if (isset($_POST['add10A'])) {
   $teamA = iterator_to_array($teamA);
   $result = $collection->updateOne(
     ['_id' => 'teamA'],
@@ -354,7 +403,7 @@ if (isset($_POST['addA'])) {
   );
 }
 
-if (isset($_POST['subA'])) {
+if (isset($_POST['sub10A'])) {
   $teamA = iterator_to_array($teamA);
   $result = $collection->updateOne(
     ['_id' => 'teamA'],
@@ -362,7 +411,7 @@ if (isset($_POST['subA'])) {
   );
 }
 
-if (isset($_POST['addB'])) {
+if (isset($_POST['add10B'])) {
   $teamB = iterator_to_array($teamB);
   $result = $collection->updateOne(
     ['_id' => 'teamB'],
@@ -370,7 +419,7 @@ if (isset($_POST['addB'])) {
   );
 }
 
-if (isset($_POST['subB'])) {
+if (isset($_POST['sub10B'])) {
   $teamB = iterator_to_array($teamB);
   $result = $collection->updateOne(
     ['_id' => 'teamB'],
@@ -378,7 +427,7 @@ if (isset($_POST['subB'])) {
   );
 }
 
-if (isset($_POST['addC'])) {
+if (isset($_POST['add10C'])) {
   $teamC = iterator_to_array($teamC);
   $result = $collection->updateOne(
     ['_id' => 'teamC'],
@@ -386,11 +435,59 @@ if (isset($_POST['addC'])) {
   );
 }
 
-if (isset($_POST['subC'])) {
+if (isset($_POST['sub10C'])) {
   $teamC = iterator_to_array($teamC);
   $result = $collection->updateOne(
     ['_id' => 'teamC'],
     ['$set' => ['value.1' => $teamC['value'][1] - 10]]
+  );
+}
+
+if (isset($_POST['add20A'])) {
+  $teamA = iterator_to_array($teamA);
+  $result = $collection->updateOne(
+    ['_id' => 'teamA'],
+    ['$set' => ['value.1' => $teamA['value'][1] + 20]]
+  );
+}
+
+if (isset($_POST['sub20A'])) {
+  $teamA = iterator_to_array($teamA);
+  $result = $collection->updateOne(
+    ['_id' => 'teamA'],
+    ['$set' => ['value.1' => $teamA['value'][1] - 20]]
+  );
+}
+
+if (isset($_POST['add20B'])) {
+  $teamB = iterator_to_array($teamB);
+  $result = $collection->updateOne(
+    ['_id' => 'teamB'],
+    ['$set' => ['value.1' => $teamB['value'][1] + 20]]
+  );
+}
+
+if (isset($_POST['sub20B'])) {
+  $teamB = iterator_to_array($teamB);
+  $result = $collection->updateOne(
+    ['_id' => 'teamB'],
+    ['$set' => ['value.1' => $teamB['value'][1] - 20]]
+  );
+}
+
+if (isset($_POST['add20C'])) {
+  $teamC = iterator_to_array($teamC);
+  $result = $collection->updateOne(
+    ['_id' => 'teamC'],
+    ['$set' => ['value.1' => $teamC['value'][1] + 20]]
+  );
+}
+
+if (isset($_POST['sub20C'])) {
+  $teamC = iterator_to_array($teamC);
+  $result = $collection->updateOne(
+    ['_id' => 'teamC'],
+    ['$set' => ['value.1' => $teamC['value'][1] - 20]]
   );
 }
 
@@ -402,5 +499,15 @@ if (isset($_POST['sfx'])) {
   );
 }
 
-$jsono = array($mode, $lead, $category, $mandatory, $general, $play, $time, $option, $solution, $lock, $turn, $teamA, $teamB, $teamC, $sfx, );
+if (isset($_POST['submit'])) {
+  $spect1 = $_POST['spect1'];
+  $spect2 = $_POST['spect2'];
+  $spect3 = $_POST['spect3'];
+  $result = $collection->updateOne(
+    ['_id' => 'spectators'],
+    ['$set' => ['value' => [$spect1, $spect2, $spect3]]]
+  );
+}
+
+$jsono = array($mode, $lead, $category, $mandatory, $general, $play, $time, $option, $solution, $lock, $turn, $teamA, $teamB, $teamC, $sfx, $spectators);
 echo json_encode($jsono);
