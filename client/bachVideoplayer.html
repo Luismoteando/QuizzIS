@@ -39,14 +39,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script>
         var semaphore = 1;
-        var play = "true";
+        var play = true;
         var mode = "questions";
         var category = "mandatory";
         var mandatory = 1;
         var general = 1;
         var lead = 1;
         var option = 0;
-        var solution = "false";
+        var solution = false;
         var time = 0;
         var ctime = 0;
 
@@ -71,14 +71,18 @@
                         if (solution != response[8].value) {
                             showSolution(response);
                         }
-                        if ((mandatory != response[3].value[0] || general != response[4].value[0]) && response[0].value == "questions") {
-                            changeQuestion(response);
-                        }
-                        if (lead != response[1].value && response[0].value == "leads") {
-                            changeLead(response);
-                        }
-                        if (mode != response[0].value && response[0].value == "ranking") {
-                            changeRanking(response);
+                        if (response[0].value == "questions") {
+                            if (mandatory != response[3].value[0] || general != response[4].value[0]) {
+                                changeQuestion(response);
+                            }
+                        } else if (response[0].value == "leads") {
+                            if (lead != response[1].value) {
+                                changeLead(response);
+                            }
+                        } else if (response[0].value == "ranking") {
+                            if (mode != response[0].value) {
+                                changeRanking(response);
+                            }
                         }
                     },
                     dataType: "json",
@@ -94,11 +98,11 @@
 
             if (videoPlayer1.style.display != "none") {
                 if (!videoPlayer1.ended) {
-                    if (play == "true") {
+                    if (play == true) {
                         if (videoPlayer1.paused) {
                             videoPlayer1.play();
                         }
-                    } else if (play == "false") {
+                    } else if (play == false) {
                         if (!videoPlayer1.paused) {
                             videoPlayer1.pause();
                         }
@@ -106,11 +110,11 @@
                 }
             } else if (videoPlayer2.style.display != "none") {
                 if (!videoPlayer2.ended) {
-                    if (play == "true") {
+                    if (play == true) {
                         if (videoPlayer2.paused) {
                             videoPlayer2.play();
                         }
-                    } else if (play == "false") {
+                    } else if (play == false) {
                         if (!videoPlayer2.paused) {
                             videoPlayer2.pause();
                         }
@@ -146,7 +150,7 @@
         function showSolution(response) {
             solution = response[8].value;
 
-            if (solution == "true") {
+            if (solution == true) {
                 if (semaphore % 2 == 0) {
                     if (category == "mandatory") {
                         videoPlayer1.src = "media/questions/bach/mandatory/" + mandatory + "/" + option + ".mp4";

@@ -19,7 +19,7 @@
                             <a href="index.html">Categorías</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            cyclillerato
+                            Ciclos Formativos
                         </li>
                     </ol>
                 </nav>
@@ -409,8 +409,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script>
             var width;
-            var playing = "true";
-            var locked = "false";
+            var playing = true;
+            var locked = false;
             var turn = null;
 
             $(document).ready(function() {
@@ -433,7 +433,7 @@
             };
 
             btnPlayPregO.onclick = function() {
-                if (playing == "false") {
+                if (playing == false) {
                     $.post("cyclServer.php", {
                         play: true,
                         mode: "questions",
@@ -471,7 +471,7 @@
             };
 
             btnPlayPregG.onclick = function() {
-                if (playing == "false") {
+                if (playing == false) {
                     $.post("cyclServer.php", {
                         play: true,
                         mode: "questions",
@@ -622,32 +622,6 @@
                 });
             };
 
-            btnBloquear.onclick = function() {
-                width = $(window).width();
-
-                if (width < 575.98) {
-                    if (locked == "false") {
-                        $.post("cyclServer.php", {
-                            lock: true
-                        });
-                    } else {
-                        $.post("cyclServer.php", {
-                            lock: false
-                        });
-                    }
-                } else {
-                    if (locked == "false") {
-                        $.post("cyclServer.php", {
-                            lock: true
-                        });
-                    } else {
-                        $.post("cyclServer.php", {
-                            lock: false
-                        });
-                    }
-                }
-            }
-
             btnEntr1.onclick = function() {
                 $.post("cyclServer.php", {
                     mode: "leads",
@@ -708,6 +682,18 @@
                     play: true,
                     solution: false
                 });
+            }
+
+            btnBloquear.onclick = function() {
+                if (locked == false) {
+                    $.post("cyclServer.php", {
+                        lock: true
+                    });
+                } else {
+                    $.post("cyclServer.php", {
+                        lock: false
+                    });
+                }
             }
 
             btnTurnoA.onclick = function() {
@@ -831,7 +817,7 @@
                 liGenerales.innerHTML = response[4].value[1] - response[4].value[0];
 
                 if (width < 575.98) {
-                    if (playing == "false") {
+                    if (playing == false) {
                         btnPlayPregO.innerHTML = '<i class="fas fa-play"></i>';
                         btnPlayPregG.innerHTML = '<i class="fas fa-play"></i>';
                     } else {
@@ -839,7 +825,7 @@
                         btnPlayPregG.innerHTML = '<i class="fas fa-pause"></i>';
                     }
                 } else {
-                    if (playing == "false") {
+                    if (playing == false) {
                         btnPlayPregO.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
                         btnPlayPregG.innerHTML = '<i class="fas fa-play"></i><span> Reproducir</span>';
                     } else {
@@ -867,13 +853,13 @@
                 }
 
                 if (width < 575.98) {
-                    if (locked == "false") {
+                    if (locked == false) {
                         btnBloquear.innerHTML = '<i class="fas fa-lock-open"></i>';
                     } else {
                         btnBloquear.innerHTML = '<i class="fas fa-lock"></i>';
                     }
                 } else {
-                    if (locked == "false") {
+                    if (locked == false) {
                         btnBloquear.innerHTML = '<i class="fas fa-lock-open"></i><span> Bloquear pulsadores</span>';
                     } else {
                         btnBloquear.innerHTML = '<i class="fas fa-lock"></i><span> Desbloquear pulsadores</span>';

@@ -90,6 +90,7 @@ if (isset($_POST['previous'])) {
       ['$set' => ['value.0' => $mandatory['value'][0] - 1]]
     );
     $play = $_POST['play'];
+    $play = filter_var($play, FILTER_VALIDATE_BOOLEAN);
     $result = $collection->updateOne(
       ['_id' => 'play'],
       ['$set' => ['value' => $play]]
@@ -108,6 +109,7 @@ if (isset($_POST['previous'])) {
       ['$set' => ['value.0' => $general['value'][0] - 1]]
     );
     $play = $_POST['play'];
+    $play = filter_var($play, FILTER_VALIDATE_BOOLEAN);
     $result = $collection->updateOne(
       ['_id' => 'play'],
       ['$set' => ['value' => $play]]
@@ -125,6 +127,7 @@ if (isset($_POST['previous'])) {
 
 if (isset($_POST['play'])) {
   $play = $_POST['play'];
+  $play = filter_var($play, FILTER_VALIDATE_BOOLEAN);
   $result = $collection->updateOne(
     ['_id' => 'play'],
     ['$set' => ['value' => $play]]
@@ -139,6 +142,7 @@ if (isset($_POST['next'])) {
       ['$set' => ['value.0' => $mandatory['value'][0] + 1]]
     );
     $play = $_POST['play'];
+    $play = filter_var($play, FILTER_VALIDATE_BOOLEAN);
     $result = $collection->updateOne(
       ['_id' => 'play'],
       ['$set' => ['value' => $play]]
@@ -157,6 +161,7 @@ if (isset($_POST['next'])) {
       ['$set' => ['value.0' => $general['value'][0] + 1]]
     );
     $play = $_POST['play'];
+    $play = filter_var($play, FILTER_VALIDATE_BOOLEAN);
     $result = $collection->updateOne(
       ['_id' => 'play'],
       ['$set' => ['value' => $play]]
@@ -231,6 +236,7 @@ if (isset($_POST['option3p3'])) {
 
 if (isset($_POST['solution'])) {
   $solution = $_POST['solution'];
+  $solution = filter_var($solution, FILTER_VALIDATE_BOOLEAN);
   $result = $collection->updateOne(
     ['_id' => 'solution'],
     ['$set' => ['value' => $solution]]
@@ -239,6 +245,7 @@ if (isset($_POST['solution'])) {
 
 if (isset($_POST['lock'])) {
   $lock = $_POST['lock'];
+  $lock = filter_var($lock, FILTER_VALIDATE_BOOLEAN);
   $result = $collection->updateOne(
     ['_id' => 'lock'],
     ['$set' => ['value' => $lock]]
@@ -252,7 +259,7 @@ if (isset($_POST['turn'])) {
   $buffer = $turn['buffer'];
   $value = $turn['value'];
 
-  if ($lock['value'] == 'false') {
+  if ($lock['value'] == false) {
     $buffer1 = str_split($serial, 1);
     $buffer2 = str_split($buffer, 1);
     $diff = array_diff_assoc($buffer1, $buffer2);
@@ -262,12 +269,20 @@ if (isset($_POST['turn'])) {
           ['_id' => 'turn'],
           ['$set' => ['value.0' => $first, 'buffer' => $serial]]
         );
+        $result = $collection->updateOne(
+          ['_id' => 'play'],
+          ['$set' => ['value' => false]]
+        );
       }
     } elseif ($value[1] == null) {
       if ($second = reset($diff)) {
         $result = $collection->updateOne(
           ['_id' => 'turn'],
           ['$set' => ['value.1' => $second, 'buffer' => $serial]]
+        );
+        $result = $collection->updateOne(
+          ['_id' => 'play'],
+          ['$set' => ['value' => false]]
         );
       }
     } elseif ($value[2] == null) {
@@ -276,29 +291,36 @@ if (isset($_POST['turn'])) {
           ['_id' => 'turn'],
           ['$set' => ['value.2' => $third, 'buffer' => $serial]]
         );
+        $result = $collection->updateOne(
+          ['_id' => 'play'],
+          ['$set' => ['value' => false]]
+        );
       }
     }
   } else {
-    if ($value[0] == null) {
-      $result = $collection->updateOne(
-        ['_id' => 'turn'],
-        ['$set' => ['value' => [null, null, null], 'buffer' => $serial]]
-      );
-    }
+    $result = $collection->updateOne(
+      ['_id' => 'turn'],
+      ['$set' => ['buffer' => $serial]]
+    );
   }
 }
 
 if (isset($_POST['turnAux'])) {
+  $turn = iterator_to_array($turn);
+  $value = iterator_to_array($turn['value']);
   $turnAux = $_POST['turnAux'];
-  if ($turnAux != "") {
+
+  if ($turnAux == "") {
+    array_shift($value);
+    array_push($value, null);
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value.0' => $turnAux]]
+      ['$set' => ['value' => $value]]
     );
   } else {
     $result = $collection->updateOne(
       ['_id' => 'turn'],
-      ['$set' => ['value' => [null, null, null]]]
+      ['$set' => ['value.0' => $turnAux]]
     );
   }
 }

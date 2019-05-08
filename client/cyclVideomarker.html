@@ -42,7 +42,7 @@
         var turn1 = null;
         var turn2 = null;
         var turn3 = null;
-        var locked = "false";
+        var locked = false;
         var sfx = null;
 
         $(document).ready(function() {
@@ -56,15 +56,9 @@
                 $.ajax({
                     url: 'http://olimpiadaserver.ddns.net:8888/server/cyclServer.php',
                     success: function(response) {
-                        //locked = response[9].value;
-
                         playSFX(response);
                         setScore(response);
-                        //if (locked == "false") {
-                        manageTurn(response);
-                        //} else {
-                        //    quitTurn();
-                        //}
+                        manageTurn(response);x
                     },
                     dataType: "json",
                     complete: function() {
