@@ -100,6 +100,12 @@
   display: block;
 }
 
+.turnos {
+  padding: 10px;
+  margin: 0 auto;
+  width: 82%;
+}
+
 .puntuaciones {
   padding: 10px;
   margin: 0 auto;

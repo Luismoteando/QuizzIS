@@ -311,18 +311,35 @@ if (isset($_POST['turnAux'])) {
   $value = iterator_to_array($turn['value']);
   $turnAux = $_POST['turnAux'];
 
-  if ($turnAux == "") {
-    array_shift($value);
-    array_push($value, null);
-    $result = $collection->updateOne(
-      ['_id' => 'turn'],
-      ['$set' => ['value' => $value]]
-    );
+  if(isset($_POST['sfx'])) {
+    $sfx = $_POST['sfx'];
+    if ($sfx == 0) {
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['value' => [null, null, null]]]
+      );
+    } elseif ($sfx == 1) {
+      array_shift($value);
+      array_push($value, null);
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['value' => $value]]
+      );
+    }
   } else {
-    $result = $collection->updateOne(
-      ['_id' => 'turn'],
-      ['$set' => ['value.0' => $turnAux]]
-    );
+    if ($turnAux == "") {
+      array_shift($value);
+      array_push($value, null);
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['value' => $value]]
+      );
+    } else {
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['value.0' => $turnAux]]
+      );
+    }
   }
 }
 
