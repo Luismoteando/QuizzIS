@@ -11,18 +11,18 @@
     <span id="spanTempo"></span>
     <span id="spanContra"></span>
 
-    <img id="imgSelec14" src="media/selecarriba.svg"></img>
-    <img id="imgSelec24" src="media/selecarriba.svg"></img>
-    <img id="imgSelec34" src="media/selecabajo.svg"></img>
-    <img id="imgSelec44" src="media/selecabajo.svg"></img>
+    <img id="imgSelec14" src="media/img/selecarriba.svg"></img>
+    <img id="imgSelec24" src="media/img/selecarriba.svg"></img>
+    <img id="imgSelec34" src="media/img/selecabajo.svg"></img>
+    <img id="imgSelec44" src="media/img/selecabajo.svg"></img>
 
-    <img id="imgSelec13" src="media/selec.svg"></img>
-    <img id="imgSelec23" src="media/selec.svg"></img>
-    <img id="imgSelec33" src="media/selec.svg"></img>
+    <img id="imgSelec13" src="media/img/selec.svg"></img>
+    <img id="imgSelec23" src="media/img/selec.svg"></img>
+    <img id="imgSelec33" src="media/img/selec.svg"></img>
 
-    <img id="imgPrimero" style="display: none;" src="media/primero.svg"></img>
-    <img id="imgSegundo" style="display: none;" src="media/segundo.svg"></img>
-    <img id="imgTercero" style="display: none;" src="media/tercero.svg"></img>
+    <img id="imgPrimero" style="display: none;" src="media/img/primero.svg"></img>
+    <img id="imgSegundo" style="display: none;" src="media/img/segundo.svg"></img>
+    <img id="imgTercero" style="display: none;" src="media/img/tercero.svg"></img>
 
     <strong><span id="spanAliasA"></span></strong>
     <span id="spanScoreA"></span>
@@ -221,7 +221,11 @@
             mode = response[0].value;
 
             if (semaphore % 2 == 0) {
-                videoPlayer1.src = "media/leads/" + lead + ".mp4";
+                if (lead == 1) {
+                    videoPlayer1.src = "media/leads/" + lead + ".mp4";
+                } else {
+                    videoPlayer1.src = "media/leads/" + lead + ".m4v";
+                }
                 videoPlayer1.oncanplaythrough = function() {
                     clearOptions();
                     clearRanking();
@@ -230,7 +234,11 @@
                     semaphore++;
                 }
             } else {
-                videoPlayer2.src = "media/leads/" + lead + ".mp4";
+                if (lead == 1) {
+                    videoPlayer2.src = "media/leads/" + lead + ".mp4";
+                } else {
+                    videoPlayer2.src = "media/leads/" + lead + ".m4v";
+                }
                 videoPlayer2.oncanplaythrough = function() {
                     clearOptions();
                     clearRanking();

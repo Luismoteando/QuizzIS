@@ -274,6 +274,10 @@ if (isset($_POST['turn'])) {
           ['_id' => 'play'],
           ['$set' => ['value' => false]]
         );
+        $result = $collection->updateOne(
+          ['_id' => 'sfx'],
+          ['$set' => ['value' => 0]]
+        );
       }
     } elseif ($value[1] == null) {
       if ($second = reset($diff)) {
@@ -285,6 +289,10 @@ if (isset($_POST['turn'])) {
           ['_id' => 'play'],
           ['$set' => ['value' => false]]
         );
+        $result = $collection->updateOne(
+          ['_id' => 'sfx'],
+          ['$set' => ['value' => 0]]
+        );
       }
     } elseif ($value[2] == null) {
       if ($third = reset($diff)) {
@@ -295,6 +303,10 @@ if (isset($_POST['turn'])) {
         $result = $collection->updateOne(
           ['_id' => 'play'],
           ['$set' => ['value' => false]]
+        );
+        $result = $collection->updateOne(
+          ['_id' => 'sfx'],
+          ['$set' => ['value' => 0]]
         );
       }
     }
@@ -313,17 +325,17 @@ if (isset($_POST['turnAux'])) {
 
   if(isset($_POST['sfx'])) {
     $sfx = $_POST['sfx'];
-    if ($sfx == 0) {
-      $result = $collection->updateOne(
-        ['_id' => 'turn'],
-        ['$set' => ['value' => [null, null, null]]]
-      );
-    } elseif ($sfx == 1) {
+    if ($sfx == 1) {
       array_shift($value);
       array_push($value, null);
       $result = $collection->updateOne(
         ['_id' => 'turn'],
         ['$set' => ['value' => $value]]
+      );
+    } elseif ($sfx == 2) {
+      $result = $collection->updateOne(
+        ['_id' => 'turn'],
+        ['$set' => ['value' => [null, null, null]]]
       );
     }
   } else {

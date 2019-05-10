@@ -25,8 +25,7 @@
                 </h2>
             </div>
         </div>
-        <audio id="sfxCorrect" src="media/correcta.wav"></audio>
-        <audio id="sfxIncorrect" src="media/incorrecta.wav"></audio>
+        <audio id="audioSFX"></audio>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -100,15 +99,9 @@
         function playSFX(response) {
             sfx = response[14].value;
 
-            if (sfx == "0") {
-                sfxCorrect.pause();
-                sfxCorrect.play();
-                $.post("http://olimpiadaserver.ddns.net:8888/server/bachServer.php", {
-                    sfx: null
-                });
-            } else if (sfx == "1") {
-                sfxIncorrect.pause();
-                sfxIncorrect.play();
+            if (sfx != null && sfx != "") {
+                audioSFX.src = "media/sfx/" + sfx + ".mp3";
+                audioSFX.play();
                 $.post("http://olimpiadaserver.ddns.net:8888/server/bachServer.php", {
                     sfx: null
                 });
