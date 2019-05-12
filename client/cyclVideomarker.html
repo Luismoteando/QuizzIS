@@ -99,9 +99,14 @@
         function playSFX(response) {
             sfx = response[14].value;
 
-            if (sfx != null && sfx != "") {
+            if (sfx != null && sfx !== "") {
                 audioSFX.src = "media/sfx/" + sfx + ".mp3";
-                audioSFX.play();
+                var playPromise = audioSFX.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        audioSFX.play();
+                    });
+                }
                 $.post("http://olimpiadaserver.ddns.net:8888/server/cyclServer.php", {
                     sfx: null
                 });
