@@ -53,7 +53,7 @@
         function runPoll() {
             setTimeout(function() {
                 $.ajax({
-                    url: 'http://169.254.215.26:8888/server/cyclServer.php',
+                    url: 'http://192.168.0.8:8888/server/cyclServer.php',
                     success: function(response) {
                         playSFX(response);
                         setScore(response);
@@ -90,7 +90,7 @@
         function setAlias() {
             alias = getParameterByName("alias");
             hAlias.innerHTML = alias;
-            $.post("http://169.254.215.26:8888/server/cyclServer.php", {
+            $.post("http://192.168.0.8:8888/server/cyclServer.php", {
                 team: team,
                 alias: alias
             });
@@ -107,7 +107,7 @@
                         audioSFX.play();
                     });
                 }
-                $.post("http://169.254.215.26:8888/server/cyclServer.php", {
+                $.post("http://192.168.0.8:8888/server/cyclServer.php", {
                     sfx: null
                 });
             }
