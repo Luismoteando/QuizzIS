@@ -57,7 +57,7 @@
         function runPoll() {
             setTimeout(function() {
                 $.ajax({
-                    url: 'http://olimpiadaserver.ddns.net:8888/server/bachServer.php',
+                    url: 'http://169.254.215.26:8888/server/bachServer.php',
                     success: function(response) {
                         checkPlay(response);
                         setTimer(response);

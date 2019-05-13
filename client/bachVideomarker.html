@@ -53,7 +53,7 @@
         function runPoll() {
             setTimeout(function() {
                 $.ajax({
-                    url: 'http://olimpiadaserver.ddns.net:8888/server/bachServer.php',
+                    url: 'http://169.254.215.26:8888/server/bachServer.php',
                     success: function(response) {
                         playSFX(response);
                         setScore(response);
@@ -90,7 +90,7 @@
         function setAlias() {
             alias = getParameterByName("alias");
             hAlias.innerHTML = alias;
-            $.post("http://olimpiadaserver.ddns.net:8888/server/bachServer.php", {
+            $.post("http://169.254.215.26:8888/server/bachServer.php", {
                 team: team,
                 alias: alias
             });
@@ -107,7 +107,7 @@
                         audioSFX.play();
                     });
                 }
-                $.post("http://olimpiadaserver.ddns.net:8888/server/bachServer.php", {
+                $.post("http://169.254.215.26:8888/server/bachServer.php", {
                     sfx: null
                 });
             }
