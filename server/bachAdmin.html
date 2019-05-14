@@ -519,13 +519,15 @@
                     $.post("bachServer.php", {
                         play: true,
                         mode: "questions",
-                        category: "mandatory"
+                        category: "mandatory",
+                        lock: false
                     });
                 } else {
                     $.post("bachServer.php", {
                         play: false,
                         mode: "questions",
-                        category: "mandatory"
+                        category: "mandatory",
+                        lock: true
                     });
                 }
             };
@@ -536,7 +538,9 @@
                     category: "mandatory",
                     previous: true,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: false,
+                    sfx: 0
                 });
                 divSolucion.style.display = "none";
             };
@@ -547,7 +551,9 @@
                     category: "mandatory",
                     next: true,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: false,
+                    sfx: 0
                 });
                 divSolucion.style.display = "none";
             };
@@ -557,13 +563,15 @@
                     $.post("bachServer.php", {
                         play: true,
                         mode: "questions",
-                        category: "general"
+                        category: "general",
+                        lock: false
                     });
                 } else {
                     $.post("bachServer.php", {
                         play: false,
                         mode: "questions",
-                        category: "general"
+                        category: "general",
+                        lock: true
                     });
                 }
             };
@@ -574,7 +582,9 @@
                     category: "general",
                     previous: true,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: false,
+                    sfx: 0
                 });
                 divSolucion.style.display = "none";
             };
@@ -585,7 +595,9 @@
                     category: "general",
                     next: true,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: false,
+                    sfx: 0
                 });
                 divSolucion.style.display = "none";
             };
@@ -598,9 +610,17 @@
             function timeout() {
                 if (time >= 0) {
                     time -= 1;
-                    $.post("bachServer.php", {
-                        timer: time
-                    });
+                    if(time <= 3) {
+                      $.post("bachServer.php", {
+                          timer: time,
+                          sfx: 1
+                      });
+                    } else {
+                      $.post("bachServer.php", {
+                          timer: time,
+                      });
+                    }
+
                     setTimeout("timeout()", 1000);
                 } else {
                     return
@@ -634,7 +654,8 @@
                 $.post("bachServer.php", {
                     option1p4: true,
                     solution: false,
-                    lock: false
+                    lock: false,
+                    sfx: 2
                 });
                 divSolucion.style.display = "block";
             };
@@ -643,7 +664,8 @@
                 $.post("bachServer.php", {
                     option2p4: true,
                     solution: false,
-                    lock: false
+                    lock: false,
+                    sfx: 2
                 });
                 divSolucion.style.display = "block";
             };
@@ -652,7 +674,8 @@
                 $.post("bachServer.php", {
                     option3p4: true,
                     solution: false,
-                    lock: false
+                    lock: false,
+                    sfx: 2
                 });
                 divSolucion.style.display = "block";
             };
@@ -661,7 +684,8 @@
                 $.post("bachServer.php", {
                     option4p4: true,
                     solution: false,
-                    lock: false
+                    lock: false,
+                    sfx: 2
                 });
                 divSolucion.style.display = "block";
             };
@@ -670,7 +694,8 @@
                 $.post("bachServer.php", {
                     option1p3: true,
                     solution: false,
-                    lock: false
+                    lock: false,
+                    sfx: 2
                 });
                 divSolucion.style.display = "block";
             };
@@ -679,7 +704,8 @@
                 $.post("bachServer.php", {
                     option2p3: true,
                     solution: false,
-                    lock: false
+                    lock: false,
+                    sfx: 2
                 });
                 divSolucion.style.display = "block";
             };
@@ -688,14 +714,16 @@
                 $.post("bachServer.php", {
                     option3p3: true,
                     solution: false,
-                    lock: false
+                    lock: false,
+                    sfx: 2
                 });
                 divSolucion.style.display = "block";
             };
 
             btnSolucion.onclick = function() {
                 $.post("bachServer.php", {
-                    solution: true
+                    solution: true,
+                    lock: true
                 });
             }
 
@@ -704,7 +732,8 @@
                     mode: "leads",
                     lead: 1,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: true
                 });
             }
 
@@ -713,7 +742,8 @@
                     mode: "leads",
                     lead: 2,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: true
                 });
             }
 
@@ -722,7 +752,8 @@
                     mode: "leads",
                     lead: 3,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: true
                 });
             }
 
@@ -731,7 +762,8 @@
                     mode: "leads",
                     lead: 4,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: true
                 });
             }
 
@@ -740,7 +772,8 @@
                     mode: "leads",
                     lead: 5,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: true
                 });
             }
 
@@ -749,7 +782,8 @@
                     mode: "leads",
                     lead: 6,
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: true
                 });
             }
 
@@ -757,7 +791,8 @@
                 $.post("bachServer.php", {
                     mode: "ranking",
                     play: true,
-                    solution: false
+                    solution: false,
+                    lock: true
                 });
             }
 
@@ -778,12 +813,13 @@
                     $.post("bachServer.php", {
                         turnAux: null,
                         lock: true,
-                        sfx: 2
+                        sfx: 5
                     });
                 } else {
                     $.post("bachServer.php", {
                         turnAux: "a",
-                        lock: true
+                        lock: true,
+                        sfx: 5
                     });
                 }
             };
@@ -807,12 +843,13 @@
                     $.post("bachServer.php", {
                         turnAux: null,
                         lock: true,
-                        sfx: 1
+                        sfx: 4
                     });
                 } else {
                     $.post("bachServer.php", {
                         turnAux: "a",
-                        lock: true
+                        lock: true,
+                        sfx: 4
                     });
                 }
             };
@@ -858,12 +895,13 @@
                     $.post("bachServer.php", {
                         turnAux: null,
                         lock: true,
-                        sfx: 2
+                        sfx: 5
                     });
                 } else {
                     $.post("bachServer.php", {
                         turnAux: "b",
-                        lock: true
+                        lock: true,
+                        sfx: 5
                     });
                 }
             };
@@ -887,12 +925,13 @@
                     $.post("bachServer.php", {
                         turnAux: null,
                         lock: true,
-                        sfx: 1
+                        sfx: 4
                     });
                 } else {
                     $.post("bachServer.php", {
                         turnAux: "b",
-                        lock: true
+                        lock: true,
+                        sfx: 4
                     });
                 }
             };
@@ -938,12 +977,13 @@
                     $.post("bachServer.php", {
                         turnAux: null,
                         lock: true,
-                        sfx: 2
+                        sfx: 5
                     });
                 } else {
                     $.post("bachServer.php", {
                         turnAux: "c",
-                        lock: true
+                        lock: true,
+                        sfx: 5
                     });
                 }
             };
@@ -967,12 +1007,13 @@
                     $.post("bachServer.php", {
                         turnAux: null,
                         lock: true,
-                        sfx: 1
+                        sfx: 4
                     });
                 } else {
                     $.post("bachServer.php", {
                         turnAux: "c",
-                        lock: true
+                        lock: true,
+                        sfx: 4
                     });
                 }
             };
@@ -1020,6 +1061,9 @@
                     spect2: spect2.value,
                     spect3: spect3.value,
                 });
+                spect1.innerHTML = "";
+                spect2.innerHTML = "";
+                spect3.innerHTML = "";
             }
 
             btnReset.onclick = function() {

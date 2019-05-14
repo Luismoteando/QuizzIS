@@ -9,7 +9,6 @@
 
 <body>
     <span id="spanTempo"></span>
-    <span id="spanContra"></span>
 
     <img id="imgSelec14" src="media/img/selecarriba.svg"></img>
     <img id="imgSelec24" src="media/img/selecarriba.svg"></img>
@@ -48,7 +47,6 @@
         var option = 0;
         var solution = false;
         var time = 0;
-        var ctime = 0;
 
         $(document).ready(function() {
             runPoll();
@@ -63,10 +61,6 @@
                         setTimer(response);
                         if (option != response[7].value) {
                             showOption(response);
-                            if (option != 0) {
-                                ctime = 5;
-                                setCounterattack();
-                            }
                         }
                         if (solution != response[8].value) {
                             showSolution(response);
@@ -132,18 +126,6 @@
             } else {
                 spanTempo.innerHTML = "";
                 spanTempo.style.display = "none";
-            }
-        }
-
-        function setCounterattack() {
-            if (ctime >= 0) {
-                spanContra.innerHTML = "Contra " + ctime;
-                spanContra.style.display = "block";
-                ctime -= 1;
-                setTimeout("setCounterattack()", 1000);
-            } else {
-                spanContra.innerHTML = "";
-                spanContra.style.display = "none";
             }
         }
 
