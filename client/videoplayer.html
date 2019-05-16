@@ -37,16 +37,25 @@
 
     <script src="js/jquery.min.js"></script>
     <script>
+        var phase = "bach";
         var semaphore = 1;
         var play = true;
         var mode = "questions";
         var category = "mandatory";
-        var mandatory = 1;
-        var general = 1;
+        var mandatoryBach = 1;
+        var generalBach = 1;
+        var mandatoryCycl = 1;
+        var generalCycl = 1;
         var lead = 1;
         var option = 0;
         var solution = false;
         var time = 0;
+        var teamBachA = null;
+        var teamBachB = null;
+        var teamBachC = null;
+        var teamCyclA = null;
+        var teamCyclB = null;
+        var teamCyclC = null;
 
         $(document).ready(function() {
             runPoll();
@@ -55,26 +64,26 @@
         function runPoll() {
             setTimeout(function() {
                 $.ajax({
-                    url: 'http://192.168.0.8:8888/server/cyclServer.php',
+                    url: 'http://localhost:8888/server/server.php',
                     success: function(response) {
                         checkPlay(response);
                         setTimer(response);
-                        if (option != response[7].value) {
+                        if (option != response[10].value) {
                             showOption(response);
                         }
-                        if (solution != response[8].value) {
+                        if (solution != response[11].value) {
                             showSolution(response);
                         }
-                        if (response[0].value == "questions") {
-                            if (mandatory != response[3].value[0] || general != response[4].value[0]) {
+                        if (response[1].value == "questions") {
+                            if (mandatoryBach != response[4].value[0] || generalBach != response[5].value[0] || mandatoryCycl != response[6].value[0] || generalCycl != response[7].value[0]) {
                                 changeQuestion(response);
                             }
-                        } else if (response[0].value == "leads") {
-                            if (lead != response[1].value) {
+                        } else if (response[1].value == "leads") {
+                            if (lead != response[2].value) {
                                 changeLead(response);
                             }
-                        } else if (response[0].value == "ranking") {
-                            if (mode != response[0].value) {
+                        } else if (response[1].value == "ranking") {
+                            if (mode != response[1].value) {
                                 changeRanking(response);
                             }
                         }
@@ -88,7 +97,7 @@
         };
 
         function checkPlay(response) {
-            play = response[5].value;
+            play = response[8].value;
 
             if (videoPlayer1.style.display != "none") {
                 if (!videoPlayer1.ended) {
@@ -118,7 +127,7 @@
         }
 
         function setTimer(response) {
-            time = response[6].value;
+            time = response[9].value;
 
             if (time >= 0) {
                 spanTempo.innerHTML = time;
@@ -130,15 +139,25 @@
         }
 
         function showSolution(response) {
-            solution = response[8].value;
+            phase = response[0].value;
+            solution = response[11].value;
 
             if (solution == true) {
                 if (semaphore % 2 == 0) {
-                    if (category == "mandatory") {
-                        videoPlayer1.src = "media/questions/cycl/mandatory/" + mandatory + "/" + option + ".mp4";
-                    } else if (category == "general") {
-                        videoPlayer1.src = "media/questions/cycl/general/" + general + "/" + option + ".mp4";
+                    if (phase == "bach") {
+                        if (category == "mandatory") {
+                            videoPlayer1.src = "media/questions/bach/mandatory/" + mandatoryBach + "/" + option + ".mp4";
+                        } else if (category == "general") {
+                            videoPlayer1.src = "media/questions/bach/general/" + generalBach + "/" + option + ".mp4";
+                        }
+                    } else if (phase == "cycl") {
+                        if (category == "mandatory") {
+                            videoPlayer1.src = "media/questions/cycl/mandatory/" + mandatoryCycl + "/" + option + ".mp4";
+                        } else if (category == "general") {
+                            videoPlayer1.src = "media/questions/cycl/general/" + generalCycl + "/" + option + ".mp4";
+                        }
                     }
+
                     videoPlayer1.oncanplaythrough = function() {
                         clearOptions();
                         clearRanking();
@@ -147,10 +166,18 @@
                         semaphore++;
                     }
                 } else {
-                    if (category == "mandatory") {
-                        videoPlayer2.src = "media/questions/cycl/mandatory/" + mandatory + "/" + option + ".mp4";
-                    } else if (category == "general") {
-                        videoPlayer2.src = "media/questions/cycl/general/" + general + "/" + option + ".mp4";
+                    if (phase == "bach") {
+                        if (category == "mandatory") {
+                            videoPlayer2.src = "media/questions/bach/mandatory/" + mandatoryBach + "/" + option + ".mp4";
+                        } else if (category == "general") {
+                            videoPlayer2.src = "media/questions/bach/general/" + generalBach + "/" + option + ".mp4";
+                        }
+                    } else if (phase == "cycl") {
+                        if (category == "mandatory") {
+                            videoPlayer2.src = "media/questions/cycl/mandatory/" + mandatoryCycl + "/" + option + ".mp4";
+                        } else if (category == "general") {
+                            videoPlayer2.src = "media/questions/cycl/general/" + generalCycl + "/" + option + ".mp4";
+                        }
                     }
                     videoPlayer2.oncanplaythrough = function() {
                         clearOptions();
@@ -164,16 +191,27 @@
         }
 
         function changeQuestion(response) {
-            mode = response[0].value;
-            category = response[2].value;
-            mandatory = response[3].value[0];
-            general = response[4].value[0];
+            phase = response[0].value;
+            mode = response[1].value;
+            category = response[3].value;
+            mandatoryBach = response[4].value[0];
+            generalBach = response[5].value[0];
+            mandatoryCycl = response[6].value[0];
+            generalCycl = response[7].value[0];
 
             if (semaphore % 2 == 0) {
-                if (category == "mandatory") {
-                    videoPlayer1.src = "media/questions/cycl/mandatory/" + mandatory + "/0.mp4";
-                } else if (category == "general") {
-                    videoPlayer1.src = "media/questions/cycl/general/" + general + "/0.mp4";
+                if (phase == "bach") {
+                    if (category == "mandatory") {
+                        videoPlayer1.src = "media/questions/bach/mandatory/" + mandatoryBach + "/0.mp4";
+                    } else if (category == "general") {
+                        videoPlayer1.src = "media/questions/bach/general/" + generalBach + "/0.mp4";
+                    }
+                } else if (phase == "cycl") {
+                    if (category == "mandatory") {
+                        videoPlayer1.src = "media/questions/cycl/mandatory/" + mandatoryCycl + "/0.mp4";
+                    } else if (category == "general") {
+                        videoPlayer1.src = "media/questions/cycl/general/" + generalCycl + "/0.mp4";
+                    }
                 }
                 videoPlayer1.oncanplaythrough = function() {
                     clearOptions();
@@ -183,10 +221,18 @@
                     semaphore++;
                 }
             } else {
-                if (category == "mandatory") {
-                    videoPlayer2.src = "media/questions/cycl/mandatory/" + mandatory + "/0.mp4";
-                } else if (category == "general") {
-                    videoPlayer2.src = "media/questions/cycl/general/" + general + "/0.mp4";
+                if (phase == "bach") {
+                    if (category == "mandatory") {
+                        videoPlayer2.src = "media/questions/bach/mandatory/" + mandatoryBach + "/0.mp4";
+                    } else if (category == "general") {
+                        videoPlayer2.src = "media/questions/bach/general/" + generalBach + "/0.mp4";
+                    }
+                } else if (phase == "cycl") {
+                    if (category == "mandatory") {
+                        videoPlayer2.src = "media/questions/cycl/mandatory/" + mandatoryCycl + "/0.mp4";
+                    } else if (category == "general") {
+                        videoPlayer2.src = "media/questions/cycl/general/" + generalCycl + "/0.mp4";
+                    }
                 }
                 videoPlayer2.oncanplaythrough = function() {
                     clearOptions();
@@ -199,8 +245,8 @@
         }
 
         function changeLead(response) {
-            lead = response[1].value;
-            mode = response[0].value;
+            mode = response[1].value;
+            lead = response[2].value;
 
             if (semaphore % 2 == 0) {
                 if (lead == 1) {
@@ -232,7 +278,7 @@
         }
 
         function changeRanking(response) {
-            mode = response[0].value;
+            mode = response[1].value;
 
             if (semaphore % 2 == 0) {
                 videoPlayer1.src = "media/ranking/1.mp4";
@@ -258,35 +304,58 @@
         }
 
         function setRanking(response) {
-            teamA = response[11];
-            teamB = response[12];
-            teamC = response[13];
+            phase = response[0].value;
+            teamBachA = response[14];
+            teamBachB = response[15];
+            teamBachC = response[16];
+            teamCyclA = response[17];
+            teamCyclB = response[18];
+            teamCyclC = response[19];
 
             var arr = [];
-            arr.push(teamA, teamB, teamC);
-            arr.sort(function(obj1, obj2) {
-                return obj1.value[1] - obj2.value[1];
-            });
+            if (phase == "bach") {
+                arr.push(teamBachA, teamBachB, teamBachC);
+                arr.sort(function(obj1, obj2) {
+                    return obj1.value[1] - obj2.value[1];
+                });
 
-            $("#imgPrimero").addClass(arr[2]._id);
-            $("#imgSegundo").addClass(arr[1]._id);
-            $("#imgTercero").addClass(arr[0]._id);
+                $("#imgPrimero").addClass(arr[2]._id);
+                $("#imgSegundo").addClass(arr[1]._id);
+                $("#imgTercero").addClass(arr[0]._id);
+
+                spanAliasA.innerHTML = teamBachA.value[0];
+                spanAliasB.innerHTML = teamBachB.value[0];
+                spanAliasC.innerHTML = teamBachC.value[0];
+
+                spanScoreA.innerHTML = teamBachA.value[1];
+                spanScoreB.innerHTML = teamBachB.value[1];
+                spanScoreC.innerHTML = teamBachC.value[1];
+            } else if (phase == "cycl") {
+                arr.push(teamCyclA, teamCyclB, teamCyclC);
+                arr.sort(function(obj1, obj2) {
+                    return obj1.value[1] - obj2.value[1];
+                });
+
+                $("#imgPrimero").addClass(arr[2]._id);
+                $("#imgSegundo").addClass(arr[1]._id);
+                $("#imgTercero").addClass(arr[0]._id);
+
+                spanAliasA.innerHTML = teamCyclA.value[0];
+                spanAliasB.innerHTML = teamCyclB.value[0];
+                spanAliasC.innerHTML = teamCyclC.value[0];
+
+                spanScoreA.innerHTML = teamCyclA.value[1];
+                spanScoreB.innerHTML = teamCyclB.value[1];
+                spanScoreC.innerHTML = teamCyclC.value[1];
+            }
 
             imgPrimero.style.display = "block";
             imgSegundo.style.display = "block";
             imgTercero.style.display = "block";
 
-            spanAliasA.innerHTML = response[11].value[0];
-            spanAliasB.innerHTML = response[12].value[0];
-            spanAliasC.innerHTML = response[13].value[0];
-
             spanAliasA.style.display = "block";
             spanAliasB.style.display = "block";
             spanAliasC.style.display = "block";
-
-            spanScoreA.innerHTML = response[11].value[1];
-            spanScoreB.innerHTML = response[12].value[1];
-            spanScoreC.innerHTML = response[13].value[1];
 
             spanScoreA.style.display = "block";
             spanScoreB.style.display = "block";
@@ -294,7 +363,7 @@
         }
 
         function showOption(response) {
-            option = response[7].value;
+            option = response[10].value;
 
             if (option == 14) {
                 clearOptions();

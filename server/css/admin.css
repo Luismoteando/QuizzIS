@@ -148,6 +148,15 @@
   display: block;
 }
 
+.toggle {
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.toggle label {
+  width: 175px;
+}
+
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
   .controls {

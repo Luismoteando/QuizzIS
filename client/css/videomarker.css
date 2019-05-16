@@ -12,12 +12,13 @@ body {
 
 h1 {
   color: #EFD128;
-  font-size: 7.5rem;
+  font-size: 12.5rem;
 }
 
 h2 {
   color: white;
-  font-size: 22.5rem;
+  font-size: 32.5rem;
+  font-weight: bold;
 }
 
 .row-md-4 {

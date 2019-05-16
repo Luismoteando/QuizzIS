@@ -417,6 +417,9 @@
                                                 <h5>Ronda actual</h5>
                                                 <ul style="text-align: left;">
                                                     <li class="list-item">
+                                                        Fase: <strong id="liFase"></strong>
+                                                    </li>
+                                                    <li class="list-item">
                                                         Categoría: <strong id="liCategoria"></strong>
                                                     </li>
                                                     <li class="list-item">
@@ -480,13 +483,6 @@
             </div>
         </div>
 
-        <div class="row reset">
-            <div class="col-md-12">
-                <button id="btnReset" type="button" class="btn btn-outline-danger">
-                    Restablecer valores
-                </button>
-            </div>
-        </div>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
@@ -494,6 +490,7 @@
             var playing = true;
             var locked = false;
             var turn = null;
+            var phase = "bach";
 
             $(document).ready(function() {
                 runPoll();
@@ -502,7 +499,7 @@
             function runPoll() {
                 setTimeout(function() {
                     $.ajax({
-                        url: 'http://192.168.0.8:8888/server/cyclServer.php',
+                        url: 'http://localhost:8888/server/server.php',
                         success: function(response) {
                             updateState(response);
                         },
@@ -516,14 +513,14 @@
 
             btnPlayPregO.onclick = function() {
                 if (playing == false) {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         play: true,
                         mode: "questions",
                         category: "mandatory",
                         lock: false
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         play: false,
                         mode: "questions",
                         category: "mandatory",
@@ -533,7 +530,7 @@
             };
 
             btnAntPregO.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "questions",
                     category: "mandatory",
                     previous: true,
@@ -546,7 +543,7 @@
             };
 
             btnSigPregO.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "questions",
                     category: "mandatory",
                     next: true,
@@ -560,14 +557,14 @@
 
             btnPlayPregG.onclick = function() {
                 if (playing == false) {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         play: true,
                         mode: "questions",
                         category: "general",
                         lock: false
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         play: false,
                         mode: "questions",
                         category: "general",
@@ -577,7 +574,7 @@
             };
 
             btnAntPregG.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "questions",
                     category: "general",
                     previous: true,
@@ -590,7 +587,7 @@
             };
 
             btnSigPregG.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "questions",
                     category: "general",
                     next: true,
@@ -610,15 +607,15 @@
             function timeout() {
                 if (time >= 0) {
                     time -= 1;
-                    if(time <= 3) {
-                      $.post("cyclServer.php", {
-                          timer: time,
-                          sfx: 1
-                      });
+                    if (time <= 3) {
+                        $.post("server.php", {
+                            timer: time,
+                            sfx: 1
+                        });
                     } else {
-                      $.post("cyclServer.php", {
-                          timer: time,
-                      });
+                        $.post("server.php", {
+                            timer: time,
+                        });
                     }
 
                     setTimeout("timeout()", 1000);
@@ -651,7 +648,7 @@
             }
 
             btnPrimeraCuatro.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     option1p4: true,
                     solution: false,
                     lock: false,
@@ -661,7 +658,7 @@
             };
 
             btnSegundaCuatro.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     option2p4: true,
                     solution: false,
                     lock: false,
@@ -671,7 +668,7 @@
             };
 
             btnTerceraCuatro.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     option3p4: true,
                     solution: false,
                     lock: false,
@@ -681,7 +678,7 @@
             };
 
             btnCuartaCuatro.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     option4p4: true,
                     solution: false,
                     lock: false,
@@ -691,7 +688,7 @@
             };
 
             btnPrimeraTres.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     option1p3: true,
                     solution: false,
                     lock: false,
@@ -701,7 +698,7 @@
             };
 
             btnSegundaTres.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     option2p3: true,
                     solution: false,
                     lock: false,
@@ -711,7 +708,7 @@
             };
 
             btnTerceraTres.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     option3p3: true,
                     solution: false,
                     lock: false,
@@ -721,14 +718,14 @@
             };
 
             btnSolucion.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     solution: true,
                     lock: true
                 });
             }
 
             btnEntr1.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "leads",
                     lead: 1,
                     play: true,
@@ -738,7 +735,7 @@
             }
 
             btnEntr2.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "leads",
                     lead: 2,
                     play: true,
@@ -748,7 +745,7 @@
             }
 
             btnEntr3.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "leads",
                     lead: 3,
                     play: true,
@@ -758,7 +755,7 @@
             }
 
             btnEntr4.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "leads",
                     lead: 4,
                     play: true,
@@ -768,7 +765,7 @@
             }
 
             btnEntr5.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "leads",
                     lead: 5,
                     play: true,
@@ -778,7 +775,7 @@
             }
 
             btnEntr6.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "leads",
                     lead: 6,
                     play: true,
@@ -788,7 +785,7 @@
             }
 
             btnRanking.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     mode: "ranking",
                     play: true,
                     solution: false,
@@ -798,11 +795,11 @@
 
             btnBloquear.onclick = function() {
                 if (locked == false) {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         lock: true
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         lock: false
                     });
                 }
@@ -810,13 +807,13 @@
 
             btnCorrectaA.onclick = function() {
                 if (turn == "a") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true,
                         sfx: 5
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "a",
                         lock: true,
                         sfx: 5
@@ -826,12 +823,12 @@
 
             btnTurnoA.onclick = function() {
                 if (turn == "a") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "a",
                         lock: true
                     });
@@ -840,13 +837,13 @@
 
             btnIncorrectaA.onclick = function() {
                 if (turn == "a") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true,
                         sfx: 4
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "a",
                         lock: true,
                         sfx: 4
@@ -855,50 +852,50 @@
             };
 
             btnAdd5A.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add5A: true
                 });
             };
 
             btnSub5A.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub5A: true
                 });
             };
 
             btnAdd10A.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add10A: true
                 });
             };
 
             btnSub10A.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub10A: true
                 });
             };
 
             btnAdd20A.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add20A: true
                 });
             };
 
             btnSub20A.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub20A: true
                 });
             };
 
             btnCorrectaB.onclick = function() {
                 if (turn == "b") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true,
                         sfx: 5
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "b",
                         lock: true,
                         sfx: 5
@@ -908,12 +905,12 @@
 
             btnTurnoB.onclick = function() {
                 if (turn == "b") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "b",
                         lock: true
                     });
@@ -922,13 +919,13 @@
 
             btnIncorrectaB.onclick = function() {
                 if (turn == "b") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true,
                         sfx: 4
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "b",
                         lock: true,
                         sfx: 4
@@ -937,50 +934,50 @@
             };
 
             btnAdd5B.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add5B: true
                 });
             };
 
             btnSub5B.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub5B: true
                 });
             };
 
             btnAdd10B.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add10B: true
                 });
             };
 
             btnSub10B.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub10B: true
                 });
             };
 
             btnAdd20B.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add20B: true
                 });
             };
 
             btnSub20B.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub20B: true
                 });
             };
 
             btnCorrectaC.onclick = function() {
                 if (turn == "c") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true,
                         sfx: 5
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "c",
                         lock: true,
                         sfx: 5
@@ -990,12 +987,12 @@
 
             btnTurnoC.onclick = function() {
                 if (turn == "c") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "c",
                         lock: true
                     });
@@ -1004,13 +1001,13 @@
 
             btnIncorrectaC.onclick = function() {
                 if (turn == "c") {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: null,
                         lock: true,
                         sfx: 4
                     });
                 } else {
-                    $.post("cyclServer.php", {
+                    $.post("server.php", {
                         turnAux: "c",
                         lock: true,
                         sfx: 4
@@ -1019,94 +1016,71 @@
             };
 
             btnAdd5C.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add5C: true
                 });
             };
 
             btnSub5C.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub5C: true
                 });
             };
 
             btnAdd10C.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add10C: true
                 });
             };
 
             btnSub10C.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub10C: true
                 });
             };
 
             btnAdd20C.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     add20C: true
                 });
             };
 
             btnSub20C.onclick = function() {
-                $.post("cyclServer.php", {
+                $.post("server.php", {
                     sub20C: true
                 });
             };
 
-            btnSubmit.onclick = function() {
-                $.post("cyclServer.php", {
-                    submit: true,
-                    spect1: spect1.value,
-                    spect2: spect2.value,
-                    spect3: spect3.value,
-                });
-                spect1.innerHTML = "";
-                spect2.innerHTML = "";
-                spect3.innerHTML = "";
-            }
-
-            btnReset.onclick = function() {
-                $.post("cyclServer.php", {
-                    play: true,
-                    option: 0,
-                    teamA: 0,
-                    teamB: 0,
-                    teamC: 0,
-                    timer: "-1",
-                    lock: true,
-                    sfx: null,
-                    solution: false,
-                    mode: "leads",
-                    lead: 0,
-                    category: "mandatory",
-                    mandatory: 1,
-                    general: 1
-                });
-            }
-
             function updateState(response) {
                 width = $(window).width();
-                playing = response[5].value;
-                locked = response[9].value;
-                turn = response[10].value[0];
+                phase = response[0].value;
+                playing = response[8].value;
+                locked = response[12].value;
+                turn = response[13].value[0];
 
-                imgSolucion1.src = "media/solutions/cycl/mandatory/" + response[3].value[0] + ".png";
-                imgSolucion2.src = "media/solutions/cycl/general/" + response[4].value[0] + ".png";
-                if (response[2].value == "mandatory") {
-                    imgSolucion3.src = "media/solutions/cycl/mandatory/" + response[3].value[0] + ".png";
-                } else if (response[2].value == "general") {
-                    imgSolucion3.src = "media/solutions/cycl/general/" + response[4].value[0] + ".png";
+                imgSolucion1.src = "media/solutions/cycl/mandatory/" + response[6].value[0] + ".png";
+                imgSolucion2.src = "media/solutions/cycl/general/" + response[7].value[0] + ".png";
+                if (response[3].value == "mandatory") {
+                    imgSolucion3.src = "media/solutions/cycl/mandatory/" + response[6].value[0] + ".png";
+                } else if (response[3].value == "general") {
+                    imgSolucion3.src = "media/solutions/cycl/general/" + response[7].value[0] + ".png";
                 }
-                if (response[2].value == "mandatory") {
+
+                if (phase == "bach") {
+                    liFase.innerHTML = "Bachillerato";
+                } else if (phase == "cycl") {
+                    liFase.innerHTML = "Ciclos Formativos";
+                }
+
+                if (response[3].value == "mandatory") {
                     liCategoria.innerHTML = "Obligatoria";
-                    liPregunta.innerHTML = response[3].value[0];
-                } else if (response[2].value == "general") {
+                    liPregunta.innerHTML = response[6].value[0];
+                } else if (response[3].value == "general") {
                     liCategoria.innerHTML = "Cultura General";
-                    liPregunta.innerHTML = response[4].value[0];
+                    liPregunta.innerHTML = response[7].value[0];
                 }
-                liObligatorias.innerHTML = response[3].value[1] - response[3].value[0];
-                liGenerales.innerHTML = response[4].value[1] - response[4].value[0];
+                liObligatorias.innerHTML = response[6].value[1] - response[6].value[0];
+                liGenerales.innerHTML = response[7].value[1] - response[7].value[0];
 
                 if (width < 575.98) {
                     if (playing == false) {
@@ -1126,19 +1100,19 @@
                     }
                 }
 
-                if (response[6].value > 0) {
-                    liTiempo.innerHTML = response[6].value;
+                if (response[9].value > 0) {
+                    liTiempo.innerHTML = response[9].value;
                 } else {
                     liTiempo.innerHTML = 0;
                 }
 
-                if (response[7].value == 13 || response[7].value == 14) {
+                if (response[10].value == 13 || response[10].value == 14) {
                     liOpcion.innerHTML = 1;
-                } else if (response[7].value == 23 || response[7].value == 24) {
+                } else if (response[10].value == 23 || response[10].value == 24) {
                     liOpcion.innerHTML = 2;
-                } else if (response[7].value == 33 || response[7].value == 34) {
+                } else if (response[10].value == 33 || response[10].value == 34) {
                     liOpcion.innerHTML = 3;
-                } else if (response[7].value == 44) {
+                } else if (response[10].value == 44) {
                     liOpcion.innerHTML = 4;
                 } else {
                     liOpcion.innerHTML = "ninguna";
@@ -1201,49 +1175,49 @@
                 }
 
                 if (turn == "a") {
-                    liTurno1.innerHTML = response[11].value[0];
+                    liTurno1.innerHTML = response[17].value[0];
                 } else if (turn == "b") {
-                    liTurno1.innerHTML = response[12].value[0];
+                    liTurno1.innerHTML = response[18].value[0];
                 } else if (turn == "c") {
-                    liTurno1.innerHTML = response[13].value[0];
+                    liTurno1.innerHTML = response[19].value[0];
                 } else {
                     liTurno1.innerHTML = "ninguno";
                 }
-                if (response[10].value[1] == "a") {
-                    liTurno2.innerHTML = ", " + response[11].value[0];
-                } else if (response[10].value[1] == "b") {
-                    liTurno2.innerHTML = ", " + response[12].value[0];
-                } else if (response[10].value[1] == "c") {
-                    liTurno2.innerHTML = ", " + response[13].value[0];
+                if (response[13].value[1] == "a") {
+                    liTurno2.innerHTML = ", " + response[17].value[0];
+                } else if (response[13].value[1] == "b") {
+                    liTurno2.innerHTML = ", " + response[18].value[0];
+                } else if (response[13].value[1] == "c") {
+                    liTurno2.innerHTML = ", " + response[19].value[0];
                 } else {
                     liTurno2.innerHTML = "";
                 }
-                if (response[10].value[2] == "a") {
-                    liTurno3.innerHTML = ", " + response[11].value[0];
-                } else if (response[10].value[2] == "b") {
-                    liTurno3.innerHTML = ", " + response[12].value[0];
-                } else if (response[10].value[2] == "c") {
-                    liTurno3.innerHTML = ", " + response[13].value[0];
+                if (response[13].value[2] == "a") {
+                    liTurno3.innerHTML = ", " + response[17].value[0];
+                } else if (response[13].value[2] == "b") {
+                    liTurno3.innerHTML = ", " + response[18].value[0];
+                } else if (response[13].value[2] == "c") {
+                    liTurno3.innerHTML = ", " + response[19].value[0];
                 } else {
                     liTurno3.innerHTML = "";
                 }
 
-                if (response[11].value[0] != "") {
-                    liEquipoA.innerHTML = response[11].value[0] + ": ";
+                if (response[17].value[0] != "") {
+                    liEquipoA.innerHTML = response[17].value[0] + ": ";
                 }
-                if (response[12].value[0] != "") {
-                    liEquipoB.innerHTML = response[12].value[0] + ": ";
+                if (response[18].value[0] != "") {
+                    liEquipoB.innerHTML = response[18].value[0] + ": ";
                 }
-                if (response[13].value[0] != "") {
-                    liEquipoB.innerHTML = response[13].value[0] + ": ";
+                if (response[19].value[0] != "") {
+                    liEquipoB.innerHTML = response[19].value[0] + ": ";
                 }
-                liScoreA.innerHTML = response[11].value[1];
-                liScoreB.innerHTML = response[12].value[1];
-                liScoreC.innerHTML = response[13].value[1];
+                liScoreA.innerHTML = response[17].value[1];
+                liScoreB.innerHTML = response[18].value[1];
+                liScoreC.innerHTML = response[19].value[1];
 
-                liEspect1.innerHTML = response[15].value[0];
-                liEspect2.innerHTML = response[15].value[1];
-                liEspect3.innerHTML = response[15].value[2];
+                liEspect1.innerHTML = response[21].value[0];
+                liEspect2.innerHTML = response[21].value[1];
+                liEspect3.innerHTML = response[21].value[2];
             }
         </script>
 </body>
