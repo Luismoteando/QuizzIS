@@ -60,7 +60,7 @@
         function runPoll() {
             setTimeout(function() {
                 $.ajax({
-                    url: 'http://localhost:8888/server/server.php',
+                    url: 'http://192.168.0.8/server/server.php',
                     success: function(response) {
                         playSFX(response);
                         setAlias(response);
@@ -106,7 +106,7 @@
                         audioSFX.play();
                     });
                 }
-                $.post("http://localhost:8888/server/server.php", {
+                $.post("http://192.168.0.8/server/server.php", {
                     sfx: null
                 });
             }
