@@ -1,6 +1,11 @@
 @font-face {
-  font-family: 'SansBeamHead';
-  src: url('../fonts/Stawix%20-%20SansBeamHead-Regular.otf') format('opentype');
+  font-family: 'Archivo Narrow';
+  src: url('../fonts/ArchivoNarrow-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  src: url('../fonts/YanoneKaffeesatz-Regular.ttf') format('truetype');
 }
 
 .fullscreen-bg {
@@ -22,79 +27,110 @@
   height: 100%;
 }
 
-span {
-  font-size: 3.5pc;
-  font-family: 'SansBeamHead', Fallback, sans-serif;
+.fullscreen-bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 #spanTempo {
   display: none;
+  font-family: 'Archivo Narrow', Fallback, sans-serif;
+  font-size: 2.75pc;
   position: absolute;
-  top: 3%;
-  right: 3%;
+  top: 8.75%;
+  right: 6.25%;
 }
 
-#spanContra {
-  display: none;
+.opt14h {
   position: absolute;
-  top: 3%;
-  right: 3%;
+  top: 64.8%;
+  left: 15.4%;
+  width: 34.3%;
+  height: 11.5%;
 }
 
-#imgSelec14 {
-  display: none;
+.opt24h {
   position: absolute;
-  top: 76%;
-  left: 1.75%;
-  width: 47%;
+  top: 80%;
+  left: 15.4%;
+  width: 34.3%;
+  height: 11.5%;
 }
 
-#imgSelec24 {
-  display: none;
+.opt34h {
   position: absolute;
-  top: 76%;
-  right: 1.75%;
-  width: 47%;
+  top: 64.8%;
+  left: 58%;
+  width: 34.3%;
+  height: 11.5%;
 }
 
-#imgSelec34 {
-  display: none;
+.opt44h {
   position: absolute;
-  bottom: 0%;
-  left: 1.75%;
-  width: 47%;
+  top: 80%;
+  left: 58%;
+  width: 34.3%;
+  height: 11.5%;
 }
 
-#imgSelec44 {
-  display: none;
+.opt14v {
   position: absolute;
-  bottom: 0%;
-  right: 1.75%;
-  width: 47%;
+  top: 45%;
+  left: 67.75%;
+  width: 28%;
+  height: 9.25%;
 }
 
-#imgSelec13 {
-  display: none;
+.opt24v {
   position: absolute;
-  bottom: 0%;
-  left: 1.75%;
-  width: 31.3%;
+  top: 57.6%;
+  left: 67.75%;
+  width: 28%;
+  height: 9.25%;
 }
 
-#imgSelec23 {
-  display: none;
+.opt34v {
   position: absolute;
-  left: 34.35%;
-  bottom: 0%;
-  width: 31.3%;
+  top: 70%;
+  left: 67.75%;
+  width: 28%;
+  height: 9.25%;
 }
 
-#imgSelec33 {
-  display: none;
+.opt44v {
   position: absolute;
-  bottom: 0%;
-  right: 1.75%;
-  width: 31.3%;
+  top: 82.4%;
+  left: 67.75%;
+  width: 28%;
+  height: 9.25%;
+}
+
+.opt13 {
+  position: absolute;
+  top: 82.4%;
+  left: 6.7%;
+  width: 25.7%;
+  height: 8.6%;
+}
+
+.opt23 {
+  position: absolute;
+  top: 82.4%;
+  left: 39.8%;
+  width: 25.7%;
+  height: 8.6%;
+}
+
+.opt33 {
+  position: absolute;
+  top: 82.4%;
+  left: 72.7%;
+  width: 25.7%;
+  height: 8.6%;
 }
 
 .teamA {
@@ -120,42 +156,114 @@ span {
 
 #spanAliasA {
   display: none;
+  font-family: 'Archivo Narrow', Fallback, sans-serif;
+  font-size: 2.5pc;
   position: absolute;
-  bottom: 16%;
-  left: 16.5%;
+  top: 8.25%;
+  left: 6%;
 }
 
 #spanScoreA {
   display: none;
+  font-family: 'Archivo Narrow', Fallback, sans-serif;
+  font-size: 2.5pc;
   position: absolute;
-  bottom: 2.5%;
-  left: 19.5%;
+  top: 8.25%;
+  left: 20%;
 }
 
 #spanAliasB {
   display: none;
+  font-family: 'Archivo Narrow', Fallback, sans-serif;
+  font-size: 2.5pc;
   position: absolute;
-  bottom: 16%;
-  left: 50%;
+  top: 8.25%;
+  left: 27%;
 }
 
 #spanScoreB {
   display: none;
+  font-family: 'Archivo Narrow', Fallback, sans-serif;
+  font-size: 2.5pc;
   position: absolute;
-  bottom: 2.5%;
-  left: 53%;
+  top: 8.25%;
+  left: 41%;
 }
 
 #spanAliasC {
   display: none;
+  font-family: 'Archivo Narrow', Fallback, sans-serif;
+  font-size: 2.5pc;
   position: absolute;
-  bottom: 16%;
-  left: 83%;
+  top: 8.25%;
+  left: 48%;
 }
 
 #spanScoreC {
   display: none;
+  font-family: 'Archivo Narrow', Fallback, sans-serif;
+  font-size: 2.5pc;
   position: absolute;
-  bottom: 2.5%;
-  left: 86%;
+  top: 8.25%;
+  left: 62%;
+}
+
+#spanAlias1 {
+  display: none;
+  font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
+  font-size: 6.5pc;
+  color: #ffc502;
+  position: absolute;
+  top: 23.5%;
+  left: 45.5%;
+}
+
+#spanScore1 {
+  display: none;
+  font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
+  font-size: 4.5pc;
+  color: #dcdbdc;
+  position: absolute;
+  top: 35.4%;
+  left: 45.5%;
+}
+
+#spanAlias2 {
+  display: none;
+  font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
+  font-size: 6.5pc;
+  color: #ffc502;
+  position: absolute;
+  top: 33.25%;
+  left: 20.5%;
+}
+
+#spanScore2 {
+  display: none;
+  font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
+  font-size: 4.5pc;
+  color: #dcdbdc;
+  position: absolute;
+  top: 43.4%;
+  left: 20.5%;
+}
+
+#spanAlias3 {
+  display: none;
+  font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
+  font-size: 6.5pc;
+  color: #ffc502;
+  position: absolute;
+  top: 41.4%;
+  left: 69.5%;
+}
+
+#spanScore3 {
+  display: none;
+  font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
+  font-size: 4.5pc;
+  color: #dcdbdc;
+  position: absolute;
+  top: 51.4%;
+  left: 69.5%;
 }

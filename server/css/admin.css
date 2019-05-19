@@ -47,11 +47,20 @@
   display: block;
 }
 
-#divCuatroOp {
+#divCuatroOpV {
   display: none;
 }
 
-#divCuatroOp button {
+#divCuatroOpV button {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+#divCuatroOpH {
+  display: none;
+}
+
+#divCuatroOpH button {
   background-color: #e2e6ea;
   border-color: #dae0e5;
 }

@@ -2,238 +2,253 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Videomarker</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/videomarker.css">
+  <meta charset="UTF-8">
+  <title>Videomarker</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/all.css">
+  <link rel="stylesheet" href="css/videomarker.css">
 </head>
 
 <body>
-    <div class="container-fluid full-height">
-        <div class="row row-md-4">
-            <div class="col-md-12">
-                <h1 id="hAlias" class="v-center h-center">
-                    Equipo
-                </h1>
-            </div>
-        </div>
-        <div class="row row-md-8">
-            <div class="col-md-12">
-                <h2 id="hScore" class="v-center h-center">
-                    0
-                </h2>
-            </div>
-        </div>
-        <audio id="audioSFX"></audio>
+  <div class="container-fluid full-height">
+    <div class="row row-md-4">
+      <div class="col-md-12">
+        <h1 id="hAlias" class="v-center h-center">
+          Equipo
+        </h1>
+      </div>
     </div>
+    <div class="row row-md-8">
+      <div class="col-md-12">
+        <h2 id="hScore" class="v-center h-center">
+          0
+        </h2>
+      </div>
+    </div>
+    <audio id="audioSFX1"></audio>
+    <audio id="audioSFX2"></audio>
+  </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script>
-        var body = document.getElementsByTagName("body")[0];
+  <script src="js/jquery.min.js"></script>
+  <script>
+  var body = document.getElementsByTagName("body")[0];
 
-        var team = "";
-        var phase = "bach";
-        var scoreBachA = 0;
-        var scoreBachB = 0;
-        var scoreBachC = 0;
-        var scoreCyclA = 0;
-        var scoreCyclB = 0;
-        var scoreCyclC = 0;
-        var aliasBachA = "";
-        var aliasBachB = "";
-        var aliasBachC = "";
-        var aliasCyclA = "";
-        var aliasCyclB = "";
-        var aliasCyclC = "";
-        var turn1 = null;
-        var turn2 = null;
-        var turn3 = null;
-        var locked = false;
-        var sfx = null;
+  var phase = "bach";
+  var team = "";
+  var scoreBachA = 0;
+  var scoreBachB = 0;
+  var scoreBachC = 0;
+  var scoreCyclA = 0;
+  var scoreCyclB = 0;
+  var scoreCyclC = 0;
+  var aliasBachA = "";
+  var aliasBachB = "";
+  var aliasBachC = "";
+  var aliasCyclA = "";
+  var aliasCyclB = "";
+  var aliasCyclC = "";
+  var turn1 = null;
+  var turn2 = null;
+  var turn3 = null;
+  var locked = false;
+  var sfx = null;
+  var semaphore = 1;
 
-        $(document).ready(function() {
-            setTeam();
-            runPoll();
+  $(document).ready(function() {
+    setTeam();
+    runPoll();
+  });
+
+  function runPoll() {
+    setTimeout(function() {
+      $.ajax({
+        url: 'http://localhost:8888/server/server.php',
+        success: function(response) {
+          playSFX(response);
+          setAlias(response);
+          setScore(response);
+          manageTurn(response);
+        },
+        dataType: "json",
+        complete: function() {
+          runPoll();
+        }
+      })
+    }, 100);
+  };
+
+  function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.href);
+    if (results == null) {
+      return "";
+    } else {
+      if ((results[1].indexOf('?')) > 0) {
+        return decodeURIComponent(results[1].substring(0, results[1].indexOf('?')).replace(/\+/g, " "));
+      } else {
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+    }
+  }
+
+  function setTeam() {
+    team = getParameterByName("team");
+  }
+
+  function playSFX(response) {
+    sfx = response[20].value;
+
+    if (sfx != null && sfx !== "") {
+      if (semaphore % 2 == 0) {
+        audioSFX1.src = "media/sfx/" + sfx + ".mp3";
+        var playPromise = audioSFX1.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            audioSFX1.play();
+          });
+        }
+        $.post("http://localhost:8888/server/server.php", {
+          sfx: null
         });
-
-        function runPoll() {
-            setTimeout(function() {
-                $.ajax({
-                    url: 'http://192.168.0.8:8888/server/server.php',
-                    success: function(response) {
-                        playSFX(response);
-                        setAlias(response);
-                        setScore(response);
-                        manageTurn(response);
-                    },
-                    dataType: "json",
-                    complete: function() {
-                        runPoll();
-                    }
-                })
-            }, 100);
-        };
-
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-            var regexS = "[\\?&]" + name + "=([^&#]*)";
-            var regex = new RegExp(regexS);
-            var results = regex.exec(window.location.href);
-            if (results == null) {
-                return "";
-            } else {
-                if ((results[1].indexOf('?')) > 0) {
-                    return decodeURIComponent(results[1].substring(0, results[1].indexOf('?')).replace(/\+/g, " "));
-                } else {
-                    return decodeURIComponent(results[1].replace(/\+/g, " "));
-                }
-            }
+      } else {
+        audioSFX2.src = "media/sfx/" + sfx + ".mp3";
+        var playPromise = audioSFX2.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            audioSFX2.play();
+          });
         }
+        $.post("http://localhost:8888/server/server.php", {
+          sfx: null
+        });
+      }
+    }
+  }
 
-        function setTeam() {
-            team = getParameterByName("team");
-        }
+  function setAlias(response) {
+    phase = response[0].value;
+    aliasBachA = response[14].value[0];
+    aliasBachB = response[15].value[0];
+    aliasBachC = response[16].value[0];
+    aliasCyclA = response[17].value[0];
+    aliasCyclB = response[18].value[0];
+    aliasCyclC = response[19].value[0];
 
-        function playSFX(response) {
-            sfx = response[20].value;
+    if (phase == "bach") {
+      if (team == "teamA") {
+        hAlias.innerHTML = aliasBachA;
+      } 
+      else if (team == "teamB") {
+        hAlias.innerHTML = aliasBachB;
+      } 
+      else if (team == "teamC") {
+        hAlias.innerHTML = aliasBachC;
+      }
+    } else if (phase == "cycl") {
+      if (team == "teamA") {
+        hAlias.innerHTML = aliasCyclA;
+      } 
+      else if (team == "teamB") {
+        hAlias.innerHTML = aliasCyclB;
+      } 
+      else if (team == "teamC") {
+        hAlias.innerHTML = aliasCyclC;
+      }
+    }
+  }
 
-            if (sfx != null && sfx !== "") {
-                audioSFX.src = "media/sfx/" + sfx + ".mp3";
-                var playPromise = audioSFX.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        audioSFX.play();
-                    });
-                }
-                $.post("http://192.168.0.8:8888/server/server.php", {
-                    sfx: null
-                });
-            }
-        }
+  function setScore(response) {
+    phase = response[0].value;
+    scoreBachA = response[14].value[1];
+    scoreBachB = response[15].value[1];
+    scoreBachC = response[16].value[1];
+    scoreCyclA = response[17].value[1];
+    scoreCyclB = response[18].value[1];
+    scoreCyclC = response[19].value[1];
 
-        function setAlias(response) {
-            phase = response[0].value;
-            aliasBachA = response[14].value[0];
-            aliasBachB = response[15].value[0];
-            aliasBachC = response[16].value[0];
-            aliasCyclA = response[17].value[0];
-            aliasCyclB = response[18].value[0];
-            aliasCyclC = response[19].value[0];
+    if (phase == "bach") {
+      if (team == "teamA") {
+        hScore.innerHTML = scoreBachA;
+      } 
+      else if (team == "teamB") {
+        hScore.innerHTML = scoreBachB;
+      } 
+      else if (team == "teamC") {
+        hScore.innerHTML = scoreBachC;
+      }
+    } else if (phase == "cycl") {
+      if (team == "teamA") {
+        hScore.innerHTML = scoreCyclA;
+      } 
+      else if (team == "teamB") {
+        hScore.innerHTML = scoreCyclB;
+      } 
+      else if (team == "teamC") {
+        hScore.innerHTML = scoreCyclC;
+      }
+    }
+  }
 
-            if (phase == "bach") {
-                if (team == "teamA") {
-                    hAlias.innerHTML = aliasBachA;
-                } 
-                else if (team == "teamB") {
-                    hAlias.innerHTML = aliasBachB;
-                } 
-                else if (team == "teamC") {
-                    hAlias.innerHTML = aliasBachC;
-                }
-            } else if (phase == "cycl") {
-                if (team == "teamA") {
-                    hAlias.innerHTML = aliasCyclA;
-                } 
-                else if (team == "teamB") {
-                    hAlias.innerHTML = aliasCyclB;
-                } 
-                else if (team == "teamC") {
-                    hAlias.innerHTML = aliasCyclC;
-                }
-            }
-        }
+  function manageTurn(response) {
+    turn1 = response[13].value[0];
+    turn2 = response[13].value[1];
+    turn3 = response[13].value[2];
 
-        function setScore(response) {
-            phase = response[0].value;
-            scoreBachA = response[14].value[1];
-            scoreBachB = response[15].value[1];
-            scoreBachC = response[16].value[1];
-            scoreCyclA = response[17].value[1];
-            scoreCyclB = response[18].value[1];
-            scoreCyclC = response[19].value[1];
+    if (team == "teamA") {
+      if (turn1 == "a") {
+        setTurn1();
+      } else if (turn2 == "a") {
+        setTurn2();
+      } else if (turn3 == "a") {
+        setTurn3();
+      } else {
+        quitTurn();
+      }
+    } else if (team == "teamB") {
+      if (turn1 == "b") {
+        setTurn1();
+      } else if (turn2 == "b") {
+        setTurn2();
+      } else if (turn3 == "b") {
+        setTurn3();
+      } else {
+        quitTurn();
+      }
+    } else if (team == "teamC") {
+      if (turn1 == "c") {
+        setTurn1();
+      } else if (turn2 == "c") {
+        setTurn2();
+      } else if (turn3 == "c") {
+        setTurn3();
+      } else {
+        quitTurn();
+      }
+    }
+  }
 
-            if (phase == "bach") {
-                if (team == "teamA") {
-                    hScore.innerHTML = scoreBachA;
-                } 
-                else if (team == "teamB") {
-                    hScore.innerHTML = scoreBachB;
-                } 
-                else if (team == "teamC") {
-                    hScore.innerHTML = scoreBachC;
-                }
-            } else if (phase == "cycl") {
-                if (team == "teamA") {
-                    hScore.innerHTML = scoreCyclA;
-                } 
-                else if (team == "teamB") {
-                    hScore.innerHTML = scoreCyclB;
-                } 
-                else if (team == "teamC") {
-                    hScore.innerHTML = scoreCyclC;
-                }
-            }
-        }
+  function setTurn1() {
+    body.style.backgroundColor = "green";
+  }
 
-        function manageTurn(response) {
-            turn1 = response[13].value[0];
-            turn2 = response[13].value[1];
-            turn3 = response[13].value[2];
+  function setTurn2() {
+    body.style.backgroundColor = "#efd128";
+    hAlias.style.color = "#1f1d21";
+  }
 
-            if (team == "teamA") {
-                if (turn1 == "a") {
-                    setTurn1();
-                } else if (turn2 == "a") {
-                    setTurn2();
-                } else if (turn3 == "a") {
-                    setTurn3();
-                } else {
-                    quitTurn();
-                }
-            } else if (team == "teamB") {
-                if (turn1 == "b") {
-                    setTurn1();
-                } else if (turn2 == "b") {
-                    setTurn2();
-                } else if (turn3 == "b") {
-                    setTurn3();
-                } else {
-                    quitTurn();
-                }
-            } else if (team == "teamC") {
-                if (turn1 == "c") {
-                    setTurn1();
-                } else if (turn2 == "c") {
-                    setTurn2();
-                } else if (turn3 == "c") {
-                    setTurn3();
-                } else {
-                    quitTurn();
-                }
-            }
-        }
+  function setTurn3() {
+    body.style.backgroundColor = "#efd128";
+    hAlias.style.color = "#1f1d21";
+  }
 
-        function setTurn1() {
-            body.style.backgroundColor = "green";
-        }
-
-        function setTurn2() {
-            body.style.backgroundColor = "#efd128";
-            hAlias.style.color = "#1f1d21";
-        }
-
-        function setTurn3() {
-            body.style.backgroundColor = "#efd128";
-            hAlias.style.color = "#1f1d21";
-        }
-
-        function quitTurn() {
-            body.style.backgroundColor = "#1f1d21";
-            hAlias.style.color = "#efd128";
-            hScore.style.color = "white";
-        }
-    </script>
+  function quitTurn() {
+    body.style.backgroundColor = "#1f1d21";
+    hAlias.style.color = "#efd128";
+    hScore.style.color = "white";
+  }
+  </script>
 </body>
 
 </html>

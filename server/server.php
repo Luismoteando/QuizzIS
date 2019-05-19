@@ -269,52 +269,11 @@ if (isset($_POST['timer'])) {
   );
 }
 
-if (isset($_POST['option1p4'])) {
+if (isset($_POST['option'])) {
+  $option = $_POST['option'];
   $result = $collection->updateOne(
     ['_id' => 'option'],
-    ['$set' => ['value' => 14]]
-  );
-}
-
-if (isset($_POST['option2p4'])) {
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 24]]
-  );
-}
-
-if (isset($_POST['option3p4'])) {
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 34]]
-  );
-}
-
-if (isset($_POST['option4p4'])) {
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 44]]
-  );
-}
-
-if (isset($_POST['option1p3'])) {
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 13]]
-  );
-}
-
-if (isset($_POST['option2p3'])) {
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 23]]
-  );
-}
-
-if (isset($_POST['option3p3'])) {
-  $result = $collection->updateOne(
-    ['_id' => 'option'],
-    ['$set' => ['value' => 33]]
+    ['$set' => ['value' => $option]]
   );
 }
 

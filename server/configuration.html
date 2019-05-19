@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label style="text-align: left;">Equipo C</label>
-                                        <input type="text" class="form-control" id="aliasCyclB">
+                                        <input type="text" class="form-control" id="aliasCyclC">
                                     </div>
                                 </div>
                                 <button id="btnSubmit2" class="btn btn-light">
@@ -130,7 +130,7 @@
         <script>
             $(document).ready(function() {
                 $.ajax({
-                    url: 'http://192.168.0.8:8888/server/server.php',
+                    url: 'http://localhost:8888/server/server.php',
                     success: function(response) {
                         checkPhase(response);
                     },
@@ -181,7 +181,7 @@
                     submit2: true,
                     aliasCyclA: aliasCyclA.value,
                     aliasCyclB: aliasCyclB.value,
-                    aliasCyclB: aliasCyclC.value,
+                    aliasCyclC: aliasCyclC.value,
                 });
                 aliasCyclA.innerHTML = "";
                 aliasCyclB.innerHTML = "";

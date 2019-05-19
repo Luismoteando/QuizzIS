@@ -1,13 +1,13 @@
 @font-face {
-    font-family: 'SansBeamHead';
-    src: url('../fonts/Stawix%20-%20SansBeamHead-Regular.otf') format('opentype');
+  font-family: 'Archivo Narrow';
+  src: url('../fonts/ArchivoNarrow-Regular.ttf') format('truetype');
 }
 
 body {
   margin: 0;
   padding: 0;
   background-color: #1f1d21;
-  font-family: 'SansBeamHead', Fallback, sans-serif;
+  font-family: 'Archivo Narrow', Fallback, sans-serif;
 }
 
 h1 {

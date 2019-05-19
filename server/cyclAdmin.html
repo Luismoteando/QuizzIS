@@ -112,33 +112,60 @@
                                                     </button>
                                                 </div>
 
-                                                <div class="row types">
-                                                    <button id="btnUnaCuatro" type="button" class="btn btn-light">
-                                                        <i class="fas fa-ellipsis-v"></i><span> Una entre cuatro</span>
+                                                <div class="row controls">
+                                                    <button id="btnUnaCuatroH" type="button" class="btn btn-light">
+                                                        <i class="fas fa-ellipsis-v"></i><span> Cuatro opciones</span>
+                                                    </button>
+
+                                                    <button id="btnUnaCuatroV" type="button" class="btn btn-light">
+                                                        <i class="fas fa-ellipsis-v"></i><span> Cuatro con imagen</span>
                                                     </button>
 
                                                     <button id="btnUnaTres" type="button" class="btn btn-light">
-                                                        <i class="fas fa-ellipsis-v"></i><span> Una entre tres</span>
+                                                        <i class="fas fa-ellipsis-v"></i><span> Tres opciones</span>
                                                     </button>
                                                 </div>
 
-                                                <div id="divCuatroOp">
+                                                <div id="divCuatroOpH">
                                                     <div class="row options">
-                                                        <button id="btnPrimeraCuatro" type="button" class="btn btn-light">
-                                                            Opción 1
+                                                        <button id="btnPrimeraCuatroH" type="button" class="btn btn-light">
+                                                            Opción A
                                                         </button>
 
-                                                        <button id="btnSegundaCuatro" type="button" class="btn btn-light">
-                                                            Opción 2
+                                                        <button id="btnTerceraCuatroH" type="button" class="btn btn-light">
+                                                            Opción C
                                                         </button>
                                                     </div>
                                                     <div class="row options">
-                                                        <button id="btnTerceraCuatro" type="button" class="btn btn-light">
-                                                            Opción 3
+                                                        <button id="btnSegundaCuatroH" type="button" class="btn btn-light">
+                                                            Opción B
                                                         </button>
 
-                                                        <button id="btnCuartaCuatro" type="button" class="btn btn-light">
-                                                            Opción 4
+                                                        <button id="btnCuartaCuatroH" type="button" class="btn btn-light">
+                                                            Opción D
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div id="divCuatroOpV">
+                                                    <div class="row timers">
+                                                        <button id="btnPrimeraCuatroV" type="button" class="btn btn-light">
+                                                            Opción A
+                                                        </button>
+                                                    </div>
+                                                    <div class="row timers">
+                                                        <button id="btnSegundaCuatroV" type="button" class="btn btn-light">
+                                                            Opción B
+                                                        </button>
+                                                    </div>
+                                                    <div class="row timers">
+                                                        <button id="btnTerceraCuatroV" type="button" class="btn btn-light">
+                                                            Opción C
+                                                        </button>
+                                                    </div>
+                                                    <div class="row timers">
+                                                        <button id="btnCuartaCuatroV" type="button" class="btn btn-light">
+                                                            Opción D
                                                         </button>
                                                     </div>
                                                 </div>
@@ -146,15 +173,15 @@
                                                 <div id="divTresOp">
                                                     <div class="row controls">
                                                         <button id="btnPrimeraTres" type="button" class="btn btn-light">
-                                                            Opción 1
+                                                            Opción A
                                                         </button>
 
                                                         <button id="btnSegundaTres" type="button" class="btn btn-light">
-                                                            Opción 2
+                                                            Opción B
                                                         </button>
 
                                                         <button id="btnTerceraTres" type="button" class="btn btn-light">
-                                                            Opción 3
+                                                            Opción C
                                                         </button>
                                                     </div>
                                                 </div>
@@ -228,7 +255,8 @@
                                         </div>
                                         <div class="row pushbuttons">
                                             <div class="col-md-4 col-sm-12">
-                                                <h5>Marcador A</h5>
+                                                <h3 id="hScoreA">0</h3>
+                                                <h5 id="hEquipoA">Equipo A</h5>
                                                 <div class="row turnos">
                                                     <div class="col-md-4 p-0">
                                                         <button id="btnIncorrectaA" type="button" class="btn btn-light">
@@ -275,7 +303,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-sm-12">
-                                                <h5>Marcador B</h5>
+                                                <h3 id="hScoreB">0</h3>
+                                                <h5 id="hEquipoB">Equipo B</h5>
                                                 <div class="row turnos">
                                                     <div class="col-md-4 p-0">
                                                         <button id="btnIncorrectaB" type="button" class="btn btn-light">
@@ -322,7 +351,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-sm-12">
-                                                <h5>Marcador C</h5>
+                                                <h3 id="hScoreC">0</h3>
+                                                <h5 id="hEquipoC">Equipo C</h5>
                                                 <div class="row turnos">
                                                     <div class="col-md-4 p-0">
                                                         <button id="btnIncorrectaC" type="button" class="btn btn-light">
@@ -369,28 +399,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="jumbotron m-1">
-                                        <h4>Espectadores</h4>
-                                        <div class="row">
-                                            <div class="col-md-4 form-group">
-                                                <label style="text-align: left;">1º Ganador</label>
-                                                <input type="text" class="form-control" id="spect1">
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label style="text-align: left;">2º Ganador</label>
-                                                <input type="text" class="form-control" id="spect2">
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label style="text-align: left;">3º Ganador</label>
-                                                <input type="text" class="form-control" id="spect3">
-                                            </div>
-                                        </div>
-                                        <button id="btnSubmit" class="btn btn-light">
-                                            Enviar
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -482,6 +490,15 @@
                 </div>
             </div>
         </div>
+        <div class="row pb-3">
+            <div class="col-md-12">
+                <a href="configuration.html">
+                    <button id="btnConfig" type="button" class="btn btn-outline-dark">
+                        <i class="fas fa-cog"></i> Configuración
+                    </button>
+                </a>
+            </div>
+        </div>
 
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -499,7 +516,7 @@
             function runPoll() {
                 setTimeout(function() {
                     $.ajax({
-                        url: 'http://192.168.0.8:8888/server/server.php',
+                        url: 'http://localhost:8888/server/server.php',
                         success: function(response) {
                             updateState(response);
                         },
@@ -624,32 +641,50 @@
                 }
             }
 
-            btnUnaCuatro.onclick = function() {
+            btnUnaCuatroH.onclick = function() {
                 divSolucion.style.display = "none";
-                if (divCuatroOp.style.display == "none") {
+                if (divCuatroOpH.style.display == "none") {
                     divTresOp.style.display = "none";
-                    divCuatroOp.style.display = "block";
+                    divCuatroOpV.style.display = "none";
+                    divCuatroOpH.style.display = "block";
 
                 } else {
                     divTresOp.style.display = "none";
-                    divCuatroOp.style.display = "none";
+                    divCuatroOpH.style.display = "none";
+                    divCuatroOpV.style.display = "none";
+                }
+            }
+
+            btnUnaCuatroV.onclick = function() {
+                divSolucion.style.display = "none";
+                if (divCuatroOpV.style.display == "none") {
+                    divTresOp.style.display = "none";
+                    divCuatroOpH.style.display = "none";
+                    divCuatroOpV.style.display = "block";
+
+                } else {
+                    divTresOp.style.display = "none";
+                    divCuatroOpV.style.display = "none";
+                    divCuatroOpH.style.display = "none";
                 }
             }
 
             btnUnaTres.onclick = function() {
                 divSolucion.style.display = "none";
                 if (divTresOp.style.display == "none") {
-                    divCuatroOp.style.display = "none";
+                    divCuatroOpH.style.display = "none";
                     divTresOp.style.display = "block";
+                    divCuatroOpV.style.display = "none";
                 } else {
-                    divCuatroOp.style.display = "none";
+                    divCuatroOpH.style.display = "none";
                     divTresOp.style.display = "none";
+                    divCuatroOpV.style.display = "none";
                 }
             }
 
-            btnPrimeraCuatro.onclick = function() {
+            btnPrimeraCuatroH.onclick = function() {
                 $.post("server.php", {
-                    option1p4: true,
+                    option: "14h",
                     solution: false,
                     lock: false,
                     sfx: 2
@@ -657,9 +692,9 @@
                 divSolucion.style.display = "block";
             };
 
-            btnSegundaCuatro.onclick = function() {
+            btnSegundaCuatroH.onclick = function() {
                 $.post("server.php", {
-                    option2p4: true,
+                    option: "24h",
                     solution: false,
                     lock: false,
                     sfx: 2
@@ -667,9 +702,9 @@
                 divSolucion.style.display = "block";
             };
 
-            btnTerceraCuatro.onclick = function() {
+            btnTerceraCuatroH.onclick = function() {
                 $.post("server.php", {
-                    option3p4: true,
+                    option: "34h",
                     solution: false,
                     lock: false,
                     sfx: 2
@@ -677,9 +712,49 @@
                 divSolucion.style.display = "block";
             };
 
-            btnCuartaCuatro.onclick = function() {
+            btnCuartaCuatroH.onclick = function() {
                 $.post("server.php", {
-                    option4p4: true,
+                    option: "44h",
+                    solution: false,
+                    lock: false,
+                    sfx: 2
+                });
+                divSolucion.style.display = "block";
+            };
+
+            btnPrimeraCuatroV.onclick = function() {
+                $.post("server.php", {
+                    option: "14v",
+                    solution: false,
+                    lock: false,
+                    sfx: 2
+                });
+                divSolucion.style.display = "block";
+            };
+
+            btnSegundaCuatroV.onclick = function() {
+                $.post("server.php", {
+                    option: "24v",
+                    solution: false,
+                    lock: false,
+                    sfx: 2
+                });
+                divSolucion.style.display = "block";
+            };
+
+            btnTerceraCuatroV.onclick = function() {
+                $.post("server.php", {
+                    option: "34v",
+                    solution: false,
+                    lock: false,
+                    sfx: 2
+                });
+                divSolucion.style.display = "block";
+            };
+
+            btnCuartaCuatroV.onclick = function() {
+                $.post("server.php", {
+                    option: "44v",
                     solution: false,
                     lock: false,
                     sfx: 2
@@ -689,7 +764,7 @@
 
             btnPrimeraTres.onclick = function() {
                 $.post("server.php", {
-                    option1p3: true,
+                    option: "13",
                     solution: false,
                     lock: false,
                     sfx: 2
@@ -699,7 +774,7 @@
 
             btnSegundaTres.onclick = function() {
                 $.post("server.php", {
-                    option2p3: true,
+                    option: "23",
                     solution: false,
                     lock: false,
                     sfx: 2
@@ -709,7 +784,7 @@
 
             btnTerceraTres.onclick = function() {
                 $.post("server.php", {
-                    option3p3: true,
+                    option: "33",
                     solution: false,
                     lock: false,
                     sfx: 2
@@ -1132,6 +1207,13 @@
                     }
                 }
 
+                hEquipoA.innerHTML = response[17].value[0];
+                hEquipoB.innerHTML = response[18].value[0];
+                hEquipoC.innerHTML = response[19].value[0];
+                hScoreA.innerHTML = response[17].value[1];
+                hScoreB.innerHTML = response[18].value[1];
+                hScoreC.innerHTML = response[19].value[1];
+
                 if (turn == "a") {
                     btnIncorrectaA.innerHTML = '<i class="fas fa-times-circle"></i>';
                     btnTurnoA.innerHTML = '<i class="fas fa-dot-circle"></i>';
@@ -1209,7 +1291,7 @@
                     liEquipoB.innerHTML = response[18].value[0] + ": ";
                 }
                 if (response[19].value[0] != "") {
-                    liEquipoB.innerHTML = response[19].value[0] + ": ";
+                    liEquipoC.innerHTML = response[19].value[0] + ": ";
                 }
                 liScoreA.innerHTML = response[17].value[1];
                 liScoreB.innerHTML = response[18].value[1];
