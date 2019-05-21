@@ -286,11 +286,8 @@
             lead = response[2].value;
 
             if (semaphore % 2 == 0) {
-                if (lead == 1) {
-                    videoPlayer1.src = "media/leads/" + lead + ".mov";
-                } else {
-                    videoPlayer1.src = "media/leads/" + lead + ".m4v";
-                }
+                videoPlayer1.src = "media/leads/" + lead + ".mp4";
+                videoPlayer1.muted = false;
                 videoPlayer1.oncanplaythrough = function() {
                     imgOption.style.display = "none";
                     imgSolution.style.display = "none";
@@ -301,11 +298,8 @@
                     semaphore++;
                 }
             } else {
-                if (lead == 1) {
-                    videoPlayer2.src = "media/leads/" + lead + ".mov";
-                } else {
-                    videoPlayer2.src = "media/leads/" + lead + ".m4v";
-                }
+                videoPlayer2.src = "media/leads/" + lead + ".mp4";
+                videoPlayer2.muted = false;
                 videoPlayer2.oncanplaythrough = function() {
                     imgOption.style.display = "none";
                     imgSolution.style.display = "none";
