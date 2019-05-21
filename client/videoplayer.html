@@ -65,7 +65,7 @@
         function runPoll() {
             setTimeout(function() {
                 $.ajax({
-                    url: 'http://192.168.0.8:8888/server/server.php',
+                    url: 'http://localhost:8888/server/server.php',
                     success: function(response) {
                         playSFX(response);
                         checkPlay(response);
@@ -111,7 +111,7 @@
                   audioSFX1.play();
                 });
               }
-              $.post("http://192.168.0.8:8888/server/server.php", {
+              $.post("http://localhost:8888/server/server.php", {
                 sfx: null
               });
             } else {
@@ -122,7 +122,7 @@
                   audioSFX2.play();
                 });
               }
-              $.post("http://192.168.0.8:8888/server/server.php", {
+              $.post("http://localhost:8888/server/server.php", {
                 sfx: null
               });
             }

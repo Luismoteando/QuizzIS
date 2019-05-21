@@ -516,7 +516,7 @@
             function runPoll() {
                 setTimeout(function() {
                     $.ajax({
-                        url: 'http://192.168.0.8:8888/server/server.php',
+                        url: 'http://localhost:8888/server/server.php',
                         success: function(response) {
                             updateState(response);
                         },
@@ -624,7 +624,7 @@
             function timeout() {
                 if (time >= 0) {
                     time -= 1;
-                    if (time <= 3) {
+                    if (time > 0 && time <= 3) {
                         $.post("server.php", {
                             timer: time,
                             sfx: 1
@@ -900,12 +900,12 @@
                 if (turn == "a") {
                     $.post("server.php", {
                         turnAux: null,
-                        lock: true
+                        lock: false
                     });
                 } else {
                     $.post("server.php", {
                         turnAux: "a",
-                        lock: true
+                        lock: false
                     });
                 }
             }
@@ -914,13 +914,13 @@
                 if (turn == "a") {
                     $.post("server.php", {
                         turnAux: null,
-                        lock: true,
+                        lock: false,
                         sfx: 4
                     });
                 } else {
                     $.post("server.php", {
                         turnAux: "a",
-                        lock: true,
+                        lock: false,
                         sfx: 4
                     });
                 }
@@ -982,12 +982,12 @@
                 if (turn == "b") {
                     $.post("server.php", {
                         turnAux: null,
-                        lock: true
+                        lock: false
                     });
                 } else {
                     $.post("server.php", {
                         turnAux: "b",
-                        lock: true
+                        lock: false
                     });
                 }
             }
@@ -996,7 +996,7 @@
                 if (turn == "b") {
                     $.post("server.php", {
                         turnAux: null,
-                        lock: true,
+                        lock: false,
                         sfx: 4
                     });
                 } else {
@@ -1064,12 +1064,12 @@
                 if (turn == "c") {
                     $.post("server.php", {
                         turnAux: null,
-                        lock: true
+                        lock: false
                     });
                 } else {
                     $.post("server.php", {
                         turnAux: "c",
-                        lock: true
+                        lock: false
                     });
                 }
             }
@@ -1078,7 +1078,7 @@
                 if (turn == "c") {
                     $.post("server.php", {
                         turnAux: null,
-                        lock: true,
+                        lock: false,
                         sfx: 4
                     });
                 } else {
