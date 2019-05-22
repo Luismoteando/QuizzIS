@@ -157,7 +157,7 @@
 #spanAliasA {
   display: none;
   font-family: 'Archivo Narrow', Fallback, sans-serif;
-  font-size: 2pc;
+  font-size: 1.5pc;
   position: absolute;
   top: 8.5%;
   left: 6%;
@@ -175,7 +175,7 @@
 #spanAliasB {
   display: none;
   font-family: 'Archivo Narrow', Fallback, sans-serif;
-  font-size: 2pc;
+  font-size: 1.5pc;
   position: absolute;
   top: 8.5%;
   left: 27%;
@@ -193,7 +193,7 @@
 #spanAliasC {
   display: none;
   font-family: 'Archivo Narrow', Fallback, sans-serif;
-  font-size: 2pc;
+  font-size: 1.5pc;
   position: absolute;
   top: 8.5%;
   left: 48%;
@@ -211,7 +211,7 @@
 #spanAlias1 {
   display: none;
   font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
-  font-size: 5.5pc;
+  font-size: 4pc;
   color: #ffc502;
   position: absolute;
   top: 22%;
@@ -235,7 +235,7 @@
 #spanAlias2 {
   display: none;
   font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
-  font-size: 5.5pc;
+  font-size: 4pc;
   color: #ffc502;
   position: absolute;
   top: 32%;
@@ -255,7 +255,7 @@
 #spanAlias3 {
   display: none;
   font-family: 'Yanone Kaffeesatz', Fallback, sans-serif;
-  font-size: 5.5pc;
+  font-size: 4pc;
   color: #ffc502;
   position: absolute;
   top: 39%;

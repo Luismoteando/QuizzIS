@@ -186,6 +186,19 @@
                                                     </div>
                                                 </div>
 
+                                                <div id="divCorreccion" class="row turnos">
+                                                    <div class="col-md-6 p-0">
+                                                        <button id="btnIncorrecta" type="button" class="btn btn-light">
+                                                            <i class="far fa-times-circle"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-6 p-0">
+                                                        <button id="btnCorrecta" type="button" class="btn btn-light">
+                                                            <i class="far fa-check-circle"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
                                                 <div id="divSolucion" class="row solution">
                                                     <button id="btnSolucion" type="button" class="btn btn-light">
                                                         <i class="fas fa-check-circle"></i><span> Mostrar solución</span>
@@ -259,18 +272,8 @@
                                                 <h5 id="hEquipoA">Equipo A</h5>
                                                 <div class="row turnos">
                                                     <div class="col-md-4 p-0">
-                                                        <button id="btnIncorrectaA" type="button" class="btn btn-light">
-                                                            <i class="far fa-times-circle"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4 p-0">
                                                         <button id="btnTurnoA" type="button" class="btn btn-light">
                                                             <i class="far fa-dot-circle"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button id="btnCorrectaA" type="button" class="btn btn-light">
-                                                            <i class="far fa-check-circle"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -307,18 +310,8 @@
                                                 <h5 id="hEquipoB">Equipo B</h5>
                                                 <div class="row turnos">
                                                     <div class="col-md-4 p-0">
-                                                        <button id="btnIncorrectaB" type="button" class="btn btn-light">
-                                                            <i class="far fa-times-circle"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4 p-0">
                                                         <button id="btnTurnoB" type="button" class="btn btn-light">
                                                             <i class="far fa-dot-circle"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button id="btnCorrectaB" type="button" class="btn btn-light">
-                                                            <i class="far fa-check-circle"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -355,18 +348,8 @@
                                                 <h5 id="hEquipoC">Equipo C</h5>
                                                 <div class="row turnos">
                                                     <div class="col-md-4 p-0">
-                                                        <button id="btnIncorrectaC" type="button" class="btn btn-light">
-                                                            <i class="far fa-times-circle"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4 p-0">
                                                         <button id="btnTurnoC" type="button" class="btn btn-light">
                                                             <i class="far fa-dot-circle"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button id="btnCorrectaC" type="button" class="btn btn-light">
-                                                            <i class="far fa-check-circle"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -541,7 +524,7 @@
                         play: false,
                         mode: "questions",
                         category: "mandatory",
-                        lock: true
+                        lock: false
                     });
                 }
             };
@@ -585,7 +568,7 @@
                         play: false,
                         mode: "questions",
                         category: "general",
-                        lock: true
+                        lock: false
                     });
                 }
             };
@@ -792,6 +775,22 @@
                 divSolucion.style.display = "block";
             };
 
+            btnIncorrecta.onclick = function() {
+              $.post("server.php", {
+                  turnAux: null,
+                  lock: false,
+                  sfx: 4
+              });
+            };
+
+            btnCorrecta.onclick = function() {
+              $.post("server.php", {
+                turnAux: null,
+                lock: true,
+                sfx: 5
+              });
+            };
+
             btnSolucion.onclick = function() {
                 $.post("server.php", {
                     solution: true,
@@ -880,22 +879,6 @@
                 }
             }
 
-            btnCorrectaA.onclick = function() {
-                if (turn == "a") {
-                    $.post("server.php", {
-                        turnAux: null,
-                        lock: true,
-                        sfx: 5
-                    });
-                } else {
-                    $.post("server.php", {
-                        turnAux: "a",
-                        lock: true,
-                        sfx: 5
-                    });
-                }
-            };
-
             btnTurnoA.onclick = function() {
                 if (turn == "a") {
                     $.post("server.php", {
@@ -909,22 +892,6 @@
                     });
                 }
             }
-
-            btnIncorrectaA.onclick = function() {
-                if (turn == "a") {
-                    $.post("server.php", {
-                        turnAux: null,
-                        lock: false,
-                        sfx: 4
-                    });
-                } else {
-                    $.post("server.php", {
-                        turnAux: "a",
-                        lock: false,
-                        sfx: 4
-                    });
-                }
-            };
 
             btnAdd5A.onclick = function() {
                 $.post("server.php", {
@@ -962,22 +929,6 @@
                 });
             };
 
-            btnCorrectaB.onclick = function() {
-                if (turn == "b") {
-                    $.post("server.php", {
-                        turnAux: null,
-                        lock: true,
-                        sfx: 5
-                    });
-                } else {
-                    $.post("server.php", {
-                        turnAux: "b",
-                        lock: true,
-                        sfx: 5
-                    });
-                }
-            };
-
             btnTurnoB.onclick = function() {
                 if (turn == "b") {
                     $.post("server.php", {
@@ -991,22 +942,6 @@
                     });
                 }
             }
-
-            btnIncorrectaB.onclick = function() {
-                if (turn == "b") {
-                    $.post("server.php", {
-                        turnAux: null,
-                        lock: false,
-                        sfx: 4
-                    });
-                } else {
-                    $.post("server.php", {
-                        turnAux: "b",
-                        lock: true,
-                        sfx: 4
-                    });
-                }
-            };
 
             btnAdd5B.onclick = function() {
                 $.post("server.php", {
@@ -1044,22 +979,6 @@
                 });
             };
 
-            btnCorrectaC.onclick = function() {
-                if (turn == "c") {
-                    $.post("server.php", {
-                        turnAux: null,
-                        lock: true,
-                        sfx: 5
-                    });
-                } else {
-                    $.post("server.php", {
-                        turnAux: "c",
-                        lock: true,
-                        sfx: 5
-                    });
-                }
-            };
-
             btnTurnoC.onclick = function() {
                 if (turn == "c") {
                     $.post("server.php", {
@@ -1073,22 +992,6 @@
                     });
                 }
             }
-
-            btnIncorrectaC.onclick = function() {
-                if (turn == "c") {
-                    $.post("server.php", {
-                        turnAux: null,
-                        lock: false,
-                        sfx: 4
-                    });
-                } else {
-                    $.post("server.php", {
-                        turnAux: "c",
-                        lock: true,
-                        sfx: 4
-                    });
-                }
-            };
 
             btnAdd5C.onclick = function() {
                 $.post("server.php", {
@@ -1154,8 +1057,8 @@
                     liCategoria.innerHTML = "Cultura General";
                     liPregunta.innerHTML = response[5].value[0];
                 }
-                liObligatorias.innerHTML = response[4].value[1] - response[4].value[0];
-                liGenerales.innerHTML = response[5].value[1] - response[5].value[0];
+                liObligatorias.innerHTML = response[4].value[1] - response[4].value[0] - 1;
+                liGenerales.innerHTML = response[5].value[1] - response[5].value[0] - 1;
 
                 if (width < 575.98) {
                     if (playing == false) {
@@ -1215,45 +1118,21 @@
                 hScoreC.innerHTML = response[16].value[1];
 
                 if (turn == "a") {
-                    btnIncorrectaA.innerHTML = '<i class="fas fa-times-circle"></i>';
                     btnTurnoA.innerHTML = '<i class="fas fa-dot-circle"></i>';
-                    btnCorrectaA.innerHTML = '<i class="fas fa-check-circle"></i>';
-                    btnIncorrectaB.innerHTML = '<i class="far fa-times-circle"></i>';
                     btnTurnoB.innerHTML = '<i class="far fa-dot-circle"></i>';
-                    btnCorrectaB.innerHTML = '<i class="far fa-check-circle"></i>';
-                    btnIncorrectaC.innerHTML = '<i class="far fa-times-circle"></i>';
                     btnTurnoC.innerHTML = '<i class="far fa-dot-circle"></i>';
-                    btnCorrectaC.innerHTML = '<i class="far fa-check-circle"></i>';
                 } else if (turn == "b") {
-                    btnIncorrectaB.innerHTML = '<i class="fas fa-times-circle"></i>';
                     btnTurnoB.innerHTML = '<i class="fas fa-dot-circle"></i>';
-                    btnCorrectaB.innerHTML = '<i class="fas fa-check-circle"></i>';
-                    btnIncorrectaA.innerHTML = '<i class="far fa-times-circle"></i>';
                     btnTurnoA.innerHTML = '<i class="far fa-dot-circle"></i>';
-                    btnCorrectaA.innerHTML = '<i class="far fa-check-circle"></i>';
-                    btnIncorrectaC.innerHTML = '<i class="far fa-times-circle"></i>';
                     btnTurnoC.innerHTML = '<i class="far fa-dot-circle"></i>';
-                    btnCorrectaC.innerHTML = '<i class="far fa-check-circle"></i>';
                 } else if (turn == "c") {
-                    btnIncorrectaC.innerHTML = '<i class="fas fa-times-circle"></i>';
                     btnTurnoC.innerHTML = '<i class="fas fa-dot-circle"></i>';
-                    btnCorrectaC.innerHTML = '<i class="fas fa-check-circle"></i>';
-                    btnIncorrectaB.innerHTML = '<i class="far fa-times-circle"></i>';
                     btnTurnoB.innerHTML = '<i class="far fa-dot-circle"></i>';
-                    btnCorrectaB.innerHTML = '<i class="far fa-check-circle"></i>';
-                    btnIncorrectaA.innerHTML = '<i class="far fa-times-circle"></i>';
                     btnTurnoA.innerHTML = '<i class="far fa-dot-circle"></i>';
-                    btnCorrectaA.innerHTML = '<i class="far fa-check-circle"></i>';
                 } else {
                     btnTurnoA.innerHTML = '<i class="far fa-dot-circle"></i>';
                     btnTurnoB.innerHTML = '<i class="far fa-dot-circle"></i>';
                     btnTurnoC.innerHTML = '<i class="far fa-dot-circle"></i>';
-                    btnCorrectaA.innerHTML = '<i class="far fa-check-circle"></i>';
-                    btnCorrectaB.innerHTML = '<i class="far fa-check-circle"></i>';
-                    btnCorrectaC.innerHTML = '<i class="far fa-check-circle"></i>';
-                    btnIncorrectaA.innerHTML = '<i class="far fa-times-circle"></i>';
-                    btnIncorrectaB.innerHTML = '<i class="far fa-times-circle"></i>';
-                    btnIncorrectaC.innerHTML = '<i class="far fa-times-circle"></i>';
                 }
 
                 if (turn == "a") {
