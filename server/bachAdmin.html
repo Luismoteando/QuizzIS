@@ -499,7 +499,7 @@
             function runPoll() {
                 setTimeout(function() {
                     $.ajax({
-                        url: 'http://localhost:8888/server/server.php',
+                        url: 'http://192.168.0.8:8888/server/server.php',
                         success: function(response) {
                             updateState(response);
                         },

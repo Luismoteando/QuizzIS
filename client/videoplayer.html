@@ -65,7 +65,7 @@
         function runPoll() {
             setTimeout(function() {
                 $.ajax({
-                    url: 'http://localhost:8888/server/server.php',
+                    url: 'http://192.168.0.8:8888/server/server.php',
                     success: function(response) {
                         playSFX(response);
                         checkPlay(response);
@@ -111,7 +111,7 @@
                   audioSFX1.play();
                 });
               }
-              $.post("http://localhost:8888/server/server.php", {
+              $.post("http://192.168.0.8:8888/server/server.php", {
                 sfx: null
               });
             } else {
@@ -122,7 +122,7 @@
                   audioSFX2.play();
                 });
               }
-              $.post("http://localhost:8888/server/server.php", {
+              $.post("http://192.168.0.8:8888/server/server.php", {
                 sfx: null
               });
             }
@@ -253,6 +253,7 @@
                     imgSolution.style.display = "none";
                     hideRanking();
                     videoPlayer2.style.display = "none";
+                    videoPlayer2.pause();
                     videoPlayer1.style.display = "block";
                     semaphore++;
                 }
@@ -275,6 +276,7 @@
                     imgSolution.style.display = "none";
                     hideRanking();
                     videoPlayer1.style.display = "none";
+                    videoPlayer1.pause();
                     videoPlayer2.style.display = "block";
                     semaphore++;
                 }
@@ -294,6 +296,7 @@
                     hideVideomarkers();
                     hideRanking();
                     videoPlayer2.style.display = "none";
+                    videoPlayer2.pause();
                     videoPlayer1.style.display = "block";
                     semaphore++;
                 }
@@ -306,6 +309,7 @@
                     hideVideomarkers();
                     hideRanking();
                     videoPlayer1.style.display = "none";
+                    videoPlayer1.pause();
                     videoPlayer2.style.display = "block";
                     semaphore++;
                 }
@@ -327,6 +331,7 @@
                     hideVideomarkers();
                     setRanking(response);
                     videoPlayer2.style.display = "none";
+                    videoPlayer2.pause();
                     videoPlayer1.style.display = "block";
                     semaphore++;
                 }
@@ -342,6 +347,7 @@
                     hideVideomarkers();
                     setRanking(response);
                     videoPlayer1.style.display = "none";
+                    videoPlayer1.pause();
                     videoPlayer2.style.display = "block";
                     semaphore++;
                 }

@@ -303,52 +303,71 @@ if (isset($_POST['turn'])) {
   $value = $turn['value'];
 
   if ($lock['value'] == false) {
+    $value = iterator_to_array($value);
     $buffer1 = str_split($serial, 1);
     $buffer2 = str_split($buffer, 1);
     $diff = array_diff_assoc($buffer1, $buffer2);
     if ($value[0] == null) {
       if ($first = reset($diff)) {
+        if (in_array($first, $value) == false) {
+          $result = $collection->updateOne(
+            ['_id' => 'turn'],
+            ['$set' => ['value.0' => $first]]
+          );
+          $result = $collection->updateOne(
+            ['_id' => 'play'],
+            ['$set' => ['value' => false]]
+          );
+          $result = $collection->updateOne(
+            ['_id' => 'sfx'],
+            ['$set' => ['value' => 3]]
+          );
+        }
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value.0' => $first, 'buffer' => $serial]]
-        );
-        $result = $collection->updateOne(
-          ['_id' => 'play'],
-          ['$set' => ['value' => false]]
-        );
-        $result = $collection->updateOne(
-          ['_id' => 'sfx'],
-          ['$set' => ['value' => 3]]
+          ['$set' => ['buffer' => $serial]]
         );
       }
     } elseif ($value[1] == null) {
       if ($second = reset($diff)) {
+        if (in_array($second, $value) == false) {
+          $result = $collection->updateOne(
+            ['_id' => 'turn'],
+            ['$set' => ['value.1' => $second]]
+          );
+          $result = $collection->updateOne(
+            ['_id' => 'play'],
+            ['$set' => ['value' => false]]
+          );
+          $result = $collection->updateOne(
+            ['_id' => 'sfx'],
+            ['$set' => ['value' => 3]]
+          );
+        }
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value.1' => $second, 'buffer' => $serial]]
-        );
-        $result = $collection->updateOne(
-          ['_id' => 'play'],
-          ['$set' => ['value' => false]]
-        );
-        $result = $collection->updateOne(
-          ['_id' => 'sfx'],
-          ['$set' => ['value' => 3]]
+          ['$set' => ['buffer' => $serial]]
         );
       }
     } elseif ($value[2] == null) {
       if ($third = reset($diff)) {
+        if (in_array($third, $value) == false) {
+          $result = $collection->updateOne(
+            ['_id' => 'turn'],
+            ['$set' => ['value.2' => $third]]
+          );
+          $result = $collection->updateOne(
+            ['_id' => 'play'],
+            ['$set' => ['value' => false]]
+          );
+          $result = $collection->updateOne(
+            ['_id' => 'sfx'],
+            ['$set' => ['value' => 3]]
+          );
+        }
         $result = $collection->updateOne(
           ['_id' => 'turn'],
-          ['$set' => ['value.2' => $third, 'buffer' => $serial]]
-        );
-        $result = $collection->updateOne(
-          ['_id' => 'play'],
-          ['$set' => ['value' => false]]
-        );
-        $result = $collection->updateOne(
-          ['_id' => 'sfx'],
-          ['$set' => ['value' => 3]]
+          ['$set' => ['buffer' => $serial]]
         );
       }
     }
